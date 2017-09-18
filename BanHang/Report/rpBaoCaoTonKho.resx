@@ -121,27 +121,27 @@
     <value>17, 17</value>
   </metadata>
   <data name="customSqlQuery1.Sql" xml:space="preserve">
-    <value>select "sadohcm_goldstar.GPM_HangHoa"."MaHang",
-       "sadohcm_goldstar.GPM_HangHoa"."ID",
-       "sadohcm_goldstar.GPM_HangHoa"."TenHangHoa",
-       "sadohcm_goldstar.GPM_DonViTinh"."TenDonViTinh",
-       "sadohcm_goldstar.GPM_HangHoaTonKho"."SoLuongCon",
-       "sadohcm_goldstar.GPM_TrangThaiHang"."TenTrangThai"
-  from ((("sadohcm_goldstar"."GPM_HangHoa"
-       "sadohcm_goldstar.GPM_HangHoa"
-  inner join "sadohcm_goldstar"."GPM_DonViTinh"
-       "sadohcm_goldstar.GPM_DonViTinh"
-       on ("sadohcm_goldstar.GPM_DonViTinh"."ID" = "sadohcm_goldstar.GPM_HangHoa"."IDDonViTinh"))
-  inner join "sadohcm_goldstar"."GPM_HangHoaTonKho"
-       "sadohcm_goldstar.GPM_HangHoaTonKho"
-       on ("sadohcm_goldstar.GPM_HangHoaTonKho"."IDHangHoa" = "sadohcm_goldstar.GPM_HangHoa"."ID"))
-  inner join "sadohcm_goldstar"."GPM_TrangThaiHang"
-       "sadohcm_goldstar.GPM_TrangThaiHang"
-       on ("sadohcm_goldstar.GPM_TrangThaiHang"."ID" = "sadohcm_goldstar.GPM_HangHoa"."TrangThaiHang"))
+    <value>select "GPM_HangHoa"."MaHang",
+       "GPM_HangHoa"."ID",
+       "GPM_HangHoa"."TenHangHoa",
+       "GPM_DonViTinh"."TenDonViTinh",
+       "GPM_HangHoaTonKho"."SoLuongCon",
+       "GPM_TrangThaiHang"."TenTrangThai"
+  from ((("dbo"."GPM_HangHoa"
+       "GPM_HangHoa"
+  inner join "dbo"."GPM_DonViTinh"
+       "GPM_DonViTinh"
+       on ("GPM_DonViTinh"."ID" = "GPM_HangHoa"."IDDonViTinh"))
+  inner join "dbo"."GPM_HangHoaTonKho"
+       "GPM_HangHoaTonKho"
+       on ("GPM_HangHoaTonKho"."IDHangHoa" = "GPM_HangHoa"."ID"))
+  inner join "dbo"."GPM_TrangThaiHang"
+       "GPM_TrangThaiHang"
+       on ("GPM_TrangThaiHang"."ID" = "GPM_HangHoa"."TrangThaiHang"))
  where
-       ((@idLoai = -1) OR ("sadohcm_goldstar.GPM_HangHoa"."TrangThaiHang" = @idLoai))</value>
+       ((@idLoai = -1) OR ("GPM_HangHoa"."TrangThaiHang" = @idLoai))</value>
   </data>
   <data name="sqlDataSource1.ResultSchemaSerializable" xml:space="preserve">
-    <value>PERhdGFTZXQgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxWaWV3IE5hbWU9IkhhbmdIb2FfIj48RmllbGQgTmFtZT0iTWFIYW5nIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IklEIiBUeXBlPSJJbnQzMiIgLz48RmllbGQgTmFtZT0iVGVuSGFuZ0hvYSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJUZW5Eb25WaVRpbmgiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iU29MdW9uZ0NvbiIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9IlRlblRyYW5nVGhhaSIgVHlwZT0iU3RyaW5nIiAvPjwvVmlldz48VmlldyBOYW1lPSJzYWRvaGNtX2dvbGRzdGFyX0dQTV9TZXR0aW5nIj48RmllbGQgTmFtZT0iVGlldURlQ29uZ1R5IiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlRlbkNvbmdUeSIgVHlwZT0iU3RyaW5nIiAvPjwvVmlldz48L0RhdGFTZXQ+</value>
+    <value>PERhdGFTZXQgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxWaWV3IE5hbWU9IkdQTV9TZXR0aW5nIj48RmllbGQgTmFtZT0iVGlldURlQ29uZ1R5IiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlRlbkNvbmdUeSIgVHlwZT0iU3RyaW5nIiAvPjwvVmlldz48VmlldyBOYW1lPSJIYW5nSG9hXyI+PEZpZWxkIE5hbWU9Ik1hSGFuZyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJJRCIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9IlRlbkhhbmdIb2EiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iVGVuRG9uVmlUaW5oIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlNvTHVvbmdDb24iIFR5cGU9IkludDMyIiAvPjxGaWVsZCBOYW1lPSJUZW5UcmFuZ1RoYWkiIFR5cGU9IlN0cmluZyIgLz48L1ZpZXc+PC9EYXRhU2V0Pg==</value>
   </data>
 </root>

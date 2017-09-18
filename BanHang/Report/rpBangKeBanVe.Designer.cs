@@ -129,7 +129,7 @@
             this.xrTableCell3.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell3.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sadohcm_goldstar_GPM_BanVe.SoThuTu")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "GPM_BanVe.SoThuTu")});
             this.xrTableCell3.Dpi = 100F;
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.StylePriority.UseBorders = false;
@@ -143,7 +143,7 @@
             this.xrTableCell4.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell4.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sadohcm_goldstar_GPM_BanVe.KyHieu")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "GPM_BanVe.KyHieu")});
             this.xrTableCell4.Dpi = 100F;
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.StylePriority.UseBorders = false;
@@ -154,7 +154,7 @@
             this.xrTableCell9.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell9.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sadohcm_goldstar_GPM_BanVe.GiaVe", "{0:#,#}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "GPM_BanVe.GiaVe", "{0:#,#}")});
             this.xrTableCell9.Dpi = 100F;
             this.xrTableCell9.Name = "xrTableCell9";
             this.xrTableCell9.StylePriority.UseBorders = false;
@@ -165,7 +165,7 @@
             this.xrTableCell10.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell10.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sadohcm_goldstar_GPM_BanVe.SoThuTu")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "GPM_BanVe.SoThuTu")});
             this.xrTableCell10.Dpi = 100F;
             this.xrTableCell10.Name = "xrTableCell10";
             this.xrTableCell10.StylePriority.UseBorders = false;
@@ -176,7 +176,7 @@
             this.xrTableCell12.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell12.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sadohcm_goldstar_GPM_BanVe.NgayBan", "{0:dd/MM/yyyy}")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "GPM_BanVe.NgayBan", "{0:dd/MM/yyyy}")});
             this.xrTableCell12.Dpi = 100F;
             this.xrTableCell12.Name = "xrTableCell12";
             this.xrTableCell12.StylePriority.UseBorders = false;
@@ -338,7 +338,7 @@
             // xrLabel2
             // 
             this.xrLabel2.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sadohcm_goldstar_GPM_Setting.TenCongTy")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "GPM_Setting.TenCongTy")});
             this.xrLabel2.Dpi = 100F;
             this.xrLabel2.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(56.17114F, 52.50696F);
@@ -352,7 +352,7 @@
             // xrLabel1
             // 
             this.xrLabel1.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sadohcm_goldstar_GPM_Setting.TieuDeCongTy")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "GPM_Setting.TieuDeCongTy")});
             this.xrLabel1.Dpi = 100F;
             this.xrLabel1.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(56.17114F, 30.66436F);
@@ -410,7 +410,7 @@
             this.xrTableCell18.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell18.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sadohcm_goldstar_GPM_BanVe.GiaVe")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "GPM_BanVe.GiaVe")});
             this.xrTableCell18.Dpi = 100F;
             this.xrTableCell18.Name = "xrTableCell18";
             this.xrTableCell18.StylePriority.UseBorders = false;
@@ -441,13 +441,13 @@
             // 
             this.sqlDataSource1.ConnectionName = "BanHangConnectionString";
             this.sqlDataSource1.Name = "sqlDataSource1";
-            table1.Name = "sadohcm_goldstar.GPM_Setting";
+            table1.Name = "GPM_Setting";
             allColumns1.Table = table1;
             selectQuery1.Columns.Add(allColumns1);
-            selectQuery1.Name = "sadohcm_goldstar_GPM_Setting";
+            selectQuery1.Name = "GPM_Setting";
             selectQuery1.Tables.Add(table1);
             columnExpression1.ColumnName = "KyHieu";
-            table2.Name = "sadohcm_goldstar.GPM_GiaVe_ChiTiet";
+            table2.Name = "GPM_GiaVe_ChiTiet";
             columnExpression1.Table = table2;
             column1.Expression = columnExpression1;
             columnExpression2.ColumnName = "GiaVe";
@@ -463,9 +463,9 @@
             selectQuery2.Columns.Add(column2);
             selectQuery2.Columns.Add(column3);
             selectQuery2.Columns.Add(column4);
-            selectQuery2.FilterString = "[sadohcm_goldstar.GPM_BanVe.NgayBan] >= ?NgayBD And [sadohcm_goldstar.GPM_BanVe.N" +
-    "gayBan] <= ?NgayKT And [sadohcm_goldstar.GPM_GiaVe_ChiTiet.HuyVe] = 0";
-            selectQuery2.Name = "sadohcm_goldstar_GPM_BanVe";
+            selectQuery2.FilterString = "[GPM_BanVe.NgayBan] >= ?NgayBD And [GPM_BanVe.NgayBan] <= ?NgayKT And [GPM_GiaVe_" +
+    "ChiTiet.HuyVe] = 0";
+            selectQuery2.Name = "GPM_BanVe";
             queryParameter1.Name = "NgayBD";
             queryParameter1.Type = typeof(DevExpress.DataAccess.Expression);
             queryParameter1.Value = new DevExpress.DataAccess.Expression("[Parameters.NgayBD]", typeof(string));
@@ -478,7 +478,7 @@
             relationColumnInfo1.ParentKeyColumn = "ID";
             join1.KeyColumns.Add(relationColumnInfo1);
             join1.Nested = table2;
-            table3.Name = "sadohcm_goldstar.GPM_BanVe";
+            table3.Name = "GPM_BanVe";
             join1.Parent = table3;
             selectQuery2.Relations.Add(join1);
             selectQuery2.Tables.Add(table3);
@@ -506,7 +506,7 @@
             this.ReportFooter});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.sqlDataSource1});
-            this.DataMember = "sadohcm_goldstar_GPM_BanVe";
+            this.DataMember = "GPM_BanVe";
             this.DataSource = this.sqlDataSource1;
             this.Margins = new System.Drawing.Printing.Margins(0, 0, 11, 100);
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {

@@ -121,30 +121,30 @@
     <value>17, 17</value>
   </metadata>
   <data name="customSqlQuery1.Sql" xml:space="preserve">
-    <value>select SUM("sadohcm_goldstar.GPM_ChiTietDonDatHang"."SoLuong") as SoLuong,
-       "sadohcm_goldstar.GPM_ChiTietDonDatHang"."DonGia",
-       SUM("sadohcm_goldstar.GPM_ChiTietDonDatHang"."ThanhTien") as TongTien,
-       "sadohcm_goldstar.GPM_HangHoa"."MaHang",
-       "sadohcm_goldstar.GPM_HangHoa"."TenHangHoa",
-       "sadohcm_goldstar.GPM_DonViTinh"."TenDonViTinh"
-  from ((("sadohcm_goldstar"."GPM_DonDatHang"
-       "sadohcm_goldstar.GPM_DonDatHang"
-  inner join "sadohcm_goldstar"."GPM_ChiTietDonDatHang"
-       "sadohcm_goldstar.GPM_ChiTietDonDatHang"
-       on ("sadohcm_goldstar.GPM_ChiTietDonDatHang"."IDDonHang" = "sadohcm_goldstar.GPM_DonDatHang"."ID"))
-  inner join "sadohcm_goldstar"."GPM_HangHoa"
-       "sadohcm_goldstar.GPM_HangHoa"
-       on ("sadohcm_goldstar.GPM_HangHoa"."ID" = "sadohcm_goldstar.GPM_ChiTietDonDatHang"."IDHangHoa"))
-  inner join "sadohcm_goldstar"."GPM_DonViTinh"
-       "sadohcm_goldstar.GPM_DonViTinh"
-       on ("sadohcm_goldstar.GPM_DonViTinh"."ID" = "sadohcm_goldstar.GPM_HangHoa"."IDDonViTinh"))
+    <value>select SUM("GPM_ChiTietDonDatHang"."SoLuong") as SoLuong,
+       "GPM_ChiTietDonDatHang"."DonGia",
+       SUM("GPM_ChiTietDonDatHang"."ThanhTien") as TongTien,
+       "GPM_HangHoa"."MaHang",
+       "GPM_HangHoa"."TenHangHoa",
+       "GPM_DonViTinh"."TenDonViTinh"
+  from ((("dbo"."GPM_DonDatHang"
+       "GPM_DonDatHang"
+  inner join "dbo"."GPM_ChiTietDonDatHang"
+       "GPM_ChiTietDonDatHang"
+       on ("GPM_ChiTietDonDatHang"."IDDonHang" = "GPM_DonDatHang"."ID"))
+  inner join "dbo"."GPM_HangHoa"
+       "GPM_HangHoa"
+       on ("GPM_HangHoa"."ID" = "GPM_ChiTietDonDatHang"."IDHangHoa"))
+  inner join "dbo"."GPM_DonViTinh"
+       "GPM_DonViTinh"
+       on ("GPM_DonViTinh"."ID" = "GPM_HangHoa"."IDDonViTinh"))
  where
-       (("sadohcm_goldstar.GPM_DonDatHang"."NgayLap" &gt;= @NgayBD)
-       and ("sadohcm_goldstar.GPM_DonDatHang"."NgayLap" &lt;= @NgayKT))
-group by  "sadohcm_goldstar.GPM_ChiTietDonDatHang"."DonGia", "sadohcm_goldstar.GPM_HangHoa"."MaHang",
-       "sadohcm_goldstar.GPM_HangHoa"."TenHangHoa", "sadohcm_goldstar.GPM_DonViTinh"."TenDonViTinh"</value>
+       (("GPM_DonDatHang"."NgayLap" &gt;= @NgayBD)
+       and ("GPM_DonDatHang"."NgayLap" &lt;= @NgayKT))
+group by  "GPM_ChiTietDonDatHang"."DonGia", "GPM_HangHoa"."MaHang",
+       "GPM_HangHoa"."TenHangHoa", "GPM_DonViTinh"."TenDonViTinh"</value>
   </data>
   <data name="sqlDataSource1.ResultSchemaSerializable" xml:space="preserve">
-    <value>PERhdGFTZXQgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxWaWV3IE5hbWU9InNhZG9oY21fZ29sZHN0YXJfR1BNX0RvbkRhdEhhbmciPjxGaWVsZCBOYW1lPSJTb0x1b25nIiBUeXBlPSJJbnQzMiIgLz48RmllbGQgTmFtZT0iRG9uR2lhIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlRvbmdUaWVuIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9Ik1hSGFuZyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJUZW5IYW5nSG9hIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlRlbkRvblZpVGluaCIgVHlwZT0iU3RyaW5nIiAvPjwvVmlldz48VmlldyBOYW1lPSJzYWRvaGNtX2dvbGRzdGFyX0dQTV9TZXR0aW5nIj48RmllbGQgTmFtZT0iSUQiIFR5cGU9IkludDMyIiAvPjxGaWVsZCBOYW1lPSJUaWV1RGVDb25nVHkiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iVGVuQ29uZ1R5IiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlNvVGllblRpY2hMdXkiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iU29UaWVuUXV5RG9pIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IkRpYUNoaSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJEaWVuVGhvYWkiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iVGlldURlVmUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iTWFTb1RodWUiIFR5cGU9IlN0cmluZyIgLz48L1ZpZXc+PC9EYXRhU2V0Pg==</value>
+    <value>PERhdGFTZXQgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxWaWV3IE5hbWU9IkdQTV9Eb25EYXRIYW5nIj48RmllbGQgTmFtZT0iU29MdW9uZyIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9IkRvbkdpYSIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJUb25nVGllbiIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJNYUhhbmciIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iVGVuSGFuZ0hvYSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJUZW5Eb25WaVRpbmgiIFR5cGU9IlN0cmluZyIgLz48L1ZpZXc+PFZpZXcgTmFtZT0iR1BNX1NldHRpbmciPjxGaWVsZCBOYW1lPSJJRCIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9IlRpZXVEZUNvbmdUeSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJUZW5Db25nVHkiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iU29UaWVuVGljaEx1eSIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJTb1RpZW5RdXlEb2kiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iRGlhQ2hpIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkRpZW5UaG9haSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJUaWV1RGVWZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJNYVNvVGh1ZSIgVHlwZT0iU3RyaW5nIiAvPjwvVmlldz48L0RhdGFTZXQ+</value>
   </data>
 </root>

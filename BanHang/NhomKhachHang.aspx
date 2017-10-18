@@ -12,7 +12,7 @@
             </ShowAdaptiveDetailButton>
             <HideAdaptiveDetailButton ButtonType="Image">
             </HideAdaptiveDetailButton>
-            <NewButton ButtonType="Image" RenderMode="Image">
+            <NewButton>
                 <Image IconID="actions_add_16x16" ToolTip="Thêm mới">
                 </Image>
             </NewButton>
@@ -24,11 +24,11 @@
                 <Image IconID="actions_close_32x32" ToolTip="Hủy thao tác">
                 </Image>
             </CancelButton>
-            <EditButton ButtonType="Image" RenderMode="Image">
+            <EditButton>
                 <Image IconID="actions_edit_16x16devav" ToolTip="Sửa">
                 </Image>
             </EditButton>
-            <DeleteButton ButtonType="Image" RenderMode="Image">
+            <DeleteButton>
                 <Image IconID="actions_cancel_16x16" ToolTip="Xóa">
                 </Image>
             </DeleteButton>
@@ -36,11 +36,11 @@
         <SettingsPopup>
             <EditForm HorizontalAlign="WindowCenter" Modal="True" VerticalAlign="WindowCenter" />
         </SettingsPopup>
-        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" ConfirmDelete="Bạn có chắc chắn muốn xóa không?. Thao tác này có thể dẫn đễn việc xóa các Khách Hàng của nhóm!." PopupEditFormCaption="Thông tin nhóm khách hàng" Title="DANH SÁCH NHÓM KHÁCH HÀNG HÀNG" />
+        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" ConfirmDelete="Bạn có chắc chắn muốn xóa không?. Thao tác này có thể dẫn đễn việc xóa các Khách Hàng của nhóm!." PopupEditFormCaption="Thông tin nhóm khách hàng" Title="DANH SÁCH NHÓM KHÁCH HÀNG" EmptyDataRow="Danh sách trống" SearchPanelEditorNullText="Nhập thông tin cần tìm..." />
         <SettingsSearchPanel Visible="True" />
         <EditFormLayoutProperties>
             <Items>
-                <dx:GridViewColumnLayoutItem ColumnName="Tên Nhóm KH" Name="TenNhomKhachHang">
+                <dx:GridViewColumnLayoutItem ColumnName="Tên Nhóm Khách Hàng" Name="TenNhomKhachHang">
                 </dx:GridViewColumnLayoutItem>
                 <dx:GridViewColumnLayoutItem ColumnName="Ghi Chú" Name="GhiChu">
                 </dx:GridViewColumnLayoutItem>
@@ -51,9 +51,7 @@
         <Columns>
             <dx:GridViewCommandColumn ShowClearFilterButton="True" ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="5" Name="iconaction">
             </dx:GridViewCommandColumn>
-            <dx:GridViewDataTextColumn VisibleIndex="0" Caption="ID" FieldName="ID">
-            </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Tên Nhóm KH" FieldName="TenNhomKhachHang">
+            <dx:GridViewDataTextColumn VisibleIndex="1" Caption="Tên Nhóm Khách Hàng" FieldName="TenNhomKhachHang">
                 <PropertiesTextEdit>
                     <ValidationSettings>
                         <RequiredField ErrorText="Không được bỏ trống" IsRequired="True" />

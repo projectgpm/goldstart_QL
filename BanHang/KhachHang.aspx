@@ -4,16 +4,6 @@
         <Items>
             <dx:LayoutItem Caption="" HorizontalAlign="Left">
                 <LayoutItemNestedControlCollection>
-                    <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
-                        <dx:ASPxButton ID="btnXuatPDF" runat="server" OnClick="btnXuatPDF_Click" Text="Xuất PDF" Visible="False">
-                            <Image IconID="export_exporttopdf_16x16">
-                            </Image>
-                        </dx:ASPxButton>
-                    </dx:LayoutItemNestedControlContainer>
-                </LayoutItemNestedControlCollection>
-            </dx:LayoutItem>
-            <dx:LayoutItem Caption="" HorizontalAlign="Left">
-                <LayoutItemNestedControlCollection>
                     <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer2" runat="server">
                         <dx:ASPxButton ID="btnXuatExcel" runat="server" OnClick="btnXuatExcel_Click" Text="Xuất Excel">
                             <Image IconID="export_exporttoxls_16x16">
@@ -41,7 +31,7 @@
         </SettingsEditing>
         <Settings ShowFilterRow="True" ShowTitlePanel="True" />
         <SettingsBehavior ConfirmDelete="True" />
-        <SettingsCommandButton RenderMode="Image">
+        <SettingsCommandButton>
             <ShowAdaptiveDetailButton ButtonType="Image">
             </ShowAdaptiveDetailButton>
             <HideAdaptiveDetailButton ButtonType="Image">
@@ -58,11 +48,11 @@
                 <Image IconID="actions_close_32x32" ToolTip="Hủy thao tác">
                 </Image>
             </CancelButton>
-            <EditButton ButtonType="Image" RenderMode="Image">
+            <EditButton>
                 <Image IconID="actions_edit_16x16devav" ToolTip="Sửa">
                 </Image>
             </EditButton>
-            <DeleteButton ButtonType="Image" RenderMode="Image">
+            <DeleteButton>
                 <Image IconID="actions_cancel_16x16" ToolTip="Xóa">
                 </Image>
             </DeleteButton>
@@ -71,7 +61,7 @@
             <EditForm HorizontalAlign="WindowCenter" Modal="True" VerticalAlign="WindowCenter" />
         </SettingsPopup>
         <SettingsSearchPanel Visible="True" />
-        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" ConfirmDelete="Bạn có chắc chắn muốn xóa không?" PopupEditFormCaption="Thông tin khách hàng" Title="DANH SÁCH KHÁCH HÀNG" />
+        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" ConfirmDelete="Bạn có chắc chắn muốn xóa không?" PopupEditFormCaption="Thông tin khách hàng" Title="DANH SÁCH KHÁCH HÀNG" EmptyDataRow="Danh sách trống" SearchPanelEditorNullText="Nhập thông tin cần tìm..." />
         <EditFormLayoutProperties>
             <Items>
                 <dx:GridViewLayoutGroup Caption="Thông tin khách hàng">

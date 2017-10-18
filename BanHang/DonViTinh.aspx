@@ -5,7 +5,7 @@
         </SettingsEditing>
         <Settings AutoFilterCondition="Contains" ShowFilterRow="True" ShowTitlePanel="True" />
         <SettingsBehavior ConfirmDelete="True" />
-        <SettingsCommandButton RenderMode="Image">
+        <SettingsCommandButton>
             <ShowAdaptiveDetailButton ButtonType="Image">
             </ShowAdaptiveDetailButton>
             <HideAdaptiveDetailButton ButtonType="Image">
@@ -22,11 +22,11 @@
                 <Image IconID="actions_close_32x32" ToolTip="Hủy thao tác">
                 </Image>
             </CancelButton>
-            <EditButton ButtonType="Image" RenderMode="Image">
+            <EditButton>
                 <Image IconID="actions_edit_16x16devav" ToolTip="Sửa">
                 </Image>
             </EditButton>
-            <DeleteButton ButtonType="Image" RenderMode="Image">
+            <DeleteButton>
                 <Image IconID="actions_cancel_16x16" ToolTip="Xóa">
                 </Image>
             </DeleteButton>
@@ -35,7 +35,7 @@
             <EditForm HorizontalAlign="WindowCenter" Modal="True" VerticalAlign="WindowCenter" />
         </SettingsPopup>
         <SettingsSearchPanel Visible="True" />
-        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" ConfirmDelete="Bạn có chắc chắn muốn xóa không?" PopupEditFormCaption="Thông tin đơn vị tính" Title="DANH SÁCH ĐƠN VỊ TÍNH" />
+        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" ConfirmDelete="Bạn có chắc chắn muốn xóa không?" PopupEditFormCaption="Thông tin đơn vị tính" Title="DANH SÁCH ĐƠN VỊ TÍNH" EmptyDataRow="Danh sách trống" SearchPanelEditorNullText="Nhập thông tin cần tìm..." />
         <EditFormLayoutProperties>
             <Items>
                 <dx:GridViewColumnLayoutItem ColumnName="Tên Đơn Vị Tính" Name="TenDonViTinh">
@@ -49,9 +49,6 @@
         <Columns>
             <dx:GridViewCommandColumn ShowClearFilterButton="True" ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="6" Name="iconaction">
             </dx:GridViewCommandColumn>
-            <dx:GridViewDataTextColumn Caption="Mã ĐVT" FieldName="ID" VisibleIndex="0">
-                <Settings AutoFilterCondition="Contains" />
-            </dx:GridViewDataTextColumn>
             <dx:GridViewDataTextColumn Caption="Tên Đơn Vị Tính" FieldName="TenDonViTinh" VisibleIndex="1">
                 <PropertiesTextEdit>
                     

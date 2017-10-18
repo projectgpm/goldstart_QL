@@ -181,6 +181,7 @@
     <Content Include="KhachHang.aspx" />
     <Content Include="KiemKho.aspx" />
     <Content Include="KyHieuGiaVe.aspx" />
+    <Content Include="LichSuTruyCap.aspx" />
     <Content Include="Light.master" />
   </ItemGroup>
   <ItemGroup>
@@ -466,6 +467,7 @@
     <Compile Include="Data\dtKiemKho.cs" />
     <Compile Include="Data\dtKyHieuGiaVe.cs" />
     <Compile Include="Data\dtLichSuHeThong.cs" />
+    <Compile Include="Data\dtLichSuTruyCap.cs" />
     <Compile Include="Data\dtNhomKhachHang.cs" />
     <Compile Include="Data\dtNhomNguoiDung.cs" />
     <Compile Include="Data\dtPhieuKhachHangTraHang.cs" />
@@ -647,6 +649,13 @@
     </Compile>
     <Compile Include="KyHieuGiaVe.aspx.designer.cs">
       <DependentUpon>KyHieuGiaVe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LichSuTruyCap.aspx.cs">
+      <DependentUpon>LichSuTruyCap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LichSuTruyCap.aspx.designer.cs">
+      <DependentUpon>LichSuTruyCap.aspx</DependentUpon>
     </Compile>
     <Compile Include="Light.master.cs">
       <DependentUpon>Light.master</DependentUpon>

@@ -14,8 +14,16 @@ namespace BanHang
         dtNhomNguoiDung data = new dtNhomNguoiDung();
         protected void Page_Load(object sender, EventArgs e)
         {
-           
-             LoadGrid();
+            if (Session["KTDangNhap"] != "GPM")
+            {
+                Response.Redirect("DangNhap.aspx");
+            }
+            else
+            {
+                LoadGrid();
+                if (Session["IDNhanVien"].ToString() != "1")
+                    gridNhomNguoiDung.Columns["chucnang"].Visible = false;
+            }
         }
         public void LoadGrid()
         {

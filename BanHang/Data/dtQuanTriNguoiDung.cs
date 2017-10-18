@@ -33,7 +33,7 @@ namespace BanHang.Data
             using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
             {
                 con.Open();
-                string cmdText = "SELECT *  FROM [GPM_NGUOIDUNG] WHERE DAXOA = 0";
+                string cmdText = "SELECT *  FROM [GPM_NGUOIDUNG] WHERE DAXOA = 0 AND ID != 1";
                 using (SqlCommand command = new SqlCommand(cmdText, con))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {

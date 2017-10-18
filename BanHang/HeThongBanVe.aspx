@@ -197,13 +197,16 @@
                         <tr>                            
                             <td align="left" width="50%">                                
                                 <dx:ASPxButton ID="btnNhanVien" runat="server" Text="Nhân viên A" 
-                                    RenderMode="Link">
+                                    RenderMode="Link" PostBackUrl="Default.aspx">
                                     <Image IconID="businessobjects_bodetails_32x32">
                                     </Image>
                                 </dx:ASPxButton>                                
                             </td>
                             <td align="right" width="50%">
-                                
+                                <dx:ASPxButton ID="ASPxButton2" runat="server" RenderMode="Link" OnClick="ASPxButton1_Click" Text="Thoát" PostBackUrl="DangXuat.aspx">
+                                    <Image IconID="actions_cancel_32x32office2013" ToolTip="Thoát">
+                                    </Image>
+                                </dx:ASPxButton>
                             </td>
                         </tr>
                     </table>
@@ -235,7 +238,7 @@
                                     </asp:SqlDataSource>
                             </td>
                             <td width="15%" align="right">
-                                <dx:ASPxButton ID="ASPxButton1" runat="server" RenderMode="Link" OnClick="ASPxButton1_Click">
+                                <dx:ASPxButton ID="ASPxButton1" runat="server" RenderMode="Link" OnClick="ASPxButton1_Click" Text="Thêm Khách Hàng">
                                     <Image IconID="actions_newemployee_32x32devav" ToolTip="Thêm khách hàng">
                                     </Image>
                                 </dx:ASPxButton>

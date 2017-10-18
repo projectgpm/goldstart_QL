@@ -76,15 +76,6 @@ namespace BanHang {
         protected global::System.Web.UI.WebControls.XmlDataSource xmlAdmin;
         
         /// <summary>
-        /// lblChao control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxLabel lblChao;
-        
-        /// <summary>
         /// MainPane control.
         /// </summary>
         /// <remarks>
@@ -137,5 +128,14 @@ namespace BanHang {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxLabel ASPxLabel2;
+        
+        /// <summary>
+        /// lblChao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel lblChao;
     }
 }

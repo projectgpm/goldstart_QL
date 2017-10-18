@@ -18,7 +18,7 @@
             </ShowAdaptiveDetailButton>
             <HideAdaptiveDetailButton ButtonType="Image">
             </HideAdaptiveDetailButton>
-            <NewButton ButtonType="Image" RenderMode="Image">
+            <NewButton>
                 <Image IconID="actions_add_16x16" ToolTip="Thêm mới">
                 </Image>
             </NewButton>
@@ -30,11 +30,11 @@
                 <Image IconID="actions_close_32x32" ToolTip="Hủy thao tác">
                 </Image>
             </CancelButton>
-            <EditButton ButtonType="Image" RenderMode="Image">
+            <EditButton>
                 <Image IconID="actions_edit_16x16devav" ToolTip="Sửa">
                 </Image>
             </EditButton>
-            <DeleteButton ButtonType="Image" RenderMode="Image">
+            <DeleteButton>
                 <Image IconID="actions_cancel_16x16" ToolTip="Xóa">
                 </Image>
             </DeleteButton>
@@ -43,7 +43,7 @@
             <EditForm HorizontalAlign="WindowCenter" Modal="True" VerticalAlign="WindowCenter" />
         </SettingsPopup>
         <SettingsSearchPanel Visible="True" />
-        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" ConfirmDelete="Bạn có chắc chắn muốn xóa không?" PopupEditFormCaption="Thông tin nhóm người dùng" Title="DANH SÁCH NHÓM NGƯỜI DÙNG" />
+        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" ConfirmDelete="Bạn có chắc chắn muốn xóa không?" PopupEditFormCaption="Thông tin nhóm người dùng" Title="DANH SÁCH NHÓM NGƯỜI DÙNG" SearchPanelEditorNullText="Nhập thông tin cần tìm..." />
         <EditFormLayoutProperties>
             <Items>
                 <dx:GridViewColumnLayoutItem ColumnName="Tên nhóm" Name="TenNhom">
@@ -53,27 +53,19 @@
             </Items>
         </EditFormLayoutProperties>
         <Columns>
-            <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="6" Name="iconaction" ShowClearFilterButton="True">
+            <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="6" Name="chucnang" ShowClearFilterButton="True">
             </dx:GridViewCommandColumn>
-            <dx:GridViewDataTextColumn Caption="Mã Nhóm" FieldName="ID" ReadOnly="True" VisibleIndex="0">
-            </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="Tên nhóm" FieldName="TenNhom" VisibleIndex="1">
+            <dx:GridViewDataTextColumn Caption="Tên Nhóm" FieldName="TenNhom" VisibleIndex="1">
                 <PropertiesTextEdit>
                     <ValidationSettings SetFocusOnError="True">
                         <RequiredField IsRequired="True" />
                     </ValidationSettings>
                 </PropertiesTextEdit>
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataDateColumn Caption="Ngày cập nhật" FieldName="NgayCapNhat" VisibleIndex="5">
+            <dx:GridViewDataDateColumn Caption="Ngày Cập Nhật" FieldName="NgayCapNhat" VisibleIndex="5">
                 <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy">
                 </PropertiesDateEdit>
             </dx:GridViewDataDateColumn>
-            <dx:GridViewDataButtonEditColumn Caption="Phân quyền" VisibleIndex="4" Name="phanquyen">
-                
-                <DataItemTemplate>
-                    <a href="javascript:void(0);" onclick="OnMoreInfoClick(this, '<%# Container.KeyValue %>')">Xem </a>
-                </DataItemTemplate>
-            </dx:GridViewDataButtonEditColumn>
         </Columns>
         
          <Styles>

@@ -193,6 +193,15 @@ namespace BanHang {
         protected global::DevExpress.Web.ASPxButton btnNhanVien;
         
         /// <summary>
+        /// ASPxButton2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxButton ASPxButton2;
+        
+        /// <summary>
         /// cmbKhachHang control.
         /// </summary>
         /// <remarks>

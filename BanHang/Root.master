@@ -36,7 +36,7 @@
             </Styles>
             <PanelCollection>
                 <dx:PanelContent ID="PanelContent1" runat="server" SupportsDisabledAttribute="True">
-                        <div class="headerMenu" style="text-align:center; margin: 0 auto;  width: 1000px;">                                           
+                        <div class="headerMenu" style="text-align:center; margin: 0 auto;  width: 1100px;">                                           
                             <dx:ASPxRibbon ID="ASPxRibbon1" runat="server" ClientInstanceName="ribbon" 
                                     ShowGroupLabels="False" ShowFileTab="False" ShowTabs="False" CssClass="menu1">
                                 <Styles>
@@ -73,7 +73,9 @@
                                                             <dx:RibbonDropDownButtonItem Name="khach_hang" NavigateUrl="KhachHang.aspx" 
                                                                 Text="Khách Hàng">
                                                             </dx:RibbonDropDownButtonItem>
-                                                            <dx:RibbonDropDownButtonItem Name="hang_hoa" Text="Mã Hàng" NavigateUrl="HangHoa.aspx">
+                                                            <dx:RibbonDropDownButtonItem Name="hang_hoa" Text="Hàng Hóa" NavigateUrl="HangHoa.aspx">
+                                                            </dx:RibbonDropDownButtonItem>
+                                                            <dx:RibbonDropDownButtonItem Name="Giá Vé" NavigateUrl="KyHieuGiaVe.aspx" Text="Giá Vé">
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="Danh mục Combo" NavigateUrl="DanhMucCombo.aspx" Text="Danh Mục Combo">
                                                             </dx:RibbonDropDownButtonItem>
@@ -164,8 +166,6 @@
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="Lịch sử kho" NavigateUrl="LichSuKho.aspx" Text="Lịch sử kho">
                                                             </dx:RibbonDropDownButtonItem>
-                                                            <dx:RibbonDropDownButtonItem Name="Quản Lý Dữ Liệu" NavigateUrl="DuLieu.aspx" Text="Quản Lý Dữ Liệu">
-                                                            </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="Cài đặt điểm tích lũy" NavigateUrl="DiemTichLuy.aspx" Text="Cài đặt điểm tích lũy">
                                                             </dx:RibbonDropDownButtonItem>
                                                         </Items>
@@ -210,7 +210,7 @@
                 </div>
             </ExpandBarTemplate>
         </dx:ASPxPanel>
-        <dx:ASPxLabel ID="lblChao" style="float:right; padding:5px;" runat="server"></dx:ASPxLabel> 
+        
         <dx:ASPxPanel ID="MainPane" runat="server" CssClass="mainContentPane">
             <PanelCollection>
                 <dx:PanelContent ID="PanelContent2" runat="server" SupportsDisabledAttribute="True">
@@ -229,6 +229,7 @@
                         <div style="text-align:center; padding:5px;">
                             <dx:ASPxLabel ID="ASPxLabel2" runat="server">
                             </dx:ASPxLabel> 
+                             <dx:ASPxLabel ID="lblChao" style="float:right; padding-right:10px" runat="server"></dx:ASPxLabel> 
                         </div>
                 </dx:PanelContent>
             </PanelCollection>

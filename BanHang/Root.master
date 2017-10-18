@@ -54,6 +54,11 @@
                                                         </LargeImage>
                                                     </dx:RibbonButtonItem>
 
+                                                    <dx:RibbonButtonItem Name="Bán Vé" NavigateUrl="HeThongBanVe.aspx" Text="Bán Vé" Size="Large">
+                                                        <LargeImage Url="~/image/banve.png">
+                                                        </LargeImage>
+                                                    </dx:RibbonButtonItem>
+
                                                     <dx:RibbonDropDownButtonItem Name="Danh mục" NavigateUrl="javascript:void(2)" 
                                                         Size="Large" Text="Danh mục">
                                                         <Items>

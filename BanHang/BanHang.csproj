@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="image\banhang.png" />
+    <Content Include="image\banve.png" />
     <Content Include="image\bao-cao-thong-ke.png" />
     <Content Include="image\baocao.png" />
     <Content Include="image\baohanh.jpg" />

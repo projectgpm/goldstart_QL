@@ -228,7 +228,26 @@ namespace BanHang.Data
                 }
             }
         }
-
+        public static float LayDiemCuKhachHang(string IDKhachHang)
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = " SELECT DiemTichLuy FROM [GPM_KhachHang] WHERE [ID] = '" + IDKhachHang + "'";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    DataTable tb = new DataTable();
+                    tb.Load(reader);
+                    if (tb.Rows.Count != 0)
+                    {
+                        DataRow dr = tb.Rows[0];
+                        return float.Parse(dr["DiemTichLuy"].ToString());
+                    }
+                    else return 0;
+                }
+            }
+        }
         public static float GiaBan1(string IDHangHoa)
         {
             using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))

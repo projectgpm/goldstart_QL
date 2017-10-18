@@ -242,40 +242,49 @@ namespace BanHang
 
         protected void btnThanhToan_Click(object sender, EventArgs e)
         {
+     
             int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
-            float TienKhachThanhToan;
-            bool isNumeric = float.TryParse(txtKhachThanhToan.Text, out TienKhachThanhToan);
-            if (!isNumeric)
+            if (DanhSachBanVe[MaHoaDon].ListChiTietBanVe.Count > 0)
             {
-                HienThiThongBao("Nhập không đúng số tiền !!"); return;
+                float TienKhachThanhToan;
+                bool isNumeric = float.TryParse(txtKhachThanhToan.Text, out TienKhachThanhToan);
+                if (!isNumeric)
+                {
+                    HienThiThongBao("Nhập không đúng số tiền !!"); return;
+                }
+                if (TienKhachThanhToan < float.Parse(txtKhachCanTra.Text))
+                {
+                    HienThiThongBao("Thanh toán chưa đủ số tiền !!"); return;
+                }
+                DanhSachBanVe[MaHoaDon].KhachThanhToan = TienKhachThanhToan;
+                DanhSachBanVe[MaHoaDon].GiamGia = float.Parse(txtGiamGia.Text);
+                DanhSachBanVe[MaHoaDon].KhachCanTra = float.Parse(txtKhachCanTra.Text);
+                dtBanVe dt = new dtBanVe();
+                string IDNhanVien = Session["IDThuNgan"].ToString();
+                string TenNhanVien = Session["TenThuNgan"].ToString();
+
+                string IDKhachHang = "1";
+                if (cmbKhachHang.Value != null)
+                    IDKhachHang = cmbKhachHang.Value.ToString();
+                object IDHoaDon = dt.InsertHoaDonBanVe(IDNhanVien, TenNhanVien, IDKhachHang, DanhSachBanVe[MaHoaDon], txtDiemTichLuy.Text.ToString());
+
+                string IDNhanVien1 = "1"; // Session["IDThuNgan"].ToString();
+                if (Session["IDThuNgan"] != null)
+                    IDNhanVien1 = Session["IDThuNgan"].ToString();
+                if (Session["IDNhanVien"] != null)
+                    IDNhanVien1 = Session["IDNhanVien"].ToString();
+                dtLichSuHeThong.ThemLichSuTruyCap(IDNhanVien1, "Bán vé", "Thanh toán hóa đơn ID: " + IDHoaDon);
+
+                HuyHoaDon();
+                cmbKhachHang.Text = "";
+                chitietbuilInLai.ContentUrl = "~/InHoaDonBanVe.aspx?IDVe=" + IDHoaDon;
+                chitietbuilInLai.ShowOnPageLoad = true;
             }
-            if (TienKhachThanhToan < float.Parse(txtKhachThanhToan.Text))
+            else
             {
-                HienThiThongBao("Thanh toán chưa đủ số tiền !!"); return;
+                HienThiThongBao("Danh sách hàng hóa trống !!!");
+                cmbKyHieu.Focus();
             }
-            DanhSachBanVe[MaHoaDon].KhachThanhToan = TienKhachThanhToan;
-            DanhSachBanVe[MaHoaDon].GiamGia = float.Parse(txtGiamGia.Text);
-            DanhSachBanVe[MaHoaDon].KhachCanTra = float.Parse(txtKhachCanTra.Text);
-            dtBanVe dt = new dtBanVe();
-            string IDNhanVien = Session["IDThuNgan"].ToString();
-            string TenNhanVien = Session["TenThuNgan"].ToString();
-
-            string IDKhachHang = "1";
-            if (cmbKhachHang.Value != null)
-                IDKhachHang = cmbKhachHang.Value.ToString();
-            object IDHoaDon = dt.InsertHoaDonBanVe(IDNhanVien,TenNhanVien, IDKhachHang, DanhSachBanVe[MaHoaDon],txtDiemTichLuy.Text.ToString());
-
-            string IDNhanVien1 = "1"; // Session["IDThuNgan"].ToString();
-            if (Session["IDThuNgan"] != null)
-                IDNhanVien1 = Session["IDThuNgan"].ToString();
-            if (Session["IDNhanVien"] != null)
-                IDNhanVien1 = Session["IDNhanVien"].ToString();
-            dtLichSuHeThong.ThemLichSuTruyCap(IDNhanVien1, "Bán vé", "Thanh toán hóa đơn ID: " + IDHoaDon);
-            
-            HuyHoaDon();
-            cmbKhachHang.Text = "";
-            chitietbuilInLai.ContentUrl = "~/InHoaDonBanVe.aspx?IDVe=" + IDHoaDon;
-            chitietbuilInLai.ShowOnPageLoad = true;
         }
         protected void btnHuyKhachHang_Click(object sender, EventArgs e)
         {
@@ -322,10 +331,9 @@ namespace BanHang
 
             dsKhachHang.SelectParameters.Clear();
             dsKhachHang.SelectParameters.Add("DienThoai", TypeCode.String, string.Format("%{0}%", e.Filter));
-            dsKhachHang.SelectParameters.Add("CMND", TypeCode.String, string.Format("%{0}%", e.Filter));
-            
             dsKhachHang.SelectParameters.Add("MaKhachHang", TypeCode.String, string.Format("%{0}%", e.Filter));
             dsKhachHang.SelectParameters.Add("TenKhachHang", TypeCode.String, string.Format("%{0}%", e.Filter));
+            dsKhachHang.SelectParameters.Add("CMND", TypeCode.String, string.Format("%{0}%", e.Filter));
             dsKhachHang.SelectParameters.Add("startIndex", TypeCode.Int64, (e.BeginIndex + 1).ToString());
             dsKhachHang.SelectParameters.Add("endIndex", TypeCode.Int64, (e.EndIndex + 1).ToString());
             comboBox.DataSource = dsKhachHang;
@@ -343,6 +351,7 @@ namespace BanHang
                 if (!isNumeric)
                 {
                     txtDiemTichLuy.Text = "0";
+                    txtGiamGia.Text = "0";
                     txtDiemTichLuy.Focus();
                     HienThiThongBao("Nhập không đúng số điểm !!"); return;
                 }
@@ -351,7 +360,11 @@ namespace BanHang
                     float DiemTichLuy = data.DiemTichLuy(IDKhachHang);
                     if (float.Parse(txtDiemTichLuy.Text) > DiemTichLuy)
                     {
+                      
                         txtDiemTichLuy.Text = "0";
+                        txtGiamGia.Text = "0";
+                        txtDiemTichLuy.Focus();
+                        txtKhachCanTra.Text = txtTongTien.Text.ToString();
                         HienThiThongBao("Điểm tích lũy không đủ !!"); return;
                     }
                     else
@@ -370,6 +383,7 @@ namespace BanHang
             }
             else
             {
+                txtGiamGia.Text = "0";
                 txtDiemTichLuy.Text = "0";
                 cmbKhachHang.Focus();
                 HienThiThongBao("Vui lòng chọn khách hàng !!"); return;

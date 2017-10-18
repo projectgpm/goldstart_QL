@@ -63,7 +63,7 @@
                                      <asp:Button ID="btnInsertHang" runat="server" OnClick="btnInsertHang_Click" Style="display: none"/>                                                                                     
                                     <dx:ASPxComboBox ID="cmbKyHieu" runat="server" ValueType="System.String"  
                                         DropDownWidth="600" DataSourceID="SqlDanhSachKyHieu" 
-                                        TextFormatString="{1} - {2}" Width="100%"
+                                        TextFormatString="{1}" Width="100%"
                                          ValueField="ID" >
                                         <Columns>
                                             <dx:ListBoxColumn FieldName="MaKyHieu" Width="80px" Caption="Mã Ký Hiệu" />
@@ -215,7 +215,7 @@
                                 <dx:ASPxComboBox ID="cmbKhachHang" runat="server" ValueType="System.String" 
                                         DropDownWidth="700" DropDownStyle="DropDown" 
                                         ValueField="ID"
-                                        NullText="Tìm kiếm khách hàng ......." Width="100%" TextFormatString="{0} - {1} - {4}"
+                                        NullText="Tìm kiếm khách hàng ......." Width="100%" TextFormatString="{1}"
                                         EnableCallbackMode="true" CallbackPageSize="10" 
                                         OnItemsRequestedByFilterCondition="cmbKhachHang_ItemsRequestedByFilterCondition"
                                         OnItemRequestedByValue="cmbKhachHang_ItemRequestedByValue" AutoPostBack="True" OnSelectedIndexChanged="cmbKhachHang_SelectedIndexChanged" 

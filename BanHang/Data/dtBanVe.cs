@@ -99,44 +99,59 @@ namespace BanHang.Data
                         }
                         if (IDHoaDon != null)
                         {
-                            foreach (ChiTietBanVe cthd in hoaDon.ListChiTietBanVe)
-                            {
-                                int SLMua = cthd.SoLuong;
-                                for (int i = 0; i < SLMua; i++)
-                                {
-                                    //------------------------------------------------------------------------------------
-                                    int STTV = 0;
-                                    string SoVe;
-                                    string GPM = "0000000";
-                                    string cmdText = "SELECT ID FROM [GPM_GiaVe_ChiTiet] WHERE [KyHieu] = N'" + cthd.TenKyHieu + "'";
-                                    using (SqlCommand command = new SqlCommand(cmdText, con, trans))
-                                    using (SqlDataReader reader = command.ExecuteReader())
-                                    {
-                                        DataTable tb = new DataTable();
-                                        tb.Load(reader);
-                                        STTV = tb.Rows.Count + 1;
-                                        int DoDaiHT = STTV.ToString().Length;
-                                        string DoDaiGPM = GPM.Substring(0,7-DoDaiHT);
-                                        SoVe = DoDaiGPM + STTV;
-                                    }
+                            //foreach (ChiTietBanVe cthd in hoaDon.ListChiTietBanVe)
+                            //{
+                            //    int SLMua = cthd.SoLuong;
+                            //    for (int i = 0; i < SLMua; i++)
+                            //    {
+                            //        //------------------------------------------------------------------------------------
+                            //        int STTV = 0;
+                            //        string SoVe;
+                            //        string GPM = "0000000";
+                            //        string cmdText = "SELECT ID FROM [GPM_GiaVe_ChiTiet] WHERE [KyHieu] = N'" + cthd.TenKyHieu + "'";
+                            //        using (SqlCommand command = new SqlCommand(cmdText, con, trans))
+                            //        using (SqlDataReader reader = command.ExecuteReader())
+                            //        {
+                            //            DataTable tb = new DataTable();
+                            //            tb.Load(reader);
+                            //            STTV = tb.Rows.Count + 1;
+                            //            int DoDaiHT = STTV.ToString().Length;
+                            //            string DoDaiGPM = GPM.Substring(0,7-DoDaiHT);
+                            //            SoVe = DoDaiGPM + STTV;
+                            //        }
 
-                                    //-------------------------------------------------------------------------
-                                    dtBanVe bv = new dtBanVe();
-                                    string InsertChiTietHoaDon = "INSERT INTO [GPM_GiaVe_ChiTiet] ([IDBanVe],[KyHieu],[GiaVe],[SoThuTu],[NgayBan]) " +
-                                                            "VALUES (@IDBanVe, @KyHieu, @GiaVe, @SoThuTu,getdate())";
-                                    using (SqlCommand cmd = new SqlCommand(InsertChiTietHoaDon, con, trans))
-                                    {
-                                        cmd.Parameters.AddWithValue("@IDBanVe", IDHoaDon);
-                                        cmd.Parameters.AddWithValue("@KyHieu", cthd.TenKyHieu);
-                                        cmd.Parameters.AddWithValue("@GiaVe", cthd.DonGia);
-                                        cmd.Parameters.AddWithValue("@SoThuTu", SoVe);
-                                        cmd.ExecuteNonQuery();
-                                    }
+                            //        //-------------------------------------------------------------------------
+                            //        dtBanVe bv = new dtBanVe();
+                            //        string InsertChiTietHoaDon = "INSERT INTO [GPM_GiaVe_ChiTiet] ([IDBanVe],[KyHieu],[GiaVe],[SoThuTu],[NgayBan]) " +
+                            //                                "VALUES (@IDBanVe, @KyHieu, @GiaVe, @SoThuTu,getdate())";
+                            //        using (SqlCommand cmd = new SqlCommand(InsertChiTietHoaDon, con, trans))
+                            //        {
+                            //            cmd.Parameters.AddWithValue("@IDBanVe", IDHoaDon);
+                            //            cmd.Parameters.AddWithValue("@KyHieu", cthd.TenKyHieu);
+                            //            cmd.Parameters.AddWithValue("@GiaVe", cthd.DonGia);
+                            //            cmd.Parameters.AddWithValue("@SoThuTu", SoVe);
+                            //            cmd.ExecuteNonQuery();
+                            //        }
 
                                     
-                                }
+                            //    }
 
-                                dtLichSuHeThong.ThemLichSuBanHang(IDNhanVien + "", IDKhachHang + "", " Bán vé", cthd.TenKyHieu, cthd.SoLuong + "", cthd.DonGia + "", "Bán vé");
+                            //    dtLichSuHeThong.ThemLichSuBanHang(IDNhanVien + "", IDKhachHang + "", " Bán vé", cthd.TenKyHieu, cthd.SoLuong + "", cthd.DonGia + "", "Bán vé");
+                            //}
+
+                            foreach (ChiTietBanVe cthd in hoaDon.ListChiTietBanVe)
+                            {
+                                string InsertChiTietHoaDon = "INSERT INTO [GPM_GiaVe_ChiTiet] ([IDBanVe],[KyHieu],[GiaVe],[NgayBan],[SoLuong],[ThanhTien]) " +
+                                                            "VALUES (@IDBanVe, @KyHieu, @GiaVe,getdate(),@SoLuong,@ThanhTien)";
+                                using (SqlCommand cmd = new SqlCommand(InsertChiTietHoaDon, con, trans))
+                                {
+                                    cmd.Parameters.AddWithValue("@IDBanVe", IDHoaDon);
+                                    cmd.Parameters.AddWithValue("@KyHieu", cthd.TenKyHieu);
+                                    cmd.Parameters.AddWithValue("@GiaVe", cthd.DonGia);
+                                    cmd.Parameters.AddWithValue("@SoLuong", cthd.SoLuong);
+                                    cmd.Parameters.AddWithValue("@ThanhTien", cthd.ThanhTien);
+                                    cmd.ExecuteNonQuery();
+                                }
                             }
                             if (Int32.Parse(IDKhachHang) != 1)
                             {
@@ -153,7 +168,7 @@ namespace BanHang.Data
                                 using (SqlCommand cmd = new SqlCommand(CongDiemTichLuy, con, trans))
                                 {
                                     cmd.Parameters.AddWithValue("@ID", IDKhachHang);
-                                    cmd.Parameters.AddWithValue("@DiemTichLuy1", TongTienGiam);
+                                    cmd.Parameters.AddWithValue("@DiemTichLuy1", TongTienGiam.ToString());
                                     cmd.ExecuteNonQuery();
                                 }
                             }

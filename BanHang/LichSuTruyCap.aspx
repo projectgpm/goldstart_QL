@@ -16,25 +16,17 @@
         <SettingsSearchPanel Visible="True" />
         <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" ConfirmDelete="Bạn có chắc chắn muốn xóa không?" PopupEditFormCaption="Thông tin danh mục thuế" Title="DANH SÁCH LỊCH SỬ TRUY CẬP HỆ THỐNG" EmptyDataRow="Danh sách trống." SearchPanelEditorNullText="Nhập thông tin cần tìm..." />
         <Columns>
-            <dx:GridViewDataTextColumn Caption="Tên Chức Năng" FieldName="TenChucNang" VisibleIndex="0">
-            </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="Đối Tượng" FieldName="NoiDung" VisibleIndex="2">
-            </dx:GridViewDataTextColumn>
-            <dx:GridViewDataComboBoxColumn Caption="Tên Nhân Viên" FieldName="IDNhanVien" VisibleIndex="3">
+            <dx:GridViewDataComboBoxColumn Caption="Tên Nhân Viên" FieldName="IDNhanVien" VisibleIndex="1">
                 <PropertiesComboBox DataSourceID="sqlNguoiDung" TextField="TenNguoiDung" ValueField="ID">
                 </PropertiesComboBox>
             </dx:GridViewDataComboBoxColumn>
-            <dx:GridViewDataComboBoxColumn Caption="Nhóm Người Dùng" FieldName="IDNhom" VisibleIndex="4">
-                <PropertiesComboBox DataSourceID="sqlNhomNguoiDung" TextField="TenNhom" ValueField="ID">
-                </PropertiesComboBox>
-            </dx:GridViewDataComboBoxColumn>
-            <dx:GridViewDataDateColumn Caption="Thời Gian" FieldName="ThoiGian" VisibleIndex="6">
+            <dx:GridViewDataDateColumn Caption="Thời Gian" FieldName="Ngay" VisibleIndex="6">
                 <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy hh:mm:ss tt">
                 </PropertiesDateEdit>
             </dx:GridViewDataDateColumn>
-            <dx:GridViewDataTextColumn Caption="Tên PC" FieldName="TenMay" VisibleIndex="5">
+            <dx:GridViewDataTextColumn Caption="Thao Tác" FieldName="ThaoTac" VisibleIndex="3">
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="Hành Động" FieldName="HanhDong" VisibleIndex="1">
+            <dx:GridViewDataTextColumn Caption="Hành Động" FieldName="HanhDong" VisibleIndex="5">
             </dx:GridViewDataTextColumn>
         </Columns>
         <Styles>

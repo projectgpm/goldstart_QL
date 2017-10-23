@@ -59,7 +59,7 @@ namespace BanHang
             data = new dtKhachHang();
             int IDNhomKhachHang = Int32.Parse(e.NewValues["IDNhomKhachHang"].ToString());
             string TenKhachHang = e.NewValues["TenKhachHang"] == null ? "" : e.NewValues["TenKhachHang"].ToString();
-            DateTime NgaySinh = DateTime.Parse(e.NewValues["NgaySinh"] == null ? "" : e.NewValues["NgaySinh"].ToString());
+            DateTime NgaySinh = DateTime.Parse(e.NewValues["NgaySinh"] == null ? DateTime.Now.ToString() : e.NewValues["NgaySinh"].ToString());
             string CMND = e.NewValues["CMND"] == null ? "" : e.NewValues["CMND"].ToString();
             string DiaChi = e.NewValues["DiaChi"] == null ? "" : e.NewValues["DiaChi"].ToString();
             string DienThoai = e.NewValues["DienThoai"] == null ? "" : e.NewValues["DienThoai"].ToString();

@@ -459,7 +459,7 @@
             this.xrLabel11,
             this.xrLabel15});
             this.reportHeaderBand1.Dpi = 254F;
-            this.reportHeaderBand1.HeightF = 273.4633F;
+            this.reportHeaderBand1.HeightF = 247.0049F;
             this.reportHeaderBand1.Name = "reportHeaderBand1";
             // 
             // xrBarCode1
@@ -474,6 +474,7 @@
             this.xrBarCode1.Padding = new DevExpress.XtraPrinting.PaddingInfo(25, 25, 0, 0, 254F);
             this.xrBarCode1.SizeF = new System.Drawing.SizeF(475F, 40.31691F);
             this.xrBarCode1.Symbology = code128Generator1;
+            this.xrBarCode1.Visible = false;
             // 
             // xrLabel25
             // 
@@ -497,10 +498,10 @@
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "GPM_HoaDon.MaHoaDon")});
             this.xrLabel24.Dpi = 254F;
             this.xrLabel24.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.xrLabel24.LocationFloat = new DevExpress.Utils.PointFloat(0F, 218.4633F);
+            this.xrLabel24.LocationFloat = new DevExpress.Utils.PointFloat(0F, 201.7527F);
             this.xrLabel24.Name = "xrLabel24";
             this.xrLabel24.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel24.SizeF = new System.Drawing.SizeF(475F, 30F);
+            this.xrLabel24.SizeF = new System.Drawing.SizeF(475F, 44.41661F);
             this.xrLabel24.StylePriority.UseFont = false;
             this.xrLabel24.StylePriority.UseTextAlignment = false;
             this.xrLabel24.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
@@ -785,6 +786,7 @@
             this.xrLabel16.StylePriority.UseTextAlignment = false;
             this.xrLabel16.Text = "Tiền thừa:";
             this.xrLabel16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
+            this.xrLabel16.Visible = false;
             // 
             // xrLabel26
             // 
@@ -799,6 +801,7 @@
             this.xrLabel26.StylePriority.UseFont = false;
             this.xrLabel26.StylePriority.UseTextAlignment = false;
             this.xrLabel26.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
+            this.xrLabel26.Visible = false;
             // 
             // xrLabel27
             // 

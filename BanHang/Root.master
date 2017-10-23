@@ -114,7 +114,7 @@
                                                         <Items>
                                                             <dx:RibbonDropDownButtonItem Name="bangkebanhang" Text="Bảng kê bán hàng" NavigateUrl="BangKeBanHang.aspx">
                                                             </dx:RibbonDropDownButtonItem>
-                                                            <dx:RibbonDropDownButtonItem Name="bangkebanve" Text="Bảng kê bán vé" NavigateUrl="BangKeBanVe.aspx">
+                                                            <dx:RibbonDropDownButtonItem Name="bangkebanve" Text="Bảng kê bán vé" NavigateUrl="BangKeBanVe.aspx" Visible="False">
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="bangkekiemkho" NavigateUrl="BangKeKiemKho.aspx" Text="Bảng kê kiểm kho">
                                                             </dx:RibbonDropDownButtonItem>

@@ -37,7 +37,7 @@
      
         <dx:ASPxGridViewExporter ID="export" runat="server" GridViewID="HangHoaExport">
         </dx:ASPxGridViewExporter>
-        <dx:ASPxButton ID="btnNhapExel" runat="server" OnClick="btnNhapExcel_Click" Text="Nhập Exel">
+        <dx:ASPxButton ID="btnNhapExel" runat="server" OnClick="btnNhapExcel_Click" Text="Nhập Exel" Visible="False">
             <Image IconID="export_exporttoxls_16x16">
             </Image>
         </dx:ASPxButton>

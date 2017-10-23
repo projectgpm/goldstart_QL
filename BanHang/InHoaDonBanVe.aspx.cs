@@ -14,9 +14,9 @@ namespace BanHang
         {
             string IDVe = Request.QueryString["IDVe"];
 
-            rpInVe rp = new rpInVe();
-            rp.Parameters["IDVe"].Value = IDVe;
-            rp.Parameters["IDVe"].Visible = false;
+            rpHoaDonBanVe rp = new rpHoaDonBanVe();
+            rp.Parameters["ID"].Value = IDVe;
+            rp.Parameters["ID"].Visible = false;
             viewerReport.Report = rp;
         }
     }

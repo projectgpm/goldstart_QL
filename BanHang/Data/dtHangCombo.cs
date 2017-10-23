@@ -116,7 +116,7 @@ namespace BanHang.Data
             using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
             {
                 con.Open();
-                string cmdText = "SELECT [GPM_HANGHOA].* FROM [GPM_HANGHOA] WHERE TrangThai = 1 AND TenHangHoa is not null";
+                string cmdText = "SELECT [GPM_HANGHOA].* FROM [GPM_HANGHOA] WHERE TrangThai = 1 AND DAXOA = 0 AND TenHangHoa is not null";
                 using (SqlCommand command = new SqlCommand(cmdText, con))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {

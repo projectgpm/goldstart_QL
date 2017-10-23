@@ -145,6 +145,7 @@ namespace BanHang
                         data = new dtKiemKho();
                         data.ThemPhieuKiemKho(ID, IDHangHoa, TonKho, ChenhLech, ThucTe, MaHang, IDDonViTinh);
                     }
+                    dtLichSuHeThong.ThemLichSuTruyCap(Session["IDNhanVien"].ToString(), "Kiểm kho", "Tạo phiếu kiểm kho");
                     data = new dtKiemKho();
                     data.XoaPhieuKiemKho_Temp_IDPhieuKiemKho(IDPhieuKiemKho);
                     Response.Redirect("DanhSachKiemKho.aspx");

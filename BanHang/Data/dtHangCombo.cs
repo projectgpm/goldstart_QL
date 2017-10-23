@@ -9,7 +9,28 @@ namespace BanHang.Data
 {
     public class dtHangCombo
     {
-
+        public static string Dem_Max()
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                int STTV = 0;
+                string So;
+                string GPM = "00000";
+                string cmdText = "SELECT * FROM [GPM_HangHoa] WHERE [TenHangHoa] is not null";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    DataTable tb = new DataTable();
+                    tb.Load(reader);
+                    STTV = tb.Rows.Count + 1;
+                    int DoDaiHT = STTV.ToString().Length;
+                    string DoDaiGPM = GPM.Substring(0, 5 - DoDaiHT);
+                    So = DoDaiGPM + STTV;
+                    return So;
+                }
+            }
+        }
         public void XoaHangCombo(string ID)
         {
             using (SqlConnection myConnection = new SqlConnection(StaticContext.ConnectionString))
@@ -174,7 +195,7 @@ namespace BanHang.Data
             }
         }
 
-        public void ThemHangHoa(string IDHangHoaCombo, string IDHangHoa, int SoLuong, float GiaBan, float ThanhTien, string MaHang, string IDDonViTinh)
+        public void ThemHangHoa(object IDHangHoaCombo, string IDHangHoa, int SoLuong, float GiaBan, float ThanhTien, string MaHang, string IDDonViTinh)
         {
             using (SqlConnection myConnection = new SqlConnection(StaticContext.ConnectionString))
             {
@@ -290,7 +311,7 @@ namespace BanHang.Data
             }
         }
 
-        public void CapNhatHangHoa(string ID, string MaHang, string IDDonViTinh, string TenHangHoa, float TongTien, string GhiChu)
+        public void CapNhatHangHoa(object ID, string MaHang, string IDDonViTinh, string TenHangHoa, float TongTien, string GhiChu)
         {
             using (SqlConnection myConnection = new SqlConnection(StaticContext.ConnectionString))
             {

@@ -52,7 +52,7 @@
             </dx:ASPxButton>
             <dx:ASPxGridViewExporter ID="ExportHangHoa" runat="server" ExportedRowType="All" GridViewID="HangHoaExport">
             </dx:ASPxGridViewExporter>
-            <dx:ASPxGridView ID="gridHangHoa" runat="server" AutoGenerateColumns="False" KeyFieldName="ID" Width="100%" OnRowDeleting="gridHangHoa_RowDeleting" OnRowInserting="gridHangHoa_RowInserting" OnRowUpdating="gridHangHoa_RowUpdating">
+            <dx:ASPxGridView ID="gridHangHoa" runat="server" AutoGenerateColumns="False" KeyFieldName="ID" Width="100%" OnRowDeleting="gridHangHoa_RowDeleting" OnRowInserting="gridHangHoa_RowInserting" OnRowUpdating="gridHangHoa_RowUpdating" OnInitNewRow="gridHangHoa_InitNewRow">
                     <SettingsDetail ShowDetailRow="True" />
                     <Templates>
                         <EditForm>
@@ -86,12 +86,14 @@
                                 Width="100%" onrowdeleting="gridBarCode_RowDeleting" 
                                 onrowinserting="gridBarCode_RowInserting" 
                                 onrowupdating="gridBarCode_RowUpdating">
+                                <SettingsPager Mode="ShowAllRecords">
+                                </SettingsPager>
                                 <SettingsCommandButton>
                                     <ShowAdaptiveDetailButton ButtonType="Image">
                                     </ShowAdaptiveDetailButton>
                                     <HideAdaptiveDetailButton ButtonType="Image">
                                     </HideAdaptiveDetailButton>
-                                    <NewButton ButtonType="Image" RenderMode="Image">
+                                    <NewButton>
                                         <Image IconID="actions_add_16x16" ToolTip="Thêm mới">
                                         </Image>
                                     </NewButton>
@@ -103,20 +105,21 @@
                                         <Image IconID="actions_close_32x32" ToolTip="Hủy thao tác">
                                         </Image>
                                     </CancelButton>
-                                    <EditButton ButtonType="Image" RenderMode="Image">
+                                    <EditButton>
                                         <Image IconID="actions_edit_16x16devav" ToolTip="Sửa">
                                         </Image>
                                     </EditButton>
-                                    <DeleteButton ButtonType="Image" RenderMode="Image">
+                                    <DeleteButton>
                                         <Image IconID="actions_cancel_16x16" ToolTip="Xóa">
                                         </Image>
                                     </DeleteButton>
                                 </SettingsCommandButton>
+                                <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" EmptyDataRow="Danh sách trống" />
                                 <Columns>
                                     <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" 
                                         ShowNewButtonInHeader="True" VisibleIndex="3">
                                     </dx:GridViewCommandColumn>
-                                    <dx:GridViewDataTextColumn Caption="ID" FieldName="ID" VisibleIndex="0">
+                                    <dx:GridViewDataTextColumn Caption="ID" FieldName="ID" VisibleIndex="0" Visible="False">
                                         <EditFormSettings Visible="False" />
                                         <CellStyle HorizontalAlign="Center">
                                         </CellStyle>
@@ -129,10 +132,14 @@
                                         <EditFormSettings Visible="False" />
                                     </dx:GridViewDataTextColumn>
                                 </Columns>
-                                <Styles>
-                                    <Header HorizontalAlign="Center">
-                                    </Header>
-                                </Styles>
+                                  <Styles>
+            <Header Font-Bold="True" HorizontalAlign="Center">
+            </Header>
+            <AlternatingRow Enabled="True">
+            </AlternatingRow>
+            <TitlePanel Font-Bold="True" HorizontalAlign="Left">
+            </TitlePanel>
+        </Styles>
                             </dx:ASPxGridView>
                         </DetailRow>
                     </Templates>
@@ -140,7 +147,7 @@
                     </SettingsEditing>
                     <Settings ShowTitlePanel="True" ShowFilterRow="True" />
                     <SettingsBehavior ConfirmDelete="True" />
-                    <SettingsCommandButton RenderMode="Image">
+                    <SettingsCommandButton>
                         <ShowAdaptiveDetailButton ButtonType="Image">
                         </ShowAdaptiveDetailButton>
                         <HideAdaptiveDetailButton ButtonType="Image">
@@ -157,11 +164,11 @@
                             <Image IconID="actions_close_32x32" ToolTip="Hủy thao tác">
                             </Image>
                         </CancelButton>
-                        <EditButton ButtonType="Image" RenderMode="Image">
+                        <EditButton>
                             <Image IconID="actions_edit_16x16devav" ToolTip="Sửa">
                             </Image>
                         </EditButton>
-                        <DeleteButton ButtonType="Image" RenderMode="Image">
+                        <DeleteButton>
                             <Image IconID="actions_cancel_16x16" ToolTip="Xóa">
                             </Image>
                         </DeleteButton>
@@ -170,7 +177,7 @@
                         <EditForm HorizontalAlign="WindowCenter" Modal="True" VerticalAlign="WindowCenter" />
                     </SettingsPopup>
                     <SettingsSearchPanel Visible="True" />
-                    <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" ConfirmDelete="Bạn có chắc chắn muốn xóa không?" PopupEditFormCaption="Thông tin hàng hóa" Title="DANH SÁCH HÀNG HÓA" />
+                    <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" ConfirmDelete="Bạn có chắc chắn muốn xóa không?" PopupEditFormCaption="Thông tin hàng hóa" Title="DANH SÁCH HÀNG HÓA" EmptyDataRow="Danh sách trống" SearchPanelEditorNullText="Nhập thông tin cần tìm..." />
                     <EditFormLayoutProperties>
                         <Items>
                             <dx:GridViewTabbedLayoutGroup>

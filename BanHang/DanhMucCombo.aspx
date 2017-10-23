@@ -26,17 +26,17 @@
         </Items>
       </dx:ASPxFormLayout> 
     <dx:ASPxGridView ID="gridDanhMucCombo" runat="server" AutoGenerateColumns="False" Width="100%" OnRowDeleting="gridDanhMucCombo_RowDeleting" OnRowUpdating="gridDanhMucCombo_RowUpdating" KeyFieldName="ID">
-         <Settings ShowFilterRow="True" />
+          <Settings AutoFilterCondition="Contains" ShowFilterRow="True" ShowTitlePanel="True" />
         <SettingsEditing Mode="PopupEditForm">
         </SettingsEditing>
-          <Settings AutoFilterCondition="Contains" ShowFilterRow="True" ShowTitlePanel="True" />
+         <Settings ShowFilterRow="True" />
         <SettingsBehavior ConfirmDelete="True" />
         <SettingsCommandButton>
             <ShowAdaptiveDetailButton ButtonType="Image">
             </ShowAdaptiveDetailButton>
             <HideAdaptiveDetailButton ButtonType="Image">
             </HideAdaptiveDetailButton>
-            <NewButton ButtonType="Image" RenderMode="Image">
+            <NewButton>
                 <Image IconID="actions_add_16x16" ToolTip="Thêm mới">
                 </Image>
             </NewButton>
@@ -48,11 +48,11 @@
                 <Image IconID="actions_close_32x32" ToolTip="Hủy thao tác">
                 </Image>
             </CancelButton>
-            <EditButton ButtonType="Image" RenderMode="Image">
+            <EditButton>
                 <Image IconID="actions_edit_16x16devav" ToolTip="Sửa">
                 </Image>
             </EditButton>
-            <DeleteButton ButtonType="Image" RenderMode="Image">
+            <DeleteButton>
                 <Image IconID="actions_cancel_16x16">
                 </Image>
             </DeleteButton>
@@ -60,7 +60,8 @@
         <SettingsPopup>
             <EditForm HorizontalAlign="WindowCenter" VerticalAlign="WindowCenter" Modal="True" />
         </SettingsPopup>
-        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" ConfirmDelete="Bạn có chắc chắn muốn xóa không?" PopupEditFormCaption="Thông tin danh mục combo" Title="DANH SÁCH DANH MỤC COMBO" />
+         <SettingsSearchPanel Visible="True" />
+        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" ConfirmDelete="Bạn có chắc chắn muốn xóa không?" PopupEditFormCaption="Thông tin danh mục combo" Title="DANH SÁCH DANH MỤC COMBO" EmptyDataRow="Danh sách trống" SearchPanelEditorNullText="Nhập thông tin cần tìm..." />
           <EditFormLayoutProperties ColCount="2">
               <Items>
                   <dx:GridViewColumnLayoutItem ColumnName="Tên Hàng Hóa" ColSpan="2" Name="TenHangHoa">
@@ -87,7 +88,7 @@
 <PropertiesComboBox DataSourceID="sqlDonViTinh" TextField="TenDonViTinh" ValueField="ID"></PropertiesComboBox>
             </dx:GridViewDataComboBoxColumn>
             <dx:GridViewDataSpinEditColumn Caption="Tổng Tiền" VisibleIndex="4" FieldName="GiaBan1">
-                <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom" DisplayFormatInEditMode="True">
+                <PropertiesSpinEdit DisplayFormatString="{0:N0} VNĐ" NumberFormat="Custom" DisplayFormatInEditMode="True">
                     <ValidationSettings SetFocusOnError="True">
                         <RequiredField IsRequired="True" />
                     </ValidationSettings>

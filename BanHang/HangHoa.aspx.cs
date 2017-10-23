@@ -17,8 +17,15 @@ namespace BanHang
         dtHangHoa data = new dtHangHoa();
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadGrid();
-              
+            if (Session["KTDangNhap"] != "GPM")
+            {
+                Response.Redirect("DangNhap.aspx");
+            }
+            else
+            {
+                LoadGrid();
+
+            }
         }
         public void LoadGrid()
         {
@@ -34,13 +41,7 @@ namespace BanHang
             e.Cancel = true;
             gridHangHoa.CancelEdit();
             LoadGrid();
-
-            string IDNhanVien = "1"; // Session["IDThuNgan"].ToString();
-            if (Session["IDThuNgan"] != null)
-                IDNhanVien = Session["IDThuNgan"].ToString();
-            if (Session["IDNhanVien"] != null)
-                IDNhanVien = Session["IDNhanVien"].ToString();
-            dtLichSuHeThong.ThemLichSuTruyCap(IDNhanVien, "Hàng hóa", "Xóa hàng hóa ID: " + ID);
+            dtLichSuHeThong.ThemLichSuTruyCap(Session["IDNhanVien"].ToString(), "Hàng hóa", "Xóa hàng hóa ID: " + ID);
         }
 
         protected void gridHangHoa_RowInserting(object sender, DevExpress.Web.Data.ASPxDataInsertingEventArgs e)
@@ -49,8 +50,19 @@ namespace BanHang
             data = new dtHangHoa();
             string MaHang = e.NewValues["MaHang"].ToString();
             dtImportHangHoa hh = new dtImportHangHoa();
+            int KT = 0;
+            foreach (string barCode in ListBarCode)
+            {
+                if (dtHangHoa.KiemTraBarcode(barCode) == false)
+                {
+                    KT = 1;
+                    throw new Exception("Lỗi:Barcode đã tồn tại !!");
+                    return;
+                }
+
+            }
             DataTable dd = hh.KiemTraHangHoa(MaHang);
-            if (dd.Rows.Count == 0)
+            if (dd.Rows.Count == 0 && KT == 0)
             {
                 string TenHangHoa = e.NewValues["TenHangHoa"].ToString();
                 TenHangHoa = dtSetting.convertDauSangKhongDau(TenHangHoa).ToUpper();
@@ -59,7 +71,6 @@ namespace BanHang
                 string TrangThaiHang = e.NewValues["TrangThaiHang"].ToString();
                 float GiaMua = float.Parse(e.NewValues["GiaMua"].ToString());
                 float GiaBan1 = float.Parse(e.NewValues["GiaBan1"].ToString());
-
                 float GiaBan2 = float.Parse(e.NewValues["GiaBan2"] != null ? e.NewValues["GiaBan2"].ToString() : "0");
                 float GiaBan3 = float.Parse(e.NewValues["GiaBan3"] != null ? e.NewValues["GiaBan3"].ToString() : "0");
                 float GiaBan4 = float.Parse(e.NewValues["GiaBan4"] != null ? e.NewValues["GiaBan4"].ToString() : "0");
@@ -79,13 +90,7 @@ namespace BanHang
                 e.Cancel = true;
                 gridHangHoa.CancelEdit();
                 LoadGrid();
-
-                string IDNhanVien = "1"; // Session["IDThuNgan"].ToString();
-                if (Session["IDThuNgan"] != null)
-                    IDNhanVien = Session["IDThuNgan"].ToString();
-                if (Session["IDNhanVien"] != null)
-                    IDNhanVien = Session["IDNhanVien"].ToString();
-                dtLichSuHeThong.ThemLichSuTruyCap(IDNhanVien, "Hàng hóa", "Thêm hàng hóa ID: " + IDHangHoa);
+                dtLichSuHeThong.ThemLichSuTruyCap(Session["IDNhanVien"].ToString(), "Hàng hóa", "Thêm hàng hóa ID: " + IDHangHoa);
             }
             else Response.Write("<script language='JavaScript'> alert('Mã hàng đã tồn tại.'); </script>");
         }
@@ -122,13 +127,7 @@ namespace BanHang
             e.Cancel = true;
             gridHangHoa.CancelEdit();
             LoadGrid();
-
-            string IDNhanVien = "1"; // Session["IDThuNgan"].ToString();
-            if (Session["IDThuNgan"] != null)
-                IDNhanVien = Session["IDThuNgan"].ToString();
-            if (Session["IDNhanVien"] != null)
-                IDNhanVien = Session["IDNhanVien"].ToString();
-            dtLichSuHeThong.ThemLichSuTruyCap(IDNhanVien, "Hàng hóa", "Cập nhật hàng hóa ID: " + ID);
+            dtLichSuHeThong.ThemLichSuTruyCap(Session["IDNhanVien"].ToString(), "Hàng hóa", "Cập nhật hàng hóa ID: " + ID);
         }
 
         protected List<string> GetListBarCode()
@@ -177,7 +176,7 @@ namespace BanHang
             gridBarCode.CancelEdit();
             gridBarCode.DataSource = data.GetListBarCode(IDHangHoa);
             gridBarCode.DataBind();
-
+            dtLichSuHeThong.ThemLichSuTruyCap(Session["IDNhanVien"].ToString(), "Hàng hóa", "Cập Nhật Barcode");
           
         }
 
@@ -187,12 +186,20 @@ namespace BanHang
             ASPxGridView gridBarCode = sender as ASPxGridView;
             object IDHangHoa = gridBarCode.GetMasterRowKeyValue();
             string BarCode = e.NewValues["Barcode"] != null ? e.NewValues["Barcode"].ToString() : "";
-            data.ThemBarCode(IDHangHoa, BarCode);
+            if (dtHangHoa.KiemTraBarcode(BarCode) == true)
+            {
+
+                data.ThemBarCode(IDHangHoa, BarCode);
+            }
+            else
+            {
+                throw new Exception("Lỗi:Barcode đã tồn tại");
+            }
             e.Cancel = true;
             gridBarCode.CancelEdit();
             gridBarCode.DataSource = data.GetListBarCode(IDHangHoa);
             gridBarCode.DataBind();
-
+            dtLichSuHeThong.ThemLichSuTruyCap(Session["IDNhanVien"].ToString(), "Hàng hóa", "Thêm Barcode");
           
         }
 
@@ -206,6 +213,7 @@ namespace BanHang
             object IDHangHoa = gridBarCode.GetMasterRowKeyValue();
             gridBarCode.DataSource = data.GetListBarCode(IDHangHoa);
             gridBarCode.DataBind();
+            dtLichSuHeThong.ThemLichSuTruyCap(Session["IDNhanVien"].ToString(), "Hàng hóa", "Xóa Barcode");
         }
 
         protected void btnXuatExcel_Click(object sender, EventArgs e)
@@ -214,13 +222,7 @@ namespace BanHang
             HangHoaExport.DataSource = data.LayDanhSachHangHoa_FullBarcode();
             HangHoaExport.DataBind();
             export.WriteXlsToResponse();
-
-            string IDNhanVien1 = "1"; // Session["IDThuNgan"].ToString();
-            if (Session["IDThuNgan"] != null)
-                IDNhanVien1 = Session["IDThuNgan"].ToString();
-            if (Session["IDNhanVien"] != null)
-                IDNhanVien1 = Session["IDNhanVien"].ToString();
-            dtLichSuHeThong.ThemLichSuTruyCap(IDNhanVien1, "Hàng hóa", "Xuất Exel Hàng hóa");
+            dtLichSuHeThong.ThemLichSuTruyCap(Session["IDNhanVien"].ToString(), "Hàng hóa", "Xuất Excel Hàng hóa");
         }
 
         protected void btnNhapExcel_Click(object sender, EventArgs e)
@@ -238,6 +240,11 @@ namespace BanHang
             //HangHoaExport.DataSource = data.getDanhSachHangHoa_Full_Barcode();
             //HangHoaExport.DataBind();
             //export.WritePdfToResponse();
+        }
+
+        protected void gridHangHoa_InitNewRow(object sender, DevExpress.Web.Data.ASPxDataInitNewRowEventArgs e)
+        {
+            e.NewValues["MaHang"] = dtHangHoa.Dem_Max();
         }
 
        

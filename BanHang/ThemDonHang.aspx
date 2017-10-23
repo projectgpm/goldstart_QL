@@ -97,18 +97,10 @@
                         </dx:LayoutItemNestedControlContainer>
                     </LayoutItemNestedControlCollection>
                 </dx:LayoutItem>
-                <dx:LayoutItem Caption="" ColSpan="2">
+                <dx:LayoutItem Caption="" ColSpan="3" HorizontalAlign="Right">
                     <LayoutItemNestedControlCollection>
                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer15" runat="server">
-                           <dx:ASPxUploadControl ID="UploadFileExcel" runat="server" AllowedFileExtensions=".xls" Width="100%">
-                            </dx:ASPxUploadControl>
-                        </dx:LayoutItemNestedControlContainer>
-                    </LayoutItemNestedControlCollection>
-                </dx:LayoutItem>
-                <dx:LayoutItem Caption="">
-                    <LayoutItemNestedControlCollection>
-                        <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer16" runat="server">
-                            <dx:ASPxButton ID="btnThem_Temp" runat="server" Text="Thêm" OnClick="btnThem_Temp_Click">
+                            <dx:ASPxButton ID="btnThem_Temp" runat="server" OnClick="btnThem_Temp_Click" Text="Thêm">
                                 <Image IconID="actions_add_32x32">
                                 </Image>
                             </dx:ASPxButton>

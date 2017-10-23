@@ -17,16 +17,22 @@ namespace BanHang
         dtThemDonHangKho data = new dtThemDonHangKho();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["KTDangNhap"] != "GPM")
             {
-                data = new dtThemDonHangKho();
-                object IDPhieuDatHang = data.ThemPhieuDatHang();
-                IDThuMuaDatHang_Temp.Value = IDPhieuDatHang.ToString();
-                txtNguoiLap.Text = Session["TenDangNhap"].ToString();
-                txtSoDonHang.Text = (DateTime.Now.ToString("ddMMyyyy-hhmmss"));
+                Response.Redirect("DangNhap.aspx");
             }
-            LoadGrid(IDThuMuaDatHang_Temp.Value.ToString());
-           
+            else
+            {
+                if (!IsPostBack)
+                {
+                    // data = new dtThemDonHangKho();
+                    // object IDPhieuDatHang = data.ThemPhieuDatHang();
+                    IDThuMuaDatHang_Temp.Value = Session["IDNhanVien"].ToString();
+                    txtNguoiLap.Text = Session["TenDangNhap"].ToString();
+                    txtSoDonHang.Text = (DateTime.Now.ToString("ddMMyyyy-hhmmss"));
+                }
+                LoadGrid(IDThuMuaDatHang_Temp.Value.ToString());
+            }
         }
         protected void txtNgayLap_Init(object sender, EventArgs e)
         {
@@ -111,19 +117,8 @@ namespace BanHang
 
         protected void btnThem_Temp_Click(object sender, EventArgs e)
         {
-            if (cmbHangHoa.Text != "" && UploadFileExcel.FileName.ToString() != "")
+            if (cmbHangHoa.Text != "")
             {
-                Response.Write("<script language='JavaScript'> alert('Vui lòng chỉ chọn 1 hình thức thêm hàng hóa.'); </script>");
-                CLear();
-                return;
-            }
-            else if (UploadFileExcel.FileName.ToString() != "")
-            {
-                Import();
-            }
-            else if (cmbHangHoa.Text != "")
-            {
-
                 int SoLuong = Int32.Parse(txtSoLuong.Text.ToString());
                 if (SoLuong > 0)
                 {
@@ -164,7 +159,6 @@ namespace BanHang
 
         protected void btnThem_Click(object sender, EventArgs e)
         {
-
             string IDDonHang = IDThuMuaDatHang_Temp.Value.ToString();
             data = new dtThemDonHangKho();
             DataTable dt = data.DanhSachDonDatHang_Temp(IDDonHang);
@@ -176,30 +170,27 @@ namespace BanHang
                 string TongTien = txtTongTien.Text;
                 string GhiChu = txtGhiChu.Text == null ? "" : txtGhiChu.Text.ToString();
                 data = new dtThemDonHangKho();
-                data.CapNhatDonDatHang(IDDonHang, SoDonHang, IDNguoiLap, NgayLap, TongTien, GhiChu);
-                foreach (DataRow dr in dt.Rows)
+                object ID = data.ThemPhieuDatHang();
+                if (ID != null)
                 {
-                    string IDHangHoa = dr["IDHangHoa"].ToString();
-                    string MaHang = dr["MaHang"].ToString();
-                    string IDDonViTinh = dr["IDDonViTinh"].ToString();
-                    string SoLuong = dr["SoLuong"].ToString();
-                    string DonGia = dr["DonGia"].ToString();
-                    string ThanhTien = dr["ThanhTien"].ToString();
+                    data.CapNhatDonDatHang(ID, SoDonHang, IDNguoiLap, NgayLap, TongTien, GhiChu);
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        string IDHangHoa = dr["IDHangHoa"].ToString();
+                        string MaHang = dr["MaHang"].ToString();
+                        string IDDonViTinh = dr["IDDonViTinh"].ToString();
+                        string SoLuong = dr["SoLuong"].ToString();
+                        string DonGia = dr["DonGia"].ToString();
+                        string ThanhTien = dr["ThanhTien"].ToString();
+                        data = new dtThemDonHangKho();
+                        data.ThemChiTietDonHang(ID, MaHang, IDHangHoa, IDDonViTinh, SoLuong, DonGia, ThanhTien);
+                        dtSetting.CongTonKho(IDHangHoa, SoLuong);
+                    }
                     data = new dtThemDonHangKho();
-                    data.ThemChiTietDonHang(IDDonHang, MaHang, IDHangHoa, IDDonViTinh, SoLuong, DonGia, ThanhTien);
-                    dtSetting.CongTonKho(IDHangHoa, SoLuong);
+                    data.XoaChiTietDonHang_Nhap(IDDonHang);
+                    dtLichSuHeThong.ThemLichSuTruyCap(Session["IDNhanVien"].ToString(), "Thêm đơn đặt hàng", "Thêm đơn đặt hàng");
+                    Response.Redirect("DanhSachPhieuDatHang.aspx");
                 }
-                data = new dtThemDonHangKho();
-                data.XoaChiTietDonHang_Nhap(IDDonHang);
-
-                string IDNhanVien1 = "1"; // Session["IDThuNgan"].ToString();
-                if (Session["IDThuNgan"] != null)
-                    IDNhanVien1 = Session["IDThuNgan"].ToString();
-                if (Session["IDNhanVien"] != null)
-                    IDNhanVien1 = Session["IDNhanVien"].ToString();
-                dtLichSuHeThong.ThemLichSuTruyCap(IDNhanVien1, "Thêm đơn đặt hàng", "Thêm đơn đặt hàng");
-
-                Response.Redirect("DanhSachPhieuDatHang.aspx");
             }
             else
             {
@@ -215,117 +206,12 @@ namespace BanHang
             data.XoaChiTietDonHang_Temp(IDThuMuaDatHang);
             Response.Redirect("DanhSachPhieuDatHang.aspx");
         }
-        private void Import()
-        {
-            if (string.IsNullOrEmpty(UploadFileExcel.FileName))
-            {
-                Response.Write("<script language='JavaScript'> alert('Chưa chọn file.'); </script>");
-                return;
-            }
-            UploadFile();
-            string Excel = Server.MapPath("~/Uploads/") + strFileExcel;
-
-            string excelConnectionString = string.Empty;
-            excelConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Excel + ";Extended Properties=Excel 8.0;";
-
-            OleDbConnection excelConnection = new OleDbConnection(excelConnectionString);
-            OleDbCommand cmd = new OleDbCommand("Select * from [Sheet$]", excelConnection);
-            excelConnection.Open();
-            OleDbDataReader dReader = default(OleDbDataReader);
-            dReader = cmd.ExecuteReader();
-
-            DataTable dataTable = new DataTable();
-            dataTable.Load(dReader);
-            int r = dataTable.Rows.Count;
-            Import_Temp(dataTable);
-
-        }
-        private void UploadFile()
-        {
-            string folder = null;
-            string filein = null;
-            string ThangNam = null;
-
-            ThangNam = string.Concat(System.DateTime.Now.Month.ToString(), System.DateTime.Now.Year.ToString());
-            if (!Directory.Exists(Server.MapPath("~/Uploads/") + ThangNam))
-            {
-                Directory.CreateDirectory(Server.MapPath("~/Uploads/") + ThangNam);
-            }
-            folder = Server.MapPath("~/Uploads/" + ThangNam + "/");
-
-            if (UploadFileExcel.HasFile)
-            {
-                strFileExcel = Guid.NewGuid().ToString();
-                string theExtension = Path.GetExtension(UploadFileExcel.FileName);
-                strFileExcel += theExtension;
-                filein = folder + strFileExcel;
-                UploadFileExcel.SaveAs(filein);
-                strFileExcel = ThangNam + "/" + strFileExcel;
-            }
-        }
-        private void Import_Temp(DataTable datatable)
-        {
-            int intRow = datatable.Rows.Count;
-            if (datatable.Columns.Contains("MaHang") && datatable.Columns.Contains("TenHangHoa") && datatable.Columns.Contains("SoLuong") && datatable.Columns.Contains("DonViTinh") && datatable.Columns.Contains("DonGia"))
-            {
-                if (intRow != 0)
-                {
-                    for (int i = 0; i <= intRow - 1; i++)
-                    {
-                        DataRow dr = datatable.Rows[i];
-                        int SoLuong = Int32.Parse(dr["SoLuong"].ToString());
-                        string MaHang = dr["MaHang"].ToString().Trim();
-                        if (SoLuong > 0 && SoLuong.ToString() != "" && MaHang != "")
-                        {
-                            string TenHangHoa = dr["TenHangHoa"].ToString();
-                            string IDHangHoa = dtSetting.LayIDHangHoa_MaHang(MaHang.Trim());
-                            string IDDonViTinh = dtSetting.LayIDDonViTinh(IDHangHoa.Trim());
-                            string IDDonHangChiNhanh = IDThuMuaDatHang_Temp.Value.ToString();
-                            float DonGia = float.Parse(dr["DonGia"].ToString());
-                            if (DonGia == 0)
-                            {
-                                DonGia = dtSetting.GiaMua(IDHangHoa);
-                            }
-                            DataTable db = dtThemDonHangKho.KTChiTietDonHang_Temp(IDHangHoa, IDDonHangChiNhanh);// kiểm tra hàng hóa
-                            if (db.Rows.Count == 0)
-                            {
-                                data = new dtThemDonHangKho();
-                                if (dtSetting.TrangThaiHang(IDHangHoa) == 1)
-                                {
-                                    data.ThemChiTietDonHang_Temp(IDDonHangChiNhanh, MaHang, IDHangHoa, IDDonViTinh, SoLuong, DonGia, DonGia * SoLuong);
-                                    TinhTongTien();
-                                    CLear();
-                                }
-                            }
-                            else
-                            {
-                                data = new dtThemDonHangKho();
-                                data.CapNhatChiTietDonHang_temp(IDDonHangChiNhanh, IDHangHoa, SoLuong, DonGia, DonGia * SoLuong);
-                                TinhTongTien();
-                                CLear();
-                            }
-                            LoadGrid(IDDonHangChiNhanh);
-                        }
-                        else
-                        {
-                            Response.Write("<script language='JavaScript'> alert('Số lượng phải > 0.'); </script>");
-                        }
-                    }
-                }
-            }
-            else
-            {
-                Response.Write("<script language='JavaScript'> alert('Dữ liệu không chính xác? Vui lòng kiểm tra lại.'); </script>");
-            }
-        }
-        public string strFileExcel { get; set; }
         protected void BtnXoaHang_Click(object sender, EventArgs e)
         {
             string ID = (((ASPxButton)sender).CommandArgument).ToString();
             string IDThuMuaDatHang = IDThuMuaDatHang_Temp.Value.ToString();
             data = new dtThemDonHangKho();
             data.XoaChiTietDonHang_Temp_ID(ID);
-
             TinhTongTien();
             LoadGrid(IDThuMuaDatHang);
         }

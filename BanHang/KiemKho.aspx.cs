@@ -15,21 +15,21 @@ namespace BanHang
         dtKiemKho data = new dtKiemKho();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["KTDangNhap"] != "GPM")
             {
-                data = new dtKiemKho();
-                object IDPhieuKiemKho = data.ThemPhieu_Temp();
-                IDPhieuKiemKho_Temp.Value = IDPhieuKiemKho.ToString();
-                txtNguoiLapPhieu.Text = Session["TenDangNhap"] == null ? "" : Session["TenDangNhap"].ToString();
-
-                string IDNhanVien1 = "1"; // Session["IDThuNgan"].ToString();
-                if (Session["IDThuNgan"] != null)
-                    IDNhanVien1 = Session["IDThuNgan"].ToString();
-                if (Session["IDNhanVien"] != null)
-                    IDNhanVien1 = Session["IDNhanVien"].ToString();
-                dtLichSuHeThong.ThemLichSuTruyCap(IDNhanVien1, "Kiểm kho", "Truy cập kiểm kho.");
+                Response.Redirect("DangNhap.aspx");
             }
-            LoadGrid(IDPhieuKiemKho_Temp.Value.ToString());    
+            else
+            {
+                if (!IsPostBack)
+                {
+                    //data = new dtKiemKho();
+                    //object IDPhieuKiemKho = data.ThemPhieu_Temp();
+                    IDPhieuKiemKho_Temp.Value = Session["IDNhanVien"].ToString();
+                    txtNguoiLapPhieu.Text = Session["TenDangNhap"] == null ? "" : Session["TenDangNhap"].ToString();
+                }
+                LoadGrid(IDPhieuKiemKho_Temp.Value.ToString());
+            }
         }
 
         protected void gridDanhSachHangHoa_Temp_RowDeleting(object sender, DevExpress.Web.Data.ASPxDataDeletingEventArgs e)
@@ -130,22 +130,25 @@ namespace BanHang
                 DateTime NgayKiemKho = DateTime.Parse(txtNgayLapPhieu.Text.ToString());
                 string GhiChu = txtGhiChu.Text == null ? "" : txtGhiChu.Text.ToString();
                 data = new dtKiemKho();
-                data.CapNhatPhieuKiemKho(IDPhieuKiemKho, IDNguoiDung, NgayKiemKho, GhiChu);
-                foreach (DataRow dr in db.Rows)
+                object ID = data.ThemPhieu_Temp();
+                if (ID != null)
                 {
-                    string IDHangHoa = dr["IDHangHoa"].ToString();
-                    string TonKho = dr["TonKho"].ToString();
-                    string ChenhLech = dr["ChenhLech"].ToString();
-                    string ThucTe = dr["ThucTe"].ToString();
-                    string MaHang = dr["MaHang"].ToString();
-                    string IDDonViTinh = dr["IDDonViTinh"].ToString();
+                    data.CapNhatPhieuKiemKho(ID, IDNguoiDung, NgayKiemKho, GhiChu);
+                    foreach (DataRow dr in db.Rows)
+                    {
+                        string IDHangHoa = dr["IDHangHoa"].ToString();
+                        string TonKho = dr["TonKho"].ToString();
+                        string ChenhLech = dr["ChenhLech"].ToString();
+                        string ThucTe = dr["ThucTe"].ToString();
+                        string MaHang = dr["MaHang"].ToString();
+                        string IDDonViTinh = dr["IDDonViTinh"].ToString();
+                        data = new dtKiemKho();
+                        data.ThemPhieuKiemKho(ID, IDHangHoa, TonKho, ChenhLech, ThucTe, MaHang, IDDonViTinh);
+                    }
                     data = new dtKiemKho();
-                    data.ThemPhieuKiemKho(IDPhieuKiemKho, IDHangHoa, TonKho, ChenhLech, ThucTe, MaHang, IDDonViTinh);
+                    data.XoaPhieuKiemKho_Temp_IDPhieuKiemKho(IDPhieuKiemKho);
+                    Response.Redirect("DanhSachKiemKho.aspx");
                 }
-                data = new dtKiemKho();
-                data.XoaPhieuKiemKho_Temp_IDPhieuKiemKho(IDPhieuKiemKho);
-                Response.Redirect("DanhSachKiemKho.aspx");
-              
             }
             else
             {

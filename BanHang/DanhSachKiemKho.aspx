@@ -46,7 +46,7 @@
 
         
 
-        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" Title="DANH SÁCH KIỂM KHO" ConfirmDelete="Bạn chắc chắn muốn xóa?"/>
+        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" Title="DANH SÁCH KIỂM KHO" ConfirmDelete="Bạn chắc chắn muốn xóa?" EmptyDataRow="Danh sách trống" SearchPanelEditorNullText="Nhập thông tin cần tìm..."/>
         <Columns>
             <dx:GridViewDataButtonEditColumn Caption="Xem Chi Tiết" VisibleIndex="6">
                 

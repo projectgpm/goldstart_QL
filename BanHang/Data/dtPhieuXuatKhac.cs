@@ -148,7 +148,7 @@ namespace BanHang.Data
                 }
             }
         }
-        public void CapNhatPhieuXuatKhac_ID(string ID, string IDNhanVien, string IDLyDoXuat, DateTime NgayLapPhieu, string GhiChu)
+        public void CapNhatPhieuXuatKhac_ID(object ID, string IDNhanVien, string IDLyDoXuat, DateTime NgayLapPhieu, string GhiChu)
         {
             using (SqlConnection myConnection = new SqlConnection(StaticContext.ConnectionString))
             {

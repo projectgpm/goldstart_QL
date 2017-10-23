@@ -15,17 +15,22 @@ namespace BanHang
         dtPhieuXuatKhac data = new dtPhieuXuatKhac();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["KTDangNhap"] != "GPM")
             {
-                data = new dtPhieuXuatKhac();
-                object IDPhieuXuatKhac = data.ThemPhieuXuatKhac_Temp();
-                IDPhieuXuatKhac_Temp.Value = IDPhieuXuatKhac.ToString();
-                cmbNguoiLapPhieu.Text = Session["IDNhanVien"].ToString();
-               
+                Response.Redirect("DangNhap.aspx");
             }
-            LoadGrid(IDPhieuXuatKhac_Temp.Value.ToString());  
+            else
+            {
+                if (!IsPostBack)
+                {
+                    //data = new dtPhieuXuatKhac();
+                    //object IDPhieuXuatKhac = data.ThemPhieuXuatKhac_Temp();
+                    IDPhieuXuatKhac_Temp.Value = Session["IDNhanVien"].ToString();
+                    cmbNguoiLapPhieu.Text = Session["IDNhanVien"].ToString();
+                }
+                LoadGrid(IDPhieuXuatKhac_Temp.Value.ToString());
+            }
         }
-       
         public void Clear()
         {
             cmbHangHoa.Text = "";
@@ -117,29 +122,26 @@ namespace BanHang
                     string IDLyDoXuat = cmbLyDoXuat.Value.ToString();
                     string GhiChu = txtGhiChu == null ? "" : txtGhiChu.Text.ToString();
                     data = new dtPhieuXuatKhac();
-                    data.CapNhatPhieuXuatKhac_ID(IDPhieuXuatKhac, IDNguoiLapPhieu, IDLyDoXuat, NgayLapPhieu, GhiChu);
-                    foreach (DataRow dr in db.Rows)
+                    object ID = data.ThemPhieuXuatKhac_Temp();
+                    if (ID != null)
                     {
-                        string IDHangHoa = dr["IDHangHoa"].ToString();
-                        string SoLuong = dr["SoLuong"].ToString();
-                        string SoLuongCon = dr["SoLuongCon"].ToString();
-                        string MaHang = dr["MaHang"].ToString();
-                        string IDDonViTinh = dr["IDDonViTinh"].ToString();
+                        data.CapNhatPhieuXuatKhac_ID(ID, IDNguoiLapPhieu, IDLyDoXuat, NgayLapPhieu, GhiChu);
+                        foreach (DataRow dr in db.Rows)
+                        {
+                            string IDHangHoa = dr["IDHangHoa"].ToString();
+                            string SoLuong = dr["SoLuong"].ToString();
+                            string SoLuongCon = dr["SoLuongCon"].ToString();
+                            string MaHang = dr["MaHang"].ToString();
+                            string IDDonViTinh = dr["IDDonViTinh"].ToString();
+                            data = new dtPhieuXuatKhac();
+                            data.ThemChiTietPhieuXuatKhac(ID, IDHangHoa, SoLuong, MaHang, IDDonViTinh, SoLuongCon);
+                            dtSetting.TruTonKho(IDHangHoa, SoLuong);
+                        }
                         data = new dtPhieuXuatKhac();
-                        data.ThemChiTietPhieuXuatKhac(IDPhieuXuatKhac, IDHangHoa, SoLuong, MaHang, IDDonViTinh, SoLuongCon);
-                        dtSetting.TruTonKho(IDHangHoa, SoLuong);
+                        data.XoaChiTietPhieuXuatKhac_Temp(IDPhieuXuatKhac);
+                        dtLichSuHeThong.ThemLichSuTruyCap(Session["IDNhanVien"].ToString(), "Phiếu xuất khác", "Thêm phiếu xuất khác.");
+                        Response.Redirect("DanhSachPhieuXuatKhac.aspx");
                     }
-                    data = new dtPhieuXuatKhac();
-                    data.XoaChiTietPhieuXuatKhac_Temp(IDPhieuXuatKhac);
-
-                    string IDNhanVien1 = "1"; // Session["IDThuNgan"].ToString();
-                    if (Session["IDThuNgan"] != null)
-                        IDNhanVien1 = Session["IDThuNgan"].ToString();
-                    if (Session["IDNhanVien"] != null)
-                        IDNhanVien1 = Session["IDNhanVien"].ToString();
-                    dtLichSuHeThong.ThemLichSuTruyCap(IDNhanVien1, "Phiếu xuất khác", "Thêm phiếu xuất khác.");
-
-                    Response.Redirect("DanhSachPhieuXuatKhac.aspx");
                 }
                 else
                 {

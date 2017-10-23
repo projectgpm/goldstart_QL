@@ -25,7 +25,7 @@
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
-                    <dx:LayoutItem Caption="Lý Do Xuất">
+                    <dx:LayoutItem Caption="Lý Do Xuất(*)">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer4" runat="server">
                                 <dx:ASPxComboBox ID="cmbLyDoXuat" Width="100%" runat="server" DataSourceID="SqlLyDoXuat" TextField="TenTrangThai" ValueField="ID">
@@ -117,18 +117,24 @@
                             <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer14" runat="server">
                                                 
                                 <dx:ASPxGridView ID="gridDanhSachHangHoa_Temp" runat="server" AutoGenerateColumns="False" KeyFieldName="ID" OnRowDeleting="gridDanhSachHangHoa_Temp_RowDeleting" Width="100%">
+                                    <SettingsPager Mode="ShowAllRecords">
+                                    </SettingsPager>
                                     <SettingsBehavior ProcessSelectionChangedOnServer="True" ConfirmDelete="True" />
                                     <SettingsCommandButton>
                                         <ShowAdaptiveDetailButton ButtonType="Image">
                                         </ShowAdaptiveDetailButton>
                                         <HideAdaptiveDetailButton ButtonType="Image">
                                         </HideAdaptiveDetailButton>
-                                        <DeleteButton ButtonType="Image" RenderMode="Image">
+                                        <EditButton>
+                                            <Image IconID="actions_cancel_16x16">
+                                            </Image>
+                                        </EditButton>
+                                        <DeleteButton>
                                             <Image IconID="actions_cancel_16x16" ToolTip="Xóa">
                                             </Image>
                                         </DeleteButton>
                                     </SettingsCommandButton>
-                                    <SettingsText CommandDelete="Xóa" ConfirmDelete="Bạn chắc chắn muốn xóa?" />
+                                    <SettingsText CommandDelete="Xóa" ConfirmDelete="Bạn chắc chắn muốn xóa?" EmptyDataRow="Danh sách trống" />
                                     <Columns>
                                         <dx:GridViewDataComboBoxColumn Caption="Tên Hàng" FieldName="IDHangHoa" ShowInCustomizationForm="True" VisibleIndex="1">
                                             <PropertiesComboBox DataSourceID="sqlDanhSachHangHoa" TextField="TenHangHoa" ValueField="ID">

@@ -44,7 +44,7 @@
             </DeleteButton>
         </SettingsCommandButton>
         <SettingsSearchPanel Visible="True" />
-        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" Title="DANH SÁCH PHIẾU XUẤT KHÁC" ConfirmDelete="Bạn chắc chắn muốn xóa?"/>
+        <SettingsText CommandDelete="Xóa" CommandEdit="Sửa" CommandNew="Thêm" Title="DANH SÁCH PHIẾU XUẤT KHÁC" ConfirmDelete="Bạn chắc chắn muốn xóa?" EmptyDataRow="Danh sách trống" SearchPanelEditorNullText="Nhập thông tin cần tìm..."/>
         <Columns>
             <dx:GridViewDataTextColumn Caption="Ghi Chú" VisibleIndex="4" FieldName="GhiChu">
             </dx:GridViewDataTextColumn>

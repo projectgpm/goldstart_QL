@@ -277,8 +277,10 @@ namespace BanHang
 
                 HuyHoaDon();
                 cmbKhachHang.Text = "";
-                chitietbuilInLai.ContentUrl = "~/InHoaDonBanVe.aspx?IDVe=" + IDHoaDon;
-                chitietbuilInLai.ShowOnPageLoad = true;
+                //chitietbuilInLai.ContentUrl = "~/InHoaDonBanVe.aspx?IDVe=" + IDHoaDon;
+                //chitietbuilInLai.ShowOnPageLoad = true;
+                string jsInHoaDon = "window.open(\"InHoaDonBanVe.aspx?IDHoaDon=" + IDHoaDon + "\", \"PrintingFrame\");";
+                ClientScript.RegisterStartupScript(this.GetType(), "Print", jsInHoaDon, true);
             }
             else
             {

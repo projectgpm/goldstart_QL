@@ -13,10 +13,17 @@ namespace BanHang
         dtDuyetDonHangThuMua data = new dtDuyetDonHangThuMua();
         protected void Page_Load(object sender, EventArgs e)
         {
-            string IDDonHang = Request.QueryString["IDDonHang"];
-            if (IDDonHang != null)
+            if (Session["KTDangNhap"] != "GPM")
             {
-                LoadGrid(IDDonHang.ToString());
+                Response.Redirect("DangNhap.aspx");
+            }
+            else
+            {
+                string IDDonHang = Request.QueryString["IDDonHang"];
+                if (IDDonHang != null)
+                {
+                    LoadGrid(IDDonHang.ToString());
+                }
             }
         }
 

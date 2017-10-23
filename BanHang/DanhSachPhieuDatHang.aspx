@@ -85,7 +85,7 @@
                  </PropertiesDateEdit>
              </dx:GridViewDataDateColumn>
              <dx:GridViewDataSpinEditColumn Caption="Tổng Tiền" FieldName="TongTien" VisibleIndex="5">
-                 <PropertiesSpinEdit DisplayFormatString="{0:#,# VND}" NumberFormat="Custom">
+                 <PropertiesSpinEdit DisplayFormatString="{0:N0} VNĐ" NumberFormat="Custom">
                  </PropertiesSpinEdit>
              </dx:GridViewDataSpinEditColumn>
              <dx:GridViewDataButtonEditColumn Caption="Xem Chi Tiết" VisibleIndex="11">
@@ -94,7 +94,7 @@
                     <a href="javascript:void(0);" onclick="OnMoreInfoClick(this, '<%# Container.KeyValue %>')">Xem </a>
                 </DataItemTemplate>
             </dx:GridViewDataButtonEditColumn>
-             <dx:GridViewDataTextColumn Caption="Trạng Thái" FieldName="TrangThai" VisibleIndex="10">
+             <dx:GridViewDataTextColumn Caption="Trạng Thái" FieldName="TrangThai" VisibleIndex="10" Visible="False">
              </dx:GridViewDataTextColumn>
          </Columns>
         <Styles>

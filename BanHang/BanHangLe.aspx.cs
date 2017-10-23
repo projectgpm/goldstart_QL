@@ -100,7 +100,8 @@ namespace BanHang
         }
         public void ThemHangVaoChiTietHoaDon(DataTable tbThongTin)
         {
-            int MaHang = int.Parse(tbThongTin.Rows[0]["MaHang"].ToString());
+            dtHangHoa dt = new dtHangHoa();
+            int MaHang = Int32.Parse(dt.LayIDHangHoa_MaHang(tbThongTin.Rows[0]["MaHang"].ToString()));
             int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
             var exitHang = DanhSachHoaDon[MaHoaDon].ListChiTietHoaDon.FirstOrDefault(item => item.MaHang == MaHang);
             if (exitHang != null)
@@ -387,9 +388,9 @@ namespace BanHang
             dtKhachHang dt = new dtKhachHang();
             string Diem = dt.layDiemTichLuy(idKH);
             string TienQuyDoi = dtSetting.LayDiemQuyDoiTien();
-            if (Int32.Parse(txtSoDiem.Value + "") <= Int32.Parse(Diem))
+            if (float.Parse(txtSoDiem.Value + "") <= float.Parse(Diem))
             {
-                txtGiamGia.Value = Int32.Parse(txtSoDiem.Value + "") * float.Parse(TienQuyDoi);
+                txtGiamGia.Value = float.Parse(txtSoDiem.Value + "") * float.Parse(TienQuyDoi);
 
                 int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
                 DanhSachHoaDon[MaHoaDon].SoDiemGiam = Int32.Parse(txtSoDiem.Value + "");

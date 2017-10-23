@@ -85,7 +85,7 @@ namespace BanHang.Data
             using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
             {
                 con.Open();
-                string cmdText = "select GPM_HangHoa.ID, GPM_HangHoa.MaHang, GPM_HangHoa.TenHangHoa, GPM_HangHoa.IDDonViTinh, GPM_HangHoa.GiaBan1, GPM_DonViTinh.TenDonViTinh, GPM_HangHoa_Barcode.Barcode from GPM_HangHoa, GPM_DonViTinh, GPM_HangHoa_Barcode where GPM_HangHoa.ID = GPM_HangHoa_Barcode.IDHangHoa and GPM_DonViTinh.ID = GPM_HangHoa.IDDonViTinh and GPM_HangHoa_Barcode.Barcode = @Barcode";
+                string cmdText = "select GPM_HangHoa.ID, GPM_HangHoa.MaHang, GPM_HangHoa.TenHangHoa, GPM_HangHoa.IDDonViTinh, GPM_HangHoa.GiaBan1, GPM_DonViTinh.TenDonViTinh, GPM_HangHoa_Barcode.Barcode from GPM_HangHoa, GPM_DonViTinh, GPM_HangHoa_Barcode where GPM_HangHoa.ID = GPM_HangHoa_Barcode.IDHangHoa and GPM_HangHoa.ID = '" + Barcode + "' and GPM_DonViTinh.ID = GPM_HangHoa.IDDonViTinh";
                 using (SqlCommand command = new SqlCommand(cmdText, con))
                 {
                     command.Parameters.AddWithValue("@Barcode", Barcode);
@@ -126,6 +126,24 @@ namespace BanHang.Data
                         IDHoaDon = cmd.ExecuteScalar();
                     }
 
+                    dtBanVe dt = new dtBanVe();
+                    float diem = dt.DiemTichLuy(IDKhachHang);
+                    string s = "INSERT INTO GPM_LichSuQuyDoiDiem ([IDKhachHang],[SoDiemCu],[SoDiemMoi],[NoiDung],[Ngay],[HinhThuc]) VALUES (@IDKhachHang,@SoDiemCu,@SoDiemMoi,@NoiDung,@Ngay,@HinhThuc) " +
+                        "INSERT INTO GPM_LichSuQuyDoiDiem ([IDKhachHang],[SoDiemCu],[SoDiemMoi],[NoiDung],[Ngay],[HinhThuc]) VALUES (@IDKhachHang,@SoDiemCu1,@SoDiemMoi1,@NoiDung,@Ngay,@HinhThuc1)";
+                    using (SqlCommand cmd = new SqlCommand(s, con, trans))
+                    {
+                        cmd.Parameters.AddWithValue("@IDKhachHang", IDKhachHang);
+                        cmd.Parameters.AddWithValue("@SoDiemCu", diem);
+                        cmd.Parameters.AddWithValue("@SoDiemMoi", diem - hoaDon.SoDiemGiam);
+                        cmd.Parameters.AddWithValue("@SoDiemCu1", diem - hoaDon.SoDiemGiam);
+                        cmd.Parameters.AddWithValue("@SoDiemMoi1", (diem - hoaDon.SoDiemGiam) + hoaDon.SoDiemTang);
+                        cmd.Parameters.AddWithValue("@NoiDung", "Thanh toán bán hàng");
+                        cmd.Parameters.AddWithValue("@Ngay", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@HinhThuc", "Trừ");
+                        cmd.Parameters.AddWithValue("@HinhThuc1", "Cộng");
+                        cmd.ExecuteNonQuery();
+                    }
+
                     DateTime date = DateTime.Now;
                     string strDate = date.ToString("ddMMyyyy") + "-";
                     string MaHD = strDate + ((int)IDHoaDon * 0.0001).ToString().Replace(".","");
@@ -154,6 +172,8 @@ namespace BanHang.Data
                         cmd.ExecuteNonQuery();
                     }
 
+
+
                     if (IDHoaDon != null)
                     {
                         foreach (ChiTietHoaDon cthd in hoaDon.ListChiTietHoaDon)
@@ -166,7 +186,7 @@ namespace BanHang.Data
                             using (SqlCommand cmd = new SqlCommand(InsertChiTietHoaDon, con, trans))
                             {
                                 cmd.Parameters.AddWithValue("@IDHoaDon", IDHoaDon);
-                                cmd.Parameters.AddWithValue("@IDHangHoa", dtHH.LayIDHangHoa_MaHang(cthd.MaHang + ""));
+                                cmd.Parameters.AddWithValue("@IDHangHoa", cthd.MaHang + "");
                                 cmd.Parameters.AddWithValue("@SoLuong", cthd.SoLuong);
                                 cmd.Parameters.AddWithValue("@DonGia", cthd.DonGia);
                                 cmd.Parameters.AddWithValue("@TongTien", cthd.ThanhTien);
@@ -177,7 +197,7 @@ namespace BanHang.Data
                             using (SqlCommand cmd = new SqlCommand(UpdateLichSuBanHang, con, trans))
                             {
                                 cmd.Parameters.AddWithValue("@SL", cthd.SoLuong);
-                                cmd.Parameters.AddWithValue("@IDHangHoa", dtHH.LayIDHangHoa_MaHang(cthd.MaHang + ""));
+                                cmd.Parameters.AddWithValue("@IDHangHoa", cthd.MaHang + "");
                                 cmd.ExecuteNonQuery();
                             }
 

@@ -324,6 +324,7 @@ namespace BanHang.Data
             {
                 try
                 {
+
                     myConnection.Open();
                     string cmdText = "DELETE FROM [GPM_HangHoa_Barcode] WHERE [IDHangHoa] = @IDHangHoa";
                     using (SqlCommand myCommand = new SqlCommand(cmdText, myConnection))
@@ -331,19 +332,7 @@ namespace BanHang.Data
                         myCommand.Parameters.AddWithValue("@IDHangHoa", ID);
                         myCommand.ExecuteNonQuery();
                     }
-                    int KT = 0;
-                    foreach (string barCode in ListBarCode)
-                    {
-                        if (KiemTraBarcode(barCode) == false)
-                        {
-                            KT = 1;
-                            throw new Exception("Lỗi:Barcode đã tồn tại !!");
-                        }
-                    }
-                    if (KT == 0)
-                    {
-                        ThemDanhSachBarCode(ID, ListBarCode);
-                    }
+                    ThemDanhSachBarCode(ID, ListBarCode);
                 }
                 catch (Exception e)
                 {

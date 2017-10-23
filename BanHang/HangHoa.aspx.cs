@@ -67,7 +67,6 @@ namespace BanHang
                 string TenHangHoa = e.NewValues["TenHangHoa"].ToString();
                 TenHangHoa = dtSetting.convertDauSangKhongDau(TenHangHoa).ToUpper();
                 string IDDonViTinh = e.NewValues["IDDonViTinh"].ToString();
-
                 string TrangThaiHang = e.NewValues["TrangThaiHang"].ToString();
                 float GiaMua = float.Parse(e.NewValues["GiaMua"].ToString());
                 float GiaBan1 = float.Parse(e.NewValues["GiaBan1"].ToString());
@@ -171,13 +170,20 @@ namespace BanHang
             int ID = Int32.Parse(e.Keys["ID"].ToString());
             object IDHangHoa = gridBarCode.GetMasterRowKeyValue();
             string BarCode = e.NewValues["Barcode"] != null ? e.NewValues["Barcode"].ToString() : "";
-            data.CapNhatBarCode(ID, IDHangHoa, BarCode);
-            e.Cancel = true;
-            gridBarCode.CancelEdit();
-            gridBarCode.DataSource = data.GetListBarCode(IDHangHoa);
-            gridBarCode.DataBind();
-            dtLichSuHeThong.ThemLichSuTruyCap(Session["IDNhanVien"].ToString(), "Hàng hóa", "Cập Nhật Barcode");
-          
+            if (dtHangHoa.KiemTraBarcode(BarCode) == false)
+            {
+                throw new Exception("Lỗi:Barcode đã tồn tại !!");
+                return;
+            }
+            else
+            {
+                data.CapNhatBarCode(ID, IDHangHoa, BarCode);
+                e.Cancel = true;
+                gridBarCode.CancelEdit();
+                gridBarCode.DataSource = data.GetListBarCode(IDHangHoa);
+                gridBarCode.DataBind();
+                dtLichSuHeThong.ThemLichSuTruyCap(Session["IDNhanVien"].ToString(), "Hàng hóa", "Cập Nhật Barcode");
+            }
         }
 
         protected void gridBarCode_RowInserting(object sender, DevExpress.Web.Data.ASPxDataInsertingEventArgs e)

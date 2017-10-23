@@ -20,7 +20,7 @@
         </SettingsPopup>
       
         <SettingsSearchPanel Visible="True" />
-        <SettingsText Title="DANH SÁCH HÀNG HÓA TỒN KHO" />
+        <SettingsText Title="DANH SÁCH HÀNG HÓA TỒN KHO" SearchPanelEditorNullText="Nhập thông tin cần tìm..." />
       
         <EditFormLayoutProperties ColCount="2">
         </EditFormLayoutProperties>

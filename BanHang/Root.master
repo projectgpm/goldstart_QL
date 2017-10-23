@@ -63,12 +63,8 @@
                                                         Size="Large" Text="Danh mục">
                                                         <Items>
                                                             <dx:RibbonDropDownButtonItem NavigateUrl="DonViTinh.aspx" Text="Đơn Vị Tính" Name="don_vi_tinh">
-                                                                <SmallImage IconID="businessobjects_bodepartment_16x16">
-                                                                </SmallImage>
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="nhom_khach_hang" NavigateUrl="NhomKhachHang.aspx" Text="Nhóm Khách Hàng">
-                                                                <SmallImage IconID="people_people_16x16devav">
-                                                                </SmallImage>
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="khach_hang" NavigateUrl="KhachHang.aspx" 
                                                                 Text="Khách Hàng">
@@ -98,13 +94,11 @@
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="Khách Hàng Trả Hàng" Text="Khách Hàng Trả Hàng" NavigateUrl="DanhSachKhachHangTraHang.aspx">
                                                             </dx:RibbonDropDownButtonItem>
-                                                            <dx:RibbonDropDownButtonItem Name="khachhanghuyve" NavigateUrl="DanhSachKhachHangHuyVe.aspx" Text="Khách hàng trả vé">
+                                                            <dx:RibbonDropDownButtonItem Name="khachhanghuyve" NavigateUrl="DanhSachKhachHangHuyVe.aspx" Text="Khách hàng trả vé" Visible="False">
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="Phiếu xuất khác" Text="Phiếu xuất khác" NavigateUrl="DanhSachPhieuXuatKhac.aspx">
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="Kiểm Kho" NavigateUrl="DanhSachKiemKho.aspx" Text="Kiểm Kho">
-                                                                <LargeImage IconID="actions_apply_16x16">
-                                                                </LargeImage>
                                                             </dx:RibbonDropDownButtonItem>
                                                         </Items>
                                                         <LargeImage Url="~/image/nhapxuat.png">
@@ -166,7 +160,7 @@
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="Lịch sử kho" NavigateUrl="LichSuKho.aspx" Text="Lịch sử kho">
                                                             </dx:RibbonDropDownButtonItem>
-                                                            <dx:RibbonDropDownButtonItem Name="Cài đặt điểm tích lũy" NavigateUrl="DiemTichLuy.aspx" Text="Cài đặt điểm tích lũy">
+                                                            <dx:RibbonDropDownButtonItem Name="Cài đặt điểm tích lũy" NavigateUrl="DiemTichLuy.aspx" Text="Cài đặt điểm tích lũy" Visible="False">
                                                             </dx:RibbonDropDownButtonItem>
                                                         </Items>
                                                         <LargeImage Url="~/image/hethong.png">

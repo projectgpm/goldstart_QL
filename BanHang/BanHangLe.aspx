@@ -74,11 +74,12 @@
                                             <dx:ListBoxColumn FieldName="TenHangHoa" Width="200px" Caption="Tên Hàng Hóa"/>
                                             <dx:ListBoxColumn FieldName="TenDonViTinh" Width="100px" Caption="Đơn Vị Tính"/>
                                             <dx:ListBoxColumn FieldName="GiaBan1" Width="120px" Caption="Giá Bán" />
+                                            <dx:ListBoxColumn FieldName="Barcode" Width="120px" Caption="Barcode" />
                                         </Columns>
                                         <DropDownButton Visible="False">
                                         </DropDownButton>
                                     </dx:ASPxComboBox>
-                                    <asp:SqlDataSource ID="sqlHangHoa" runat="server" ConnectionString="<%$ ConnectionStrings:BanHangConnectionString %>" SelectCommand="select GPM_HangHoa.ID, GPM_HangHoa.MaHang, GPM_HangHoa.TenHangHoa, GPM_HangHoa.GiaBan1, GPM_DonViTinh.TenDonViTinh from GPM_HangHoa, GPM_DonViTinh where GPM_HangHoa.IDDonViTinh = GPM_DonViTinh.ID and GPM_HangHOa.DaXoa = 0"></asp:SqlDataSource>
+                                    <asp:SqlDataSource ID="sqlHangHoa" runat="server" ConnectionString="<%$ ConnectionStrings:BanHangConnectionString %>" SelectCommand="select GPM_HangHoa.ID, GPM_HangHoa.MaHang, GPM_HangHoa.TenHangHoa, GPM_HangHoa.GiaBan1, GPM_DonViTinh.TenDonViTinh, GPM_HangHoa_Barcode.Barcode from GPM_HangHoa, GPM_DonViTinh, GPM_HangHoa_Barcode where GPM_HangHoa_Barcode.IDHangHoa = GPM_HangHoa.ID and GPM_HangHoa.IDDonViTinh = GPM_DonViTinh.ID and GPM_HangHOa.DaXoa = 0"></asp:SqlDataSource>
                                 </td>
                                 <td>
                                     &nbsp;&nbsp;&nbsp;

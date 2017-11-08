@@ -85,7 +85,7 @@ namespace BanHang.Data
             using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
             {
                 con.Open();
-                string cmdText = "select GPM_HangHoa.ID, GPM_HangHoa.MaHang, GPM_HangHoa.TenHangHoa, GPM_HangHoa.IDDonViTinh, GPM_HangHoa.GiaBan1, GPM_DonViTinh.TenDonViTinh, GPM_HangHoa_Barcode.Barcode from GPM_HangHoa, GPM_DonViTinh, GPM_HangHoa_Barcode where GPM_HangHoa.ID = GPM_HangHoa_Barcode.IDHangHoa and GPM_HangHoa.ID = '" + Barcode + "' and GPM_DonViTinh.ID = GPM_HangHoa.IDDonViTinh";
+                string cmdText = "select GPM_HangHoa.ID, GPM_HangHoa.MaHang, GPM_HangHoa.TenHangHoa, GPM_HangHoa.IDDonViTinh, GPM_HangHoa.GiaBan1, GPM_DonViTinh.TenDonViTinh, GPM_HangHoa_Barcode.Barcode from GPM_HangHoa, GPM_DonViTinh, GPM_HangHoa_Barcode where GPM_HangHoa.ID = GPM_HangHoa_Barcode.IDHangHoa and GPM_HangHoa_Barcode.Barcode = '" + Barcode + "' and GPM_DonViTinh.ID = GPM_HangHoa.IDDonViTinh";
                 using (SqlCommand command = new SqlCommand(cmdText, con))
                 {
                     command.Parameters.AddWithValue("@Barcode", Barcode);
@@ -98,7 +98,26 @@ namespace BanHang.Data
                 }
             }
         }
-        
+
+        public DataTable LayThongTinHangHoa2(string ID)
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = "select GPM_HangHoa.ID, GPM_HangHoa.MaHang, GPM_HangHoa.TenHangHoa, GPM_HangHoa.IDDonViTinh, GPM_HangHoa.GiaBan1, GPM_DonViTinh.TenDonViTinh, GPM_HangHoa_Barcode.Barcode from GPM_HangHoa, GPM_DonViTinh, GPM_HangHoa_Barcode where GPM_HangHoa.ID = GPM_HangHoa_Barcode.IDHangHoa and GPM_HangHoa.ID = '" + ID + "' and GPM_DonViTinh.ID = GPM_HangHoa.IDDonViTinh";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                {
+                    command.Parameters.AddWithValue("@Barcode", ID);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        DataTable tb = new DataTable();
+                        tb.Load(reader);
+                        return tb;
+                    }
+                }
+            }
+        }
+
         public object InsertHoaDon(string IDNhanVien, string IDKhachHang, HoaDon hoaDon)
         {
             object IDHoaDon = null;

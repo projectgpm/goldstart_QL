@@ -151,6 +151,8 @@ namespace BanHang
                     else
                     {
                         tbThongTin = dt.LayThongTinHangHoa(txtBarcode.Value.ToString());
+                        if(tbThongTin.Rows.Count == 0)
+                            tbThongTin = dt.LayThongTinHangHoa2(txtBarcode.Value.ToString());
                     }
 
                     if (tbThongTin.Rows.Count > 0)

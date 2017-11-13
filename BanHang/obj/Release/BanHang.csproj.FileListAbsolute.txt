@@ -36,3 +36,26 @@ C:\Users\vmquy\Desktop\Cty GPM\Code\ASP Ban Hang\BanHang\BanHang\obj\Release\Ban
 C:\Users\vmquy\Desktop\Cty GPM\Code\ASP Ban Hang\BanHang\BanHang\obj\Release\BanHang.dll.licenses
 C:\Users\vmquy\Desktop\Cty GPM\Code\ASP Ban Hang\BanHang\BanHang\obj\Release\BanHang.dll
 C:\Users\vmquy\Desktop\Cty GPM\Code\ASP Ban Hang\BanHang\BanHang\obj\Release\BanHang.pdb
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\bin\BanHang.dll
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\bin\BanHang.pdb
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.csprojResolveAssemblyReference.cache
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpBangKeBanHang.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpBangKeBanVe.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpBangKeKiemKho.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpBangKeNhapHang.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpBangKePhieuXuatKhac.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpBangKeTraHang.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpBaoCaoBanHang.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpBaoCaoBanVe.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpBaoCaoKiemKho.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpBaoCaoNhapHang.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpBaoCaoPhieuXuatKhac.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpBaoCaoTonKho.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpBaoCaoTraHang.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpHoaDonBanHangLe.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpHoaDonBanVe.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.Report.rpInVe.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.csproj.GenerateResource.Cache
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.dll.licenses
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.dll
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Release\BanHang.pdb

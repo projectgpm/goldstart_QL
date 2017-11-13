@@ -784,6 +784,12 @@
     <Compile Include="Report\rpHoaDonBanHangLe.designer.cs">
       <DependentUpon>rpHoaDonBanHangLe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\rpHoaDonBanVe.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rpHoaDonBanVe.Designer.cs">
+      <DependentUpon>rpHoaDonBanVe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\rpInVe.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -883,6 +889,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rpHoaDonBanHangLe.resx">
       <DependentUpon>rpHoaDonBanHangLe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rpHoaDonBanVe.resx">
+      <DependentUpon>rpHoaDonBanVe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rpInVe.resx">
       <DependentUpon>rpInVe.cs</DependentUpon>

@@ -68,6 +68,83 @@ namespace BanHang.Data
             }
         }
 
+        public DataTable LaySoTienKetCa(string IDNhanVien)
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = "SELECT SUM(GiamGia) as GiamGia, SUM(KhachCanTra) as KhachCanTra FROM GPM_BanVe WHERE KetCa = 0 AND IDNhanVien ='" + IDNhanVien + "'";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        DataTable tb = new DataTable();
+                        tb.Load(reader);
+                        return tb;
+                    }
+                }
+            }
+        }
+        public void CapNhatKetCa(string IDNhanVien, string GioBD, string GioKT, string TongTien, string GiamGia, string Tong)
+        {
+            using (SqlConnection myConnection = new SqlConnection(StaticContext.ConnectionString))
+            {
+                try
+                {
+                    myConnection.Open();
+                    string strSQL = "INSERT INTO GPM_KetCa(GioBatDau,GioKetThuc,IDNhanVien,TongTienTruoc,GiamGia,TongTienSau) VALUES(@GioBatDau,@GioKetThuc,@IDNhanVien,@TongTienTruoc,@GiamGia,@TongTienSau) " +
+                        "UPDATE GPM_BanVe SET KetCa = 1 WHERE IDNhanVien = @IDNhanVien";
+                    using (SqlCommand myCommand = new SqlCommand(strSQL, myConnection))
+                    {
+                        myCommand.Parameters.AddWithValue("@GioBatDau", GioBD);
+                        myCommand.Parameters.AddWithValue("@GioKetThuc", GioKT);
+                        myCommand.Parameters.AddWithValue("@IDNhanVien", IDNhanVien);
+                        myCommand.Parameters.AddWithValue("@TongTienTruoc", TongTien);
+                        myCommand.Parameters.AddWithValue("@GiamGia", GiamGia);
+                        myCommand.Parameters.AddWithValue("@TongTienSau", Tong);
+                        myCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Lỗi: Quá trình Xóa dữ liệu gặp lỗi, hãy tải lại trang");
+                }
+            }
+        }
+        public DataTable LayThoiGianKetCa(string IDNhanVien)
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = "SELECT * FROM GPM_BanVe WHERE KetCa = 0 AND IDNhanVien ='" + IDNhanVien + "'";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        DataTable tb = new DataTable();
+                        tb.Load(reader);
+                        return tb;
+                    }
+                }
+            }
+        }
+        public DataTable DanhSachKetCa()
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = "SELECT * FROM GPM_KetCa";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        DataTable tb = new DataTable();
+                        tb.Load(reader);
+                        return tb;
+                    }
+                }
+            }
+        }
         public object InsertHoaDonBanVe(string IDNhanVien,string TenNhanVien, string IDKhachHang, HoaDonBanVe hoaDon,string DiemTichLuy)
         {
             object IDHoaDon = null;
@@ -110,7 +187,8 @@ namespace BanHang.Data
                                     cmd.Parameters.AddWithValue("@GiaVe", cthd.DonGia);
                                     cmd.Parameters.AddWithValue("@SoLuong", cthd.SoLuong);
                                     cmd.Parameters.AddWithValue("@ThanhTien", cthd.ThanhTien);
-                                    cmd.ExecuteNonQuery();
+                                    if (cthd.SoLuong != 0)
+                                        cmd.ExecuteNonQuery();
                                 }
                             }
                             if (Int32.Parse(IDKhachHang) != 1)
@@ -271,6 +349,24 @@ namespace BanHang.Data
             {
                 con.Open();
                 string cmdText = "SELECT GPM_BanVe.IDKhachHang,GPM_BanVe.IDNhanVien,GPM_GiaVe_ChiTiet.* FROM GPM_GiaVe_ChiTiet, GPM_BanVe WHERE GPM_GiaVe_ChiTiet.IDBanVe = GPM_BanVe.ID AND GPM_GiaVe_ChiTiet.ID = '" + ID + "'";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        DataTable tb = new DataTable();
+                        tb.Load(reader);
+                        return tb;
+                    }
+                }
+            }
+        }
+
+        public DataTable DanhSachVe()
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = "SELECT * FROM GPM_KyHieuGiaVe";
                 using (SqlCommand command = new SqlCommand(cmdText, con))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())

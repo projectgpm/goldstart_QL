@@ -41,6 +41,22 @@ namespace BanHang.Data
             }
         }
 
+        public float laySoTienQuyDoi()
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = "SELECT SoTienTichLuy FROM GPM_Setting";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    DataTable tb = new DataTable();
+                    tb.Load(reader);
+                    return float.Parse(tb.Rows[0]["SoTienTichLuy"].ToString());
+                }
+            }
+        }
+
         public DataTable DanhSachQuan_IDThanhPho(string IDThanhPho)
         {
             using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
@@ -157,6 +173,29 @@ namespace BanHang.Data
                 }
             }
         }
+
+        public void CapNhatDiemTichLuy(string IDKH, float soDiem)
+        {
+            using (SqlConnection myConnection = new SqlConnection(StaticContext.ConnectionString))
+            {
+                try
+                {
+                    myConnection.Open();
+                    string strSQL = "UPDATE GPM_KHACHHANG SET DiemTichLuy = DiemTichLuy + @DiemTichLuy1 WHERE [ID] = @ID";
+                    using (SqlCommand myCommand = new SqlCommand(strSQL, myConnection))
+                    {
+                        myCommand.Parameters.AddWithValue("@ID", IDKH);
+                        myCommand.Parameters.AddWithValue("@DiemTichLuy1", soDiem);
+                        myCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Lỗi: Quá trình Xóa dữ liệu gặp lỗi, hãy tải lại trang");
+                }
+            }
+        }
+
         public void XoaKhachHang(int ID)
         {
             using (SqlConnection myConnection = new SqlConnection(StaticContext.ConnectionString))

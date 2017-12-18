@@ -60,10 +60,67 @@ namespace BanHang
         public void BindGridChiTietHoaDon()
         {
             int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
+            dtBanVe dt = new dtBanVe();
+            if (DanhSachBanVe[MaHoaDon].ListChiTietBanVe.Count == 0)
+            {
+
+                List<ChiTietBanVe> list = new List<ChiTietBanVe>();
+
+                DataTable da = dt.DanhSachVe();
+                for (int i = 0; i < da.Rows.Count; i++)
+                    list.Add(new ChiTietBanVe(i, da.Rows[i]["TenKyHieu"].ToString(), 0, float.Parse(da.Rows[i]["GiaVe"].ToString()), 0));
+                DanhSachBanVe[MaHoaDon].ListChiTietBanVe = list;
+
+            }
+
             gridChiTietHoaDon.DataSource = DanhSachBanVe[MaHoaDon].ListChiTietBanVe;
             gridChiTietHoaDon.DataBind();
             formLayoutThanhToan.DataSource = DanhSachBanVe[MaHoaDon];
             formLayoutThanhToan.DataBind();
+
+            // Kết ca
+            string IDNhanVien = "1"; // Session["IDThuNgan"].ToString();
+            if (Session["IDThuNgan"] != null)
+                IDNhanVien = Session["IDThuNgan"].ToString();
+            if (Session["IDNhanVien"] != null)
+                IDNhanVien = Session["IDNhanVien"].ToString();
+
+            DataTable da1 = dt.LaySoTienKetCa(IDNhanVien);
+            if (da1.Rows.Count != 0)
+            {
+                txtKetCaGiamGia.Value = da1.Rows[0]["GiamGia"].ToString();
+                txtKetCaTongTien.Value = da1.Rows[0]["KhachCanTra"].ToString();
+            }
+            gridKetCa.DataSource = dt.DanhSachKetCa();
+            gridKetCa.DataBind();
+        }
+
+        protected void btnKetCa_Click(object sender, EventArgs e)
+        {
+            // Kết ca
+            string IDNhanVien = "1"; // Session["IDThuNgan"].ToString();
+            if (Session["IDThuNgan"] != null)
+                IDNhanVien = Session["IDThuNgan"].ToString();
+            if (Session["IDNhanVien"] != null)
+                IDNhanVien = Session["IDNhanVien"].ToString();
+
+            dtBanVe dt = new dtBanVe();
+            DataTable da = dt.LaySoTienKetCa(IDNhanVien);
+            DataTable da1 = dt.LayThoiGianKetCa(IDNhanVien);
+            if (da.Rows.Count != 0 && da1.Rows.Count != 0)
+            {
+                dt.CapNhatKetCa(IDNhanVien, da1.Rows[0]["NgayBan"].ToString(), da1.Rows[da1.Rows.Count - 1]["NgayBan"].ToString(), (float.Parse(da.Rows[0]["GiamGia"].ToString()) + float.Parse(da.Rows[0]["KhachCanTra"].ToString())) + "", da.Rows[0]["GiamGia"].ToString(), da.Rows[0]["KhachCanTra"].ToString());
+            }
+
+            da = dt.LaySoTienKetCa(IDNhanVien);
+            if (da.Rows.Count != 0)
+            {
+                txtKetCaGiamGia.Value = da.Rows[0]["GiamGia"].ToString();
+                txtKetCaTongTien.Value = da.Rows[0]["KhachCanTra"].ToString();
+            }
+
+            gridKetCa.DataSource = dt.DanhSachKetCa();
+            gridKetCa.DataBind();
         }
         protected void btnInsertHang_Click(object sender, EventArgs e)
         {
@@ -130,33 +187,33 @@ namespace BanHang
         }
         public void ThemHangVaoChiTietHoaDon(DataTable tbThongTin)
         {
-            string TenKyHieu = tbThongTin.Rows[0]["TenKyHieu"].ToString();
-            float GiaVe = float.Parse(tbThongTin.Rows[0]["GiaVe"].ToString());
-            int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
-            var exitHang = DanhSachBanVe[MaHoaDon].ListChiTietBanVe.FirstOrDefault(item => item.TenKyHieu == TenKyHieu);
-            if (exitHang != null)
-            {
-                int SoLuong = exitHang.SoLuong + int.Parse(txtSoLuong.Text);
-                float ThanhTienOld = exitHang.ThanhTien;
-                exitHang.SoLuong = SoLuong;
-                exitHang.ThanhTien = SoLuong * exitHang.DonGia;
-                DanhSachBanVe[MaHoaDon].TongTien += SoLuong * exitHang.DonGia - ThanhTienOld;
-                DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
-            }
-            else
-            {
-                ChiTietBanVe cthd = new ChiTietBanVe();
-                cthd.STT = DanhSachBanVe[MaHoaDon].ListChiTietBanVe.Count + 1;
-                cthd.TenKyHieu = TenKyHieu;
-                cthd.SoLuong = int.Parse(txtSoLuong.Text);
-                cthd.DonGia = GiaVe;
-                cthd.ThanhTien = int.Parse(txtSoLuong.Text) * float.Parse(cthd.DonGia.ToString());
-                DanhSachBanVe[MaHoaDon].ListChiTietBanVe.Add(cthd);
-                DanhSachBanVe[MaHoaDon].SoLuongHang++;
-                DanhSachBanVe[MaHoaDon].TongTien += cthd.ThanhTien;
-                DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
-            }
-            LamMoi();     
+            //string TenKyHieu = tbThongTin.Rows[0]["TenKyHieu"].ToString();
+            //float GiaVe = float.Parse(tbThongTin.Rows[0]["GiaVe"].ToString());
+            //int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
+            //var exitHang = DanhSachBanVe[MaHoaDon].ListChiTietBanVe.FirstOrDefault(item => item.TenKyHieu == TenKyHieu);
+            //if (exitHang != null)
+            //{
+            //    int SoLuong = exitHang.SoLuong + int.Parse(txtSoLuong.Text);
+            //    float ThanhTienOld = exitHang.ThanhTien;
+            //    exitHang.SoLuong = SoLuong;
+            //    exitHang.ThanhTien = SoLuong * exitHang.DonGia;
+            //    DanhSachBanVe[MaHoaDon].TongTien += SoLuong * exitHang.DonGia - ThanhTienOld;
+            //    DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
+            //}
+            //else
+            //{
+            //    ChiTietBanVe cthd = new ChiTietBanVe();
+            //    cthd.STT = DanhSachBanVe[MaHoaDon].ListChiTietBanVe.Count + 1;
+            //    cthd.TenKyHieu = TenKyHieu;
+            //    cthd.SoLuong = int.Parse(txtSoLuong.Text);
+            //    cthd.DonGia = GiaVe;
+            //    cthd.ThanhTien = int.Parse(txtSoLuong.Text) * float.Parse(cthd.DonGia.ToString());
+            //    DanhSachBanVe[MaHoaDon].ListChiTietBanVe.Add(cthd);
+            //    DanhSachBanVe[MaHoaDon].SoLuongHang++;
+            //    DanhSachBanVe[MaHoaDon].TongTien += cthd.ThanhTien;
+            //    DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
+            //}
+            //LamMoi();     
         }
         protected void btnUpdateGridHang_Click(object sender, EventArgs e)
         {
@@ -302,45 +359,45 @@ namespace BanHang
         {
            
         }
-        protected void cmbKhachHang_ItemRequestedByValue(object source, ListEditItemRequestedByValueEventArgs e)
-        {
-            long value = 0;
-            if (e.Value == null || !Int64.TryParse(e.Value.ToString(), out value))
-                return;
-            ASPxComboBox comboBox = (ASPxComboBox)source;
-            dsKhachHang.SelectCommand = @"SELECT ID, MaKhachHang,TenKhachHang,CMND,DienThoai,DiemTichLuy
-                                        FROM GPM_KhachHang        
-                                        WHERE (GPM_KhachHang.ID = @ID)";
+//        protected void cmbKhachHang_ItemRequestedByValue(object source, ListEditItemRequestedByValueEventArgs e)
+//        {
+//            long value = 0;
+//            if (e.Value == null || !Int64.TryParse(e.Value.ToString(), out value))
+//                return;
+//            ASPxComboBox comboBox = (ASPxComboBox)source;
+//            dsKhachHang.SelectCommand = @"SELECT ID, MaKhachHang,TenKhachHang,CMND,DienThoai,DiemTichLuy
+//                                        FROM GPM_KhachHang        
+//                                        WHERE (GPM_KhachHang.ID = @ID)";
 
-            dsKhachHang.SelectParameters.Clear();
-            dsKhachHang.SelectParameters.Add("ID", TypeCode.Int64, e.Value.ToString());
-            comboBox.DataSource = dsKhachHang;
-            comboBox.DataBind();
-        }
+//            dsKhachHang.SelectParameters.Clear();
+//            dsKhachHang.SelectParameters.Add("ID", TypeCode.Int64, e.Value.ToString());
+//            comboBox.DataSource = dsKhachHang;
+//            comboBox.DataBind();
+//        }
 
-        protected void cmbKhachHang_ItemsRequestedByFilterCondition(object source, ListEditItemsRequestedByFilterConditionEventArgs e)
-        {
-            ASPxComboBox comboBox = (ASPxComboBox)source;
+//        protected void cmbKhachHang_ItemsRequestedByFilterCondition(object source, ListEditItemsRequestedByFilterConditionEventArgs e)
+//        {
+//            ASPxComboBox comboBox = (ASPxComboBox)source;
 
-            dsKhachHang.SelectCommand = @"SELECT ID, MaKhachHang,TenKhachHang,CMND,DienThoai,DiemTichLuy
-                                        FROM (
-	                                        select ID, MaKhachHang,TenKhachHang,CMND,DienThoai,DiemTichLuy,
-	                                        row_number()over(order by MaKhachHang) as [rn] 
-	                                        FROM GPM_KhachHang
-	                                        WHERE ((DienThoai LIKE @DienThoai) OR (MaKhachHang LIKE @MaKhachHang) OR (TenKhachHang LIKE @TenKhachHang) OR (CMND LIKE @CMND))
-	                                        ) as st 
-                                        where st.[rn] between @startIndex and @endIndex";
+//            dsKhachHang.SelectCommand = @"SELECT ID, MaKhachHang,TenKhachHang,CMND,DienThoai,DiemTichLuy
+//                                        FROM (
+//	                                        select ID, MaKhachHang,TenKhachHang,CMND,DienThoai,DiemTichLuy,
+//	                                        row_number()over(order by MaKhachHang) as [rn] 
+//	                                        FROM GPM_KhachHang
+//	                                        WHERE ((DienThoai LIKE @DienThoai) OR (MaKhachHang LIKE @MaKhachHang) OR (TenKhachHang LIKE @TenKhachHang) OR (CMND LIKE @CMND))
+//	                                        ) as st 
+//                                        where st.[rn] between @startIndex and @endIndex";
 
-            dsKhachHang.SelectParameters.Clear();
-            dsKhachHang.SelectParameters.Add("DienThoai", TypeCode.String, string.Format("%{0}%", e.Filter));
-            dsKhachHang.SelectParameters.Add("MaKhachHang", TypeCode.String, string.Format("%{0}%", e.Filter));
-            dsKhachHang.SelectParameters.Add("TenKhachHang", TypeCode.String, string.Format("%{0}%", e.Filter));
-            dsKhachHang.SelectParameters.Add("CMND", TypeCode.String, string.Format("%{0}%", e.Filter));
-            dsKhachHang.SelectParameters.Add("startIndex", TypeCode.Int64, (e.BeginIndex + 1).ToString());
-            dsKhachHang.SelectParameters.Add("endIndex", TypeCode.Int64, (e.EndIndex + 1).ToString());
-            comboBox.DataSource = dsKhachHang;
-            comboBox.DataBind();
-        }
+//            dsKhachHang.SelectParameters.Clear();
+//            dsKhachHang.SelectParameters.Add("DienThoai", TypeCode.String, string.Format("%{0}%", e.Filter));
+//            dsKhachHang.SelectParameters.Add("MaKhachHang", TypeCode.String, string.Format("%{0}%", e.Filter));
+//            dsKhachHang.SelectParameters.Add("TenKhachHang", TypeCode.String, string.Format("%{0}%", e.Filter));
+//            dsKhachHang.SelectParameters.Add("CMND", TypeCode.String, string.Format("%{0}%", e.Filter));
+//            dsKhachHang.SelectParameters.Add("startIndex", TypeCode.Int64, (e.BeginIndex + 1).ToString());
+//            dsKhachHang.SelectParameters.Add("endIndex", TypeCode.Int64, (e.EndIndex + 1).ToString());
+//            comboBox.DataSource = dsKhachHang;
+//            comboBox.DataBind();
+//        }
 
         protected void txtDiemTichLuy_TextChanged(object sender, EventArgs e)
         {
@@ -435,11 +492,13 @@ namespace BanHang
         public int SoLuong { get; set; }
         public float DonGia { get; set; }
         public float ThanhTien { get; set; }
-        public ChiTietBanVe()
+        public ChiTietBanVe(int stt, string ten, int sl, float gia, float tt)
         {
-            SoLuong = 0;
-            DonGia = 0;
-            ThanhTien = 0;
+            STT = stt;
+            TenKyHieu = ten;
+            SoLuong = sl;
+            DonGia = gia;
+            ThanhTien = tt;
         }
     }
         

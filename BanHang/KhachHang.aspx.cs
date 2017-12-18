@@ -136,5 +136,11 @@ namespace BanHang
         {
             Response.Redirect("ImportExcel_KhachHang.aspx");
         }
+
+        protected void btnCapNhat_Click(object sender, EventArgs e)
+        {
+            popup.ContentUrl = "~/CapNhatDiemKH.aspx";
+            popup.ShowOnPageLoad = true;
+        }
     }
 }

@@ -22,6 +22,16 @@
                     </dx:LayoutItemNestedControlContainer>
                 </LayoutItemNestedControlCollection>
             </dx:LayoutItem>
+            <dx:LayoutItem Caption="">
+                <LayoutItemNestedControlCollection>
+                    <dx:LayoutItemNestedControlContainer runat="server">
+                        <dx:ASPxButton ID="btnCapNhat" runat="server" OnClick="btnCapNhat_Click" Text="Cập nhật điểm">
+                            <Image IconID="actions_editname_16x16">
+                            </Image>
+                        </dx:ASPxButton>
+                    </dx:LayoutItemNestedControlContainer>
+                </LayoutItemNestedControlCollection>
+            </dx:LayoutItem>
         </Items>
     </dx:ASPxFormLayout>
     <dx:ASPxGridViewExporter ID="ExportKhachHang" runat="server" GridViewID="KhachHangExport">
@@ -131,5 +141,10 @@
             </TitlePanel>
         </Styles>
     </dx:ASPxGridView>
+    <dx:ASPxPopupControl ID="popup" runat="server" AllowDragging="True" AllowResize="True" 
+         PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter"  Width="450px"
+         Height="300px" FooterText="Thông tin chi tiết"
+        HeaderText="Thông tin chi tiết" ClientInstanceName="popup" EnableHierarchyRecreation="True" CloseAction="CloseButton">
+    </dx:ASPxPopupControl>
     <asp:SqlDataSource ID="sqlNhomKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:BanHangConnectionString %>" SelectCommand="SELECT [ID], [TenNhomKhachHang] FROM [GPM_NhomKhachHang]"></asp:SqlDataSource>
 </asp:Content>

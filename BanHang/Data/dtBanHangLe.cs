@@ -45,6 +45,87 @@ namespace BanHang.Data
             }
         }
 
+        public void CapNhatKetCa(string IDNhanVien, string GioBD, string GioKT, string TongTien, string GiamGia, string Tong)
+        {
+            using (SqlConnection myConnection = new SqlConnection(StaticContext.ConnectionString))
+            {
+                try
+                {
+                    myConnection.Open();
+                    string strSQL = "INSERT INTO GPM_KetCa(GioBatDau,GioKetThuc,IDNhanVien,TongTienTruoc,GiamGia,TongTienSau) VALUES(@GioBatDau,@GioKetThuc,@IDNhanVien,@TongTienTruoc,@GiamGia,@TongTienSau) " + 
+                        "UPDATE GPM_HoaDon SET KetCa = 1 WHERE IDNhanVien = @IDNhanVien";
+                    using (SqlCommand myCommand = new SqlCommand(strSQL, myConnection))
+                    {
+                        myCommand.Parameters.AddWithValue("@GioBatDau", GioBD);
+                        myCommand.Parameters.AddWithValue("@GioKetThuc", GioKT);
+                        myCommand.Parameters.AddWithValue("@IDNhanVien", IDNhanVien);
+                        myCommand.Parameters.AddWithValue("@TongTienTruoc", TongTien);
+                        myCommand.Parameters.AddWithValue("@GiamGia", GiamGia);
+                        myCommand.Parameters.AddWithValue("@TongTienSau", Tong);
+                        myCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Lỗi: Quá trình Xóa dữ liệu gặp lỗi, hãy tải lại trang");
+                }
+            }
+        }
+
+        public DataTable LaySoTienKetCa(string IDNhanVien)
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = "SELECT SUM(GiamGia) as GiamGia, SUM(KhachCanTra) as KhachCanTra FROM GPM_HoaDon WHERE KetCa = 0 AND IDNhanVien ='" + IDNhanVien + "'";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        DataTable tb = new DataTable();
+                        tb.Load(reader);
+                        return tb;
+                    }
+                }
+            }
+        }
+
+        public DataTable DanhSachKetCa()
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = "SELECT * FROM GPM_KetCa";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        DataTable tb = new DataTable();
+                        tb.Load(reader);
+                        return tb;
+                    }
+                }
+            }
+        }
+
+        public DataTable LayThoiGianKetCa(string IDNhanVien)
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = "SELECT * FROM GPM_HoaDon WHERE KetCa = 0 AND IDNhanVien ='" + IDNhanVien + "'";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        DataTable tb = new DataTable();
+                        tb.Load(reader);
+                        return tb;
+                    }
+                }
+            }
+        }
+
         public DataTable LayThongHoaDon_BaoCao(string NgayBD, string NgayKT, string IDKho)
         {
             using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))

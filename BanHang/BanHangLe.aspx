@@ -275,14 +275,6 @@
                                                     <CaptionStyle Font-Bold="True">
                                                     </CaptionStyle>
                                                 </dx:LayoutItem>
-                                                <dx:LayoutItem Caption="QUY ĐỔI GIẢM GIÁ" VerticalAlign="Middle">
-                                                    <LayoutItemNestedControlCollection>
-                                                        <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
-                                                            <dx:ASPxCheckBox ID="ckbGiamGia" runat="server" CheckState="Unchecked" Font-Bold="False" AutoPostBack="True" OnCheckedChanged="ckbGiamGia_CheckedChanged">
-                                                            </dx:ASPxCheckBox>
-                                                        </dx:LayoutItemNestedControlContainer>
-                                                    </LayoutItemNestedControlCollection>
-                                                </dx:LayoutItem>
                                                 <dx:LayoutItem Caption="" VerticalAlign="Middle">
                                                     <LayoutItemNestedControlCollection>
                                                         <dx:LayoutItemNestedControlContainer runat="server">
@@ -362,9 +354,92 @@
                                     </dx:ContentControl>
                                 </ContentCollection>
                             </dx:TabPage>
-                            <dx:TabPage Text="Khác">
+                            <dx:TabPage Text="Kết ca">
                                 <ContentCollection>
                                     <dx:ContentControl ID="ContentControl2" runat="server">
+                                        <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" Width="100%" 
+                                            ClientInstanceName="formLayoutThanhToan" Font-Bold="True">
+                                            <Items>
+                                                <dx:LayoutItem Caption="Giảm giá" VerticalAlign="Middle">
+                                                    <LayoutItemNestedControlCollection>
+                                                        <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer18" runat="server">
+                                                            <dx:ASPxTextBox ID="txtKetCaGiamGia" runat="server" NullText="0" ReadOnly="True" 
+                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
+                                                                HorizontalAlign="Right" Width="100%" DisplayFormatString="N0" 
+                                                                ForeColor="#0000CC" Enabled="False">
+                                                            </dx:ASPxTextBox>
+                                                        </dx:LayoutItemNestedControlContainer>
+                                                    </LayoutItemNestedControlCollection>
+                                                    <CaptionStyle Font-Bold="True">
+                                                    </CaptionStyle>
+                                                </dx:LayoutItem>
+                                                <dx:LayoutItem Caption="Tổng tiền" VerticalAlign="Middle">
+                                                    <LayoutItemNestedControlCollection>
+                                                        <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
+                                                            <dx:ASPxTextBox ID="txtKetCaTongTien" runat="server" NullText="0" ReadOnly="True" 
+                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
+                                                                HorizontalAlign="Right" Width="100%" DisplayFormatString="N0" 
+                                                                ForeColor="#0000CC" Enabled="False">
+                                                            </dx:ASPxTextBox>
+                                                        </dx:LayoutItemNestedControlContainer>
+                                                    </LayoutItemNestedControlCollection>
+                                                    <CaptionStyle Font-Bold="True">
+                                                    </CaptionStyle>
+                                                </dx:LayoutItem>
+                                            </Items>
+                                            <Paddings Padding="0px" />
+                                        </dx:ASPxFormLayout>  
+                                        <dx:ASPxButton ID="btnKetCa" runat="server" Text="Kết ca" 
+                                            EnableTheming="False" Font-Bold="True" Font-Names="Courier New" 
+                                            Font-Size="20pt" Height="50px" BackColor="#33CCFF" Native="True" 
+                                            OnClick="btnKetCa_Click">                                    
+                                        </dx:ASPxButton> 
+                                        <dx:ASPxGridView ID="gridKetCa" runat="server" AccessibilityCompliant="True" AutoGenerateColumns="False" KeyFieldName="ID">
+                                            <SettingsCommandButton>
+                                                <ShowAdaptiveDetailButton ButtonType="Image">
+                                                </ShowAdaptiveDetailButton>
+                                                <HideAdaptiveDetailButton ButtonType="Image">
+                                                </HideAdaptiveDetailButton>
+                                            </SettingsCommandButton>
+                                            <Columns>
+                                                <dx:GridViewDataTextColumn Caption="Tổng tiền" FieldName="TongTienTruoc" ShowInCustomizationForm="True" VisibleIndex="3" Visible="False">
+                                                    <PropertiesTextEdit DisplayFormatInEditMode="True" DisplayFormatString="N0">
+                                                    </PropertiesTextEdit>
+                                                    <HeaderStyle Wrap="True" />
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn Caption="Giảm giá" FieldName="GiamGia" ShowInCustomizationForm="True" VisibleIndex="4">
+                                                    <PropertiesTextEdit DisplayFormatInEditMode="True" DisplayFormatString="N0">
+                                                    </PropertiesTextEdit>
+                                                    <HeaderStyle Wrap="True" />
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn Caption="Tổng" FieldName="TongTienSau" ShowInCustomizationForm="True" VisibleIndex="5">
+                                                    <PropertiesTextEdit DisplayFormatInEditMode="True" DisplayFormatString="N0">
+                                                    </PropertiesTextEdit>
+                                                    <HeaderStyle Wrap="True" />
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataDateColumn Caption="Giờ bắt đầu" FieldName="GioBatDau" ShowInCustomizationForm="True" VisibleIndex="1">
+                                                    <PropertiesDateEdit DisplayFormatInEditMode="True" DisplayFormatString="dd/MM/yyyy hh:mm">
+                                                    </PropertiesDateEdit>
+                                                    <HeaderStyle Wrap="True" />
+                                                </dx:GridViewDataDateColumn>
+                                                <dx:GridViewDataDateColumn Caption="Giờ kết thúc" FieldName="GioKetThuc" ShowInCustomizationForm="True" VisibleIndex="2">
+                                                    <PropertiesDateEdit DisplayFormatInEditMode="True" DisplayFormatString="dd/MM/yyyy hh:mm">
+                                                    </PropertiesDateEdit>
+                                                    <HeaderStyle Wrap="True" />
+                                                </dx:GridViewDataDateColumn>
+                                                <dx:GridViewDataComboBoxColumn Caption="Nhân viên" FieldName="IDNhanVien" ShowInCustomizationForm="True" VisibleIndex="0">
+                                                    <PropertiesComboBox DataSourceID="sqlNhanVien" TextField="TenNguoiDung" ValueField="ID">
+                                                    </PropertiesComboBox>
+                                                    <HeaderStyle Wrap="True" />
+                                                </dx:GridViewDataComboBoxColumn>
+                                            </Columns>
+                                        </dx:ASPxGridView>
+                                        <asp:SqlDataSource ID="sqlNhanVien" runat="server" ConnectionString="<%$ ConnectionStrings:BanHangConnectionString %>" SelectCommand="SELECT [TenNguoiDung], [ID] FROM [GPM_NguoiDung] WHERE ([DaXoa] = @DaXoa)">
+                                            <SelectParameters>
+                                                <asp:Parameter DefaultValue="0" Name="DaXoa" Type="Int32" />
+                                            </SelectParameters>
+                                        </asp:SqlDataSource>
+                                        <asp:SqlDataSource ID="sqlKetCa" runat="server" ConnectionString="<%$ ConnectionStrings:BanHangConnectionString %>" SelectCommand="SELECT * FROM [GPM_KetCa]"></asp:SqlDataSource>
                                     </dx:ContentControl>
                                 </ContentCollection>
                             </dx:TabPage>

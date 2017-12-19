@@ -174,6 +174,27 @@ namespace BanHang.Data
                             cmd.Parameters.AddWithValue("@DiemTichLuy", DiemTichLuy);
                             IDHoaDon = cmd.ExecuteScalar();
                         }
+
+                        dtBanVe dt = new dtBanVe();
+                        string Diem = dtSetting.LayTienQuyDoiDiem();
+                        float diem = dt.DiemTichLuy(IDKhachHang);
+                        string s = "INSERT INTO GPM_LichSuQuyDoiDiem ([IDKhachHang],[SoDiemCu],[SoDiemMoi],[NoiDung],[Ngay],[HinhThuc]) VALUES (@IDKhachHang,@SoDiemCu,@SoDiemMoi,@NoiDung,@Ngay,@HinhThuc) " +
+                            "INSERT INTO GPM_LichSuQuyDoiDiem ([IDKhachHang],[SoDiemCu],[SoDiemMoi],[NoiDung],[Ngay],[HinhThuc]) VALUES (@IDKhachHang,@SoDiemCu1,@SoDiemMoi1,@NoiDung,@Ngay,@HinhThuc1)";
+                        using (SqlCommand cmd = new SqlCommand(s, con, trans))
+                        {
+                            cmd.Parameters.AddWithValue("@IDKhachHang", IDKhachHang);
+                            cmd.Parameters.AddWithValue("@SoDiemCu", diem);
+                            cmd.Parameters.AddWithValue("@SoDiemMoi", diem - int.Parse(DiemTichLuy));
+                            cmd.Parameters.AddWithValue("@SoDiemCu1", diem - int.Parse(DiemTichLuy));
+                            cmd.Parameters.AddWithValue("@SoDiemMoi1", (diem - int.Parse(DiemTichLuy)) + (hoaDon.KhachCanTra / float.Parse(Diem)));
+                            cmd.Parameters.AddWithValue("@NoiDung", "Thanh toán bán vé");
+                            cmd.Parameters.AddWithValue("@Ngay", DateTime.Now);
+                            cmd.Parameters.AddWithValue("@HinhThuc", "Trừ");
+                            cmd.Parameters.AddWithValue("@HinhThuc1", "Cộng");
+                            if (int.Parse(IDKhachHang) != 1)
+                                cmd.ExecuteNonQuery();
+                        }
+
                         if (IDHoaDon != null)
                         {
                             foreach (ChiTietBanVe cthd in hoaDon.ListChiTietBanVe)

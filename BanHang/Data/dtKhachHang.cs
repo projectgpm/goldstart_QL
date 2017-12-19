@@ -174,18 +174,26 @@ namespace BanHang.Data
             }
         }
 
-        public void CapNhatDiemTichLuy(string IDKH, float soDiem)
+        public void CapNhatDiemTichLuy(string IDKH, float soDiem, string soTien, string noiDung)
         {
             using (SqlConnection myConnection = new SqlConnection(StaticContext.ConnectionString))
             {
                 try
                 {
+                    dtBanVe dt = new dtBanVe();
+                    float diem = dt.DiemTichLuy(IDKH);
                     myConnection.Open();
-                    string strSQL = "UPDATE GPM_KHACHHANG SET DiemTichLuy = DiemTichLuy + @DiemTichLuy1 WHERE [ID] = @ID";
+                    string strSQL = "UPDATE GPM_KHACHHANG SET DiemTichLuy = DiemTichLuy + @DiemTichLuy1 WHERE [ID] = @ID " +
+                        "INSERT INTO GPM_LichSuQuyDoiDiem(IDKhachHang,SoDiemCu,SoDiemMoi,NoiDung,Ngay,HinhThuc) VALUES(@IDKhachHang,@SoDiemCu,@SoDiemMoi,@NoiDung,getDATE(),@HinhThuc)";
                     using (SqlCommand myCommand = new SqlCommand(strSQL, myConnection))
                     {
                         myCommand.Parameters.AddWithValue("@ID", IDKH);
                         myCommand.Parameters.AddWithValue("@DiemTichLuy1", soDiem);
+                        myCommand.Parameters.AddWithValue("@IDKhachHang", IDKH);
+                        myCommand.Parameters.AddWithValue("@SoDiemCu", diem);
+                        myCommand.Parameters.AddWithValue("@SoDiemMoi", diem + soDiem);
+                        myCommand.Parameters.AddWithValue("@NoiDung", noiDung);
+                        myCommand.Parameters.AddWithValue("@HinhThuc", "Cộng");
                         myCommand.ExecuteNonQuery();
                     }
                 }

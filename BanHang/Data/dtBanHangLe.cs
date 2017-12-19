@@ -241,7 +241,8 @@ namespace BanHang.Data
                         cmd.Parameters.AddWithValue("@Ngay", DateTime.Now);
                         cmd.Parameters.AddWithValue("@HinhThuc", "Trừ");
                         cmd.Parameters.AddWithValue("@HinhThuc1", "Cộng");
-                        cmd.ExecuteNonQuery();
+                        if (int.Parse(IDKhachHang) != 1)
+                            cmd.ExecuteNonQuery();
                     }
 
                     DateTime date = DateTime.Now;

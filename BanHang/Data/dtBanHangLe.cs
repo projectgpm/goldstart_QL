@@ -209,104 +209,122 @@ namespace BanHang.Data
                 {
                     con.Open();
                     trans = con.BeginTransaction();
-                    string InsertHoaDon = "INSERT INTO [GPM_HoaDon] ([IDKhachHang],[IDNhanVien],[NgayBan],[TongTien],[HinhThucGiamGia],[GiamGia],[KhachCanTra],[KhachThanhToan],[TienThua]) " +
-                                          "OUTPUT INSERTED.ID " +
-                                          "VALUES (@IDKhachHang, @IDNhanVien, getdate(), @TongTien, @HinhThucGiamGia, @GiamGia, @KhachCanTra, @KhachThanhToan, @TienThua)";
-
-                    using (SqlCommand cmd = new SqlCommand(InsertHoaDon, con, trans))
+                    string CompuMaHoaDon = @"SELECT 
+                                          REPLICATE('0', 6 - LEN((count(ID) + 1))) + 
+                                          CAST((count(ID) + 1) AS varchar) + '-' + 
+                                          FORMAT(GETDATE() , 'ddMMyy')
+                                          as 'Mã Hóa Đơn'  
+                                          from GPM_HoaDon 
+                                          where DATEDIFF(dd,NgayBan, GetDate()) = 0";
+                    object MaHoaDon;
+                    using (SqlCommand cmd = new SqlCommand(CompuMaHoaDon, con, trans))
                     {
-                        cmd.Parameters.AddWithValue("@IDKhachHang", IDKhachHang);
-                        cmd.Parameters.AddWithValue("@IDNhanVien", IDNhanVien);
-                        cmd.Parameters.AddWithValue("@TongTien", hoaDon.TongTien);
-                        cmd.Parameters.AddWithValue("@HinhThucGiamGia", hoaDon.HinhThucGiamGia);
-                        cmd.Parameters.AddWithValue("@GiamGia", hoaDon.GiamGia);
-                        cmd.Parameters.AddWithValue("@KhachCanTra", hoaDon.KhachCanTra);
-                        cmd.Parameters.AddWithValue("@KhachThanhToan", hoaDon.KhachThanhToan);
-                        cmd.Parameters.AddWithValue("@TienThua", hoaDon.TienThua);
-                        IDHoaDon = cmd.ExecuteScalar();
+                        MaHoaDon = cmd.ExecuteScalar();
                     }
-
-                    dtBanVe dt = new dtBanVe();
-                    float diem = dt.DiemTichLuy(IDKhachHang);
-                    string s = "INSERT INTO GPM_LichSuQuyDoiDiem ([IDKhachHang],[SoDiemCu],[SoDiemMoi],[NoiDung],[Ngay],[HinhThuc]) VALUES (@IDKhachHang,@SoDiemCu,@SoDiemMoi,@NoiDung,@Ngay,@HinhThuc) " +
-                        "INSERT INTO GPM_LichSuQuyDoiDiem ([IDKhachHang],[SoDiemCu],[SoDiemMoi],[NoiDung],[Ngay],[HinhThuc]) VALUES (@IDKhachHang,@SoDiemCu1,@SoDiemMoi1,@NoiDung,@Ngay,@HinhThuc1)";
-                    using (SqlCommand cmd = new SqlCommand(s, con, trans))
+                    if (MaHoaDon != null)
                     {
-                        cmd.Parameters.AddWithValue("@IDKhachHang", IDKhachHang);
-                        cmd.Parameters.AddWithValue("@SoDiemCu", diem);
-                        cmd.Parameters.AddWithValue("@SoDiemMoi", diem - hoaDon.SoDiemGiam);
-                        cmd.Parameters.AddWithValue("@SoDiemCu1", diem - hoaDon.SoDiemGiam);
-                        cmd.Parameters.AddWithValue("@SoDiemMoi1", (diem - hoaDon.SoDiemGiam) + hoaDon.SoDiemTang);
-                        cmd.Parameters.AddWithValue("@NoiDung", "Thanh toán bán hàng");
-                        cmd.Parameters.AddWithValue("@Ngay", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@HinhThuc", "Trừ");
-                        cmd.Parameters.AddWithValue("@HinhThuc1", "Cộng");
-                        if (int.Parse(IDKhachHang) != 1)
-                            cmd.ExecuteNonQuery();
-                    }
-
-                    DateTime date = DateTime.Now;
-                    string strDate = date.ToString("ddMMyyyy") + "-";
-                    string MaHD = strDate + ((int)IDHoaDon * 0.0001).ToString().Replace(".","");
-
-                    string strUpdateMaHoaDon = "update GPM_HoaDon set MaHoaDon = @MaHoaDon where ID = @ID";
-                    using (SqlCommand cmd = new SqlCommand(strUpdateMaHoaDon, con, trans))
-                    {
-                        cmd.Parameters.AddWithValue("@MaHoaDon", MaHD);
-                        cmd.Parameters.AddWithValue("@ID", IDHoaDon);
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    string strUpdateDiemKH = "update GPM_KhachHang set DiemTichLuy = DiemTichLuy - @dTL where ID = @IDKhachHang and ID != 1";
-                    using (SqlCommand cmd = new SqlCommand(strUpdateDiemKH, con, trans))
-                    {
-                        cmd.Parameters.AddWithValue("@dTL", hoaDon.SoDiemGiam);
-                        cmd.Parameters.AddWithValue("@IDKhachHang", IDKhachHang);
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    string strUpdateDiemKHTang = "update GPM_KhachHang set DiemTichLuy = DiemTichLuy + @dTLTang where ID = @IDKhachHang and ID != 1";
-                    using (SqlCommand cmd = new SqlCommand(strUpdateDiemKHTang, con, trans))
-                    {
-                        cmd.Parameters.AddWithValue("@dTLTang", hoaDon.SoDiemTang);
-                        cmd.Parameters.AddWithValue("@IDKhachHang", IDKhachHang);
-                        cmd.ExecuteNonQuery();
-                    }
 
 
+                        string InsertHoaDon = "INSERT INTO [GPM_HoaDon] ([MaHoaDon],[IDKhachHang],[IDNhanVien],[NgayBan],[TongTien],[HinhThucGiamGia],[GiamGia],[KhachCanTra],[KhachThanhToan],[TienThua]) " +
+                                              "OUTPUT INSERTED.ID " +
+                                              "VALUES (@MaHoaDon,@IDKhachHang, @IDNhanVien, getdate(), @TongTien, @HinhThucGiamGia, @GiamGia, @KhachCanTra, @KhachThanhToan, @TienThua)";
 
-                    if (IDHoaDon != null)
-                    {
-                        foreach (ChiTietHoaDon cthd in hoaDon.ListChiTietHoaDon)
+                        using (SqlCommand cmd = new SqlCommand(InsertHoaDon, con, trans))
                         {
-                            dtHangHoa dtHH = new dtHangHoa();
-                            dtLichSuHeThong.ThemLichSuBanHang(IDNhanVien + "", IDKhachHang + "", "Bán hàng", cthd.MaHang + "", cthd.SoLuong + "", cthd.DonGia + "", "Bán hàng");
-                            
-                            string InsertChiTietHoaDon = "INSERT INTO [GPM_ChiTietHoaDon] ([IDHoaDon],[IDHangHoa] ,[SoLuong],[DonGia],[TongTien]) " +
-                                                         "VALUES (@IDHoaDon, @IDHangHoa, @SoLuong, @DonGia, @TongTien)";
-                            using (SqlCommand cmd = new SqlCommand(InsertChiTietHoaDon, con, trans))
-                            {
-                                cmd.Parameters.AddWithValue("@IDHoaDon", IDHoaDon);
-                                cmd.Parameters.AddWithValue("@IDHangHoa", cthd.MaHang + "");
-                                cmd.Parameters.AddWithValue("@SoLuong", cthd.SoLuong);
-                                cmd.Parameters.AddWithValue("@DonGia", cthd.DonGia);
-                                cmd.Parameters.AddWithValue("@TongTien", cthd.ThanhTien);
-                                cmd.ExecuteNonQuery();
-                            }
-
-                            string UpdateLichSuBanHang = "update GPM_HangHoaTonKho set SoLuongCon = SoLuongCon - @SL where IDHangHoa = (select ID from GPM_HangHoa where TrangThaiHang != 2 and ID = @IDHangHoa)";
-                            using (SqlCommand cmd = new SqlCommand(UpdateLichSuBanHang, con, trans))
-                            {
-                                cmd.Parameters.AddWithValue("@SL", cthd.SoLuong);
-                                cmd.Parameters.AddWithValue("@IDHangHoa", cthd.MaHang + "");
-                                cmd.ExecuteNonQuery();
-                            }
-
-
+                            cmd.Parameters.AddWithValue("@MaHoaDon", MaHoaDon);
+                            cmd.Parameters.AddWithValue("@IDKhachHang", IDKhachHang);
+                            cmd.Parameters.AddWithValue("@IDNhanVien", IDNhanVien);
+                            cmd.Parameters.AddWithValue("@TongTien", hoaDon.TongTien);
+                            cmd.Parameters.AddWithValue("@HinhThucGiamGia", hoaDon.HinhThucGiamGia);
+                            cmd.Parameters.AddWithValue("@GiamGia", hoaDon.GiamGia);
+                            cmd.Parameters.AddWithValue("@KhachCanTra", hoaDon.KhachCanTra);
+                            cmd.Parameters.AddWithValue("@KhachThanhToan", hoaDon.KhachThanhToan);
+                            cmd.Parameters.AddWithValue("@TienThua", hoaDon.TienThua);
+                            IDHoaDon = cmd.ExecuteScalar();
                         }
+
+                        dtBanVe dt = new dtBanVe();
+                        float diem = dt.DiemTichLuy(IDKhachHang);
+                        string s = "INSERT INTO GPM_LichSuQuyDoiDiem ([IDKhachHang],[SoDiemCu],[SoDiemMoi],[NoiDung],[Ngay],[HinhThuc]) VALUES (@IDKhachHang,@SoDiemCu,@SoDiemMoi,@NoiDung,@Ngay,@HinhThuc) " +
+                            "INSERT INTO GPM_LichSuQuyDoiDiem ([IDKhachHang],[SoDiemCu],[SoDiemMoi],[NoiDung],[Ngay],[HinhThuc]) VALUES (@IDKhachHang,@SoDiemCu1,@SoDiemMoi1,@NoiDung,@Ngay,@HinhThuc1)";
+                        using (SqlCommand cmd = new SqlCommand(s, con, trans))
+                        {
+                            cmd.Parameters.AddWithValue("@IDKhachHang", IDKhachHang);
+                            cmd.Parameters.AddWithValue("@SoDiemCu", diem);
+                            cmd.Parameters.AddWithValue("@SoDiemMoi", diem - hoaDon.SoDiemGiam);
+                            cmd.Parameters.AddWithValue("@SoDiemCu1", diem - hoaDon.SoDiemGiam);
+                            cmd.Parameters.AddWithValue("@SoDiemMoi1", (diem - hoaDon.SoDiemGiam) + hoaDon.SoDiemTang);
+                            cmd.Parameters.AddWithValue("@NoiDung", "Thanh toán bán hàng");
+                            cmd.Parameters.AddWithValue("@Ngay", DateTime.Now);
+                            cmd.Parameters.AddWithValue("@HinhThuc", "Trừ");
+                            cmd.Parameters.AddWithValue("@HinhThuc1", "Cộng");
+                            if (int.Parse(IDKhachHang) != 1)
+                                cmd.ExecuteNonQuery();
+                        }
+
+                        //DateTime date = DateTime.Now;
+                        //string strDate = date.ToString("ddMMyyyy") + "-";
+                        //string MaHD = strDate + ((int)IDHoaDon * 0.0001).ToString().Replace(".", "");
+
+                        //string strUpdateMaHoaDon = "update GPM_HoaDon set MaHoaDon = @MaHoaDon where ID = @ID";
+                        //using (SqlCommand cmd = new SqlCommand(strUpdateMaHoaDon, con, trans))
+                        //{
+                        //    cmd.Parameters.AddWithValue("@MaHoaDon", MaHD);
+                        //    cmd.Parameters.AddWithValue("@ID", IDHoaDon);
+                        //    cmd.ExecuteNonQuery();
+                        //}
+
+                        string strUpdateDiemKH = "update GPM_KhachHang set DiemTichLuy = DiemTichLuy - @dTL where ID = @IDKhachHang and ID != 1";
+                        using (SqlCommand cmd = new SqlCommand(strUpdateDiemKH, con, trans))
+                        {
+                            cmd.Parameters.AddWithValue("@dTL", hoaDon.SoDiemGiam);
+                            cmd.Parameters.AddWithValue("@IDKhachHang", IDKhachHang);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        string strUpdateDiemKHTang = "update GPM_KhachHang set DiemTichLuy = DiemTichLuy + @dTLTang where ID = @IDKhachHang and ID != 1";
+                        using (SqlCommand cmd = new SqlCommand(strUpdateDiemKHTang, con, trans))
+                        {
+                            cmd.Parameters.AddWithValue("@dTLTang", hoaDon.SoDiemTang);
+                            cmd.Parameters.AddWithValue("@IDKhachHang", IDKhachHang);
+                            cmd.ExecuteNonQuery();
+                        }
+
+
+
+                        if (IDHoaDon != null)
+                        {
+                            foreach (ChiTietHoaDon cthd in hoaDon.ListChiTietHoaDon)
+                            {
+                                dtHangHoa dtHH = new dtHangHoa();
+                                dtLichSuHeThong.ThemLichSuBanHang(IDNhanVien + "", IDKhachHang + "", "Bán hàng", cthd.MaHang + "", cthd.SoLuong + "", cthd.DonGia + "", "Bán hàng");
+
+                                string InsertChiTietHoaDon = "INSERT INTO [GPM_ChiTietHoaDon] ([IDHoaDon],[IDHangHoa] ,[SoLuong],[DonGia],[TongTien]) " +
+                                                             "VALUES (@IDHoaDon, @IDHangHoa, @SoLuong, @DonGia, @TongTien)";
+                                using (SqlCommand cmd = new SqlCommand(InsertChiTietHoaDon, con, trans))
+                                {
+                                    cmd.Parameters.AddWithValue("@IDHoaDon", IDHoaDon);
+                                    cmd.Parameters.AddWithValue("@IDHangHoa", cthd.MaHang + "");
+                                    cmd.Parameters.AddWithValue("@SoLuong", cthd.SoLuong);
+                                    cmd.Parameters.AddWithValue("@DonGia", cthd.DonGia);
+                                    cmd.Parameters.AddWithValue("@TongTien", cthd.ThanhTien);
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                                string UpdateLichSuBanHang = "update GPM_HangHoaTonKho set SoLuongCon = SoLuongCon - @SL where IDHangHoa = (select ID from GPM_HangHoa where TrangThaiHang != 2 and ID = @IDHangHoa)";
+                                using (SqlCommand cmd = new SqlCommand(UpdateLichSuBanHang, con, trans))
+                                {
+                                    cmd.Parameters.AddWithValue("@SL", cthd.SoLuong);
+                                    cmd.Parameters.AddWithValue("@IDHangHoa", cthd.MaHang + "");
+                                    cmd.ExecuteNonQuery();
+                                }
+
+
+                            }
+                        }
+                        trans.Commit();
+                        con.Close();
                     }
-                    trans.Commit();
-                    con.Close();
                 }
                 catch (Exception ex)
                 {

@@ -111,6 +111,7 @@
     <Content Include="BaoCaoTraHang.aspx" />
     <Content Include="bin\BanHang.dll" />
     <Content Include="bin\BanHang.pdb" />
+    <Content Include="CapNhatDiemKH.aspx" />
     <Content Include="ChiTietDonHangDuyetThuMua.aspx" />
     <Content Include="ChiTietHangHoaCombo.aspx" />
     <Content Include="ChiTietHoaDonDaIn.aspx" />
@@ -181,6 +182,7 @@
     <Content Include="KhachHang.aspx" />
     <Content Include="KiemKho.aspx" />
     <Content Include="KyHieuGiaVe.aspx" />
+    <Content Include="LichSuQuyDoiDiem.aspx" />
     <Content Include="LichSuTruyCap.aspx" />
     <Content Include="Light.master" />
   </ItemGroup>
@@ -352,6 +354,13 @@
     <Compile Include="BaoCaoTraHang.aspx.designer.cs">
       <DependentUpon>BaoCaoTraHang.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CapNhatDiemKH.aspx.cs">
+      <DependentUpon>CapNhatDiemKH.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CapNhatDiemKH.aspx.designer.cs">
+      <DependentUpon>CapNhatDiemKH.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ChiTietDonHangDuyetThuMua.aspx.cs">
       <DependentUpon>ChiTietDonHangDuyetThuMua.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -450,6 +459,7 @@
     <Compile Include="DanhSachPhieuXuatKhac.aspx.designer.cs">
       <DependentUpon>DanhSachPhieuXuatKhac.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Data\DAO_ConnectSQL.cs" />
     <Compile Include="Data\dtBanHangLe.cs" />
     <Compile Include="Data\dtBanVe.cs" />
     <Compile Include="Data\dtBaoCao.cs" />
@@ -649,6 +659,13 @@
     </Compile>
     <Compile Include="KyHieuGiaVe.aspx.designer.cs">
       <DependentUpon>KyHieuGiaVe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LichSuQuyDoiDiem.aspx.cs">
+      <DependentUpon>LichSuQuyDoiDiem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LichSuQuyDoiDiem.aspx.designer.cs">
+      <DependentUpon>LichSuQuyDoiDiem.aspx</DependentUpon>
     </Compile>
     <Compile Include="LichSuTruyCap.aspx.cs">
       <DependentUpon>LichSuTruyCap.aspx</DependentUpon>

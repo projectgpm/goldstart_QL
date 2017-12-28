@@ -155,21 +155,38 @@ namespace BanHang.Data
                 {
                     con.Open();
                     trans = con.BeginTransaction();
-                    string InsertHoaDon = "INSERT INTO [GPM_BanVe] ([IDKhachHang],[TenKhachHang], [IDNhanVien],[TenNhanVien],[SoLuong],[TongTien],[NgayBan],[KhachCanTra],[KhachThanhToan],[TienThua],[GiamGia],[DiemTichLuy]) " +
-                                            "OUTPUT INSERTED.ID " +
-                                            "VALUES (@IDKhachHang, @TenKhachHang, @IDNhanVien,@TenNhanVien, @SoLuong, @TongTien, getdate(), @KhachCanTra, @KhachThanhToan,@TienThua, @GiamGia, @DiemTichLuy)";
+                    string CompuMaHoaDon = @"SELECT 
+                                          REPLICATE('0', 7 - LEN((count(ID) + 1))) + 
+                                          CAST((count(ID) + 1) AS varchar) + '-' + 
+                                          FORMAT(GETDATE() , 'ddMMyy')
+                                          as 'Mã Hóa Đơn'  
+                                          from GPM_BanVe 
+                                          where DATEDIFF(dd,NgayBan, GetDate()) = 0";
+                    object MaHoaDon;
+                    using (SqlCommand cmd = new SqlCommand(CompuMaHoaDon, con, trans))
+                    {
+                        MaHoaDon = cmd.ExecuteScalar();
+                    }
+                    if (MaHoaDon != null)
+                    {
+
+
+                        string InsertHoaDon = "INSERT INTO [GPM_BanVe] ([MaHoaDon],[IDKhachHang],[TenKhachHang], [IDNhanVien],[TenNhanVien],[SoLuong],[TongTien],[NgayBan],[KhachCanTra],[KhachThanhToan],[TienThua],[GiamGia],[DiemTichLuy]) " +
+                                                "OUTPUT INSERTED.ID " +
+                                                "VALUES (@MaHoaDon,@IDKhachHang, @TenKhachHang, @IDNhanVien,@TenNhanVien, @SoLuong, @TongTien, getdate(), @KhachCanTra, @KhachThanhToan,@TienThua, @GiamGia, @DiemTichLuy)";
 
                         using (SqlCommand cmd = new SqlCommand(InsertHoaDon, con, trans))
                         {
                             cmd.Parameters.AddWithValue("@IDKhachHang", IDKhachHang);
+                            cmd.Parameters.AddWithValue("@MaHoaDon", MaHoaDon);
                             cmd.Parameters.AddWithValue("@TenKhachHang", dtBanVe.LayTenKhachHang(IDKhachHang));
                             cmd.Parameters.AddWithValue("@IDNhanVien", IDNhanVien);
-                            cmd.Parameters.AddWithValue("@TenNhanVien",TenNhanVien );
+                            cmd.Parameters.AddWithValue("@TenNhanVien", TenNhanVien);
                             cmd.Parameters.AddWithValue("@SoLuong", hoaDon.SoLuongHang);
-                            cmd.Parameters.AddWithValue("@TongTien",hoaDon.TongTien);
+                            cmd.Parameters.AddWithValue("@TongTien", hoaDon.TongTien);
                             cmd.Parameters.AddWithValue("@KhachCanTra", hoaDon.KhachCanTra);
                             cmd.Parameters.AddWithValue("@KhachThanhToan", hoaDon.KhachThanhToan);
-                            cmd.Parameters.AddWithValue("@GiamGia",  hoaDon.GiamGia);
+                            cmd.Parameters.AddWithValue("@GiamGia", hoaDon.GiamGia);
                             cmd.Parameters.AddWithValue("@TienThua", hoaDon.TienThua);
                             cmd.Parameters.AddWithValue("@DiemTichLuy", DiemTichLuy);
                             IDHoaDon = cmd.ExecuteScalar();
@@ -230,7 +247,7 @@ namespace BanHang.Data
                                     // trừ điểm tích lũy
                                     string TruLichSuDiem = "INSERT INTO [GPM_LichSuQuyDoiDiem]([IDKhachHang],[SoDiemCu],[SoDiemMoi],[NoiDung],[Ngay],[HinhThuc]) VALUES(@IDKhachHang,@SoDiemCu,@SoDiemMoi,@NoiDung,getdate(),@HinhThuc)";
                                     string DiemCu = dtSetting.LayDiemCuKhachHang(IDKhachHang).ToString();
-                                    string SoDiemMoi =( double.Parse(DiemCu) + DiemTichLuyDuocCong) - double.Parse(DiemTichLuy) + "";
+                                    string SoDiemMoi = (double.Parse(DiemCu) + DiemTichLuyDuocCong) - double.Parse(DiemTichLuy) + "";
                                     using (SqlCommand cmd = new SqlCommand(TruLichSuDiem, con, trans))
                                     {
                                         cmd.Parameters.AddWithValue("@IDKhachHang", IDKhachHang);
@@ -256,9 +273,10 @@ namespace BanHang.Data
                                     cmd.ExecuteNonQuery();
                                 }
                             }
-                        } 
-                    trans.Commit();
-                    con.Close();
+                        }
+                        trans.Commit();
+                        con.Close();
+                    }
                 }
                 catch (Exception ex)
                 {

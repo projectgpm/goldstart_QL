@@ -156,7 +156,7 @@ namespace BanHang.Data
                     con.Open();
                     trans = con.BeginTransaction();
                     string CompuMaHoaDon = @"SELECT 
-                                          REPLICATE('0', 7 - LEN((count(ID) + 1))) + 
+                                          REPLICATE('0', 4 - LEN((count(ID) + 1))) + 
                                           CAST((count(ID) + 1) AS varchar) + '-' + 
                                           FORMAT(GETDATE() , 'ddMMyy')
                                           as 'Mã Hóa Đơn'  

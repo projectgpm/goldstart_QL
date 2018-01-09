@@ -25,6 +25,22 @@ namespace BanHang.Data
             }
         }
 
+        public DataTable LayDanhSachNguoiDung()
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = "SELECT ID,TenNguoiDung FROM GPM_NguoiDung";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    DataTable tb = new DataTable();
+                    tb.Load(reader);
+                    return tb;
+                }
+            }
+        }
+
         //public DataTable DanhSachMenu()
         //{
         //    using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))

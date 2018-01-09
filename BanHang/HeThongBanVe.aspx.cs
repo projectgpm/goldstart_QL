@@ -55,6 +55,22 @@ namespace BanHang
             {
                 Response.Redirect("DangNhap.aspx");
             }
+
+            // Kết ca
+            string IDNhanVien1 = "1"; // Session["IDThuNgan"].ToString();
+            if (Session["IDThuNgan"] != null)
+                IDNhanVien1 = Session["IDThuNgan"].ToString();
+            if (Session["IDNhanVien"] != null)
+                IDNhanVien1 = Session["IDNhanVien"].ToString();
+            dtBanVe dt = new dtBanVe();
+            DataTable da1 = dt.LaySoTienKetCa(IDNhanVien1);
+            if (da1.Rows.Count != 0)
+            {
+                txtKetCaGiamGia.Value = da1.Rows[0]["GiamGia"].ToString();
+                txtKetCaTongTien.Value = da1.Rows[0]["KhachCanTra"].ToString();
+            }
+            gridKetCa.DataSource = dt.DanhSachKetCa();
+            gridKetCa.DataBind();
         }
 
         public void BindGridChiTietHoaDon()

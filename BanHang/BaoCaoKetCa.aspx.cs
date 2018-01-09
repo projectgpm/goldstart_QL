@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace BanHang
 {
-    public partial class BangKeBanHang : System.Web.UI.Page
+    public partial class BaoCaoKetCa : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,11 +20,11 @@ namespace BanHang
                     IDNhanVien = Session["IDThuNgan"].ToString();
                 if (Session["IDNhanVien"] != null)
                     IDNhanVien = Session["IDNhanVien"].ToString();
-                dtLichSuHeThong.ThemLichSuTruyCap(IDNhanVien, "Bảng kê bán hàng", "Truy cập bảng kê");
+                dtLichSuHeThong.ThemLichSuTruyCap(IDNhanVien, "Báo cáo kết ca", "Truy cập bảng kê");
 
                 dtNhomNguoiDung dt = new dtNhomNguoiDung();
                 DataTable da = dt.LayDanhSachNguoiDung();
-                da.Rows.Add(-1,"Tất cả");
+                da.Rows.Add(-1, "Tất cả");
                 cmbNhanVien.DataSource = da;
                 cmbNhanVien.ValueField = "ID";
                 cmbNhanVien.TextField = "TenNguoiDung";
@@ -94,7 +94,7 @@ namespace BanHang
             ngayBD = ngayBD + "00:00:0.000";
             ngayKT = ngayKT + "23:59:59.999";
 
-            popup.ContentUrl = "~/InBangKeBanHang.aspx?ngayBD=" + ngayBD + "&ngayKT=" + ngayKT;
+            popup.ContentUrl = "~/InBaoCaoKetCa.aspx?ngayBD=" + ngayBD + "&ngayKT=" + ngayKT;
             popup.ShowOnPageLoad = true;
         }
     }

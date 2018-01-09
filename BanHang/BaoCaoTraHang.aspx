@@ -60,7 +60,7 @@
                     <dx:LayoutItem Caption="">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer8" runat="server">
-                                <dx:ASPxButton ID="btnXemBaoCao" runat="server" Text="Xem báo cáo" Width="100%" OnClick="btnXemBaoCao_Click">
+                                <dx:ASPxButton ID="btnXemBaoCao" runat="server" Text="In" Width="100%" OnClick="btnXemBaoCao_Click">
                                     <Image IconID="print_printarea_16x16">
                                     </Image>
                                 </dx:ASPxButton>

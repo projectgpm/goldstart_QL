@@ -91,9 +91,9 @@ namespace BanHang.Data
             {
                 try
                 {
+                    object ID = "";
                     myConnection.Open();
-                    string strSQL = "INSERT INTO GPM_KetCa(GioBatDau,GioKetThuc,IDNhanVien,TongTienTruoc,GiamGia,TongTienSau) VALUES(@GioBatDau,@GioKetThuc,@IDNhanVien,@TongTienTruoc,@GiamGia,@TongTienSau) " +
-                        "UPDATE GPM_BanVe SET KetCa = 1 WHERE IDNhanVien = @IDNhanVien";
+                    string strSQL = "INSERT INTO GPM_KetCa(GioBatDau,GioKetThuc,IDNhanVien,TongTienTruoc,GiamGia,TongTienSau) OUTPUT INSERTED.ID VALUES(@GioBatDau,@GioKetThuc,@IDNhanVien,@TongTienTruoc,@GiamGia,@TongTienSau) ";
                     using (SqlCommand myCommand = new SqlCommand(strSQL, myConnection))
                     {
                         myCommand.Parameters.AddWithValue("@GioBatDau", GioBD);
@@ -102,6 +102,13 @@ namespace BanHang.Data
                         myCommand.Parameters.AddWithValue("@TongTienTruoc", TongTien);
                         myCommand.Parameters.AddWithValue("@GiamGia", GiamGia);
                         myCommand.Parameters.AddWithValue("@TongTienSau", Tong);
+                        ID = myCommand.ExecuteScalar();
+                    }
+                    string strSQL1 = "UPDATE GPM_BanVe SET KetCa = @KetCa WHERE IDNhanVien = @IDNhanVien AND KetCa = 0";
+                    using (SqlCommand myCommand = new SqlCommand(strSQL1, myConnection))
+                    {
+                        myCommand.Parameters.AddWithValue("@KetCa", ID);
+                        myCommand.Parameters.AddWithValue("@IDNhanVien", IDNhanVien);
                         myCommand.ExecuteNonQuery();
                     }
                 }
@@ -133,7 +140,7 @@ namespace BanHang.Data
             using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
             {
                 con.Open();
-                string cmdText = "SELECT * FROM GPM_KetCa";
+                string cmdText = "SELECT * FROM GPM_KetCa ORDER BY ID DESC";
                 using (SqlCommand command = new SqlCommand(cmdText, con))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())

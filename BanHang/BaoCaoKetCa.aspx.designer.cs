@@ -10,7 +10,7 @@
 namespace BanHang {
     
     
-    public partial class BangKeBanHang {
+    public partial class BaoCaoKetCa {
         
         /// <summary>
         /// ASPxFormLayout1 control.
@@ -146,6 +146,15 @@ namespace BanHang {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.LayoutItemNestedControlContainer LayoutItemNestedControlContainer8;
+        
+        /// <summary>
+        /// LayoutItemNestedControlContainer9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.LayoutItemNestedControlContainer LayoutItemNestedControlContainer9;
         
         /// <summary>
         /// btnXemBaoCao control.

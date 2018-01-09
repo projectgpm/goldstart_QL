@@ -97,6 +97,7 @@
     </Content>
     <Content Include="BangKeBanHang.aspx" />
     <Content Include="BangKeBanVe.aspx" />
+    <Content Include="BangKeKetCa.aspx" />
     <Content Include="BangKeKiemKho.aspx" />
     <Content Include="BangKeNhapHang.aspx" />
     <Content Include="BangKePhieuXuatKhac.aspx" />
@@ -104,6 +105,7 @@
     <Content Include="BanHangLe.aspx" />
     <Content Include="BaoCaoBanHang.aspx" />
     <Content Include="BaoCaoBanVe.aspx" />
+    <Content Include="BaoCaoKetCa.aspx" />
     <Content Include="BaoCaoKiemKho.aspx" />
     <Content Include="BaoCaoNhapHang.aspx" />
     <Content Include="BaoCaoPhieuXuatKhac.aspx" />
@@ -166,12 +168,14 @@
     <Content Include="ImportExcel_KhachHang.aspx" />
     <Content Include="InBangKeBanHang.aspx" />
     <Content Include="InBangKeBanVe.aspx" />
+    <Content Include="InBangKeKetCa.aspx" />
     <Content Include="InBangKeKiemKho.aspx" />
     <Content Include="InBangKeNhapHang.aspx" />
     <Content Include="InBangKePhieuXuatKhac.aspx" />
     <Content Include="InBangKeTraHang.aspx" />
     <Content Include="InBaoCaoBanHang.aspx" />
     <Content Include="InBaoCaoBanVe.aspx" />
+    <Content Include="InBaoCaoKetCa.aspx" />
     <Content Include="InBaoCaoKiemKho.aspx" />
     <Content Include="InBaoCaoNhapHang.aspx" />
     <Content Include="InBaoCaoPhieuXuatKhac.aspx" />
@@ -270,6 +274,13 @@
     <Compile Include="BangKeBanVe.aspx.designer.cs">
       <DependentUpon>BangKeBanVe.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BangKeKetCa.aspx.cs">
+      <DependentUpon>BangKeKetCa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BangKeKetCa.aspx.designer.cs">
+      <DependentUpon>BangKeKetCa.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BangKeKiemKho.aspx.cs">
       <DependentUpon>BangKeKiemKho.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -318,6 +329,13 @@
     </Compile>
     <Compile Include="BaoCaoBanVe.aspx.designer.cs">
       <DependentUpon>BaoCaoBanVe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BaoCaoKetCa.aspx.cs">
+      <DependentUpon>BaoCaoKetCa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaoCaoKetCa.aspx.designer.cs">
+      <DependentUpon>BaoCaoKetCa.aspx</DependentUpon>
     </Compile>
     <Compile Include="BaoCaoKiemKho.aspx.cs">
       <DependentUpon>BaoCaoKiemKho.aspx</DependentUpon>
@@ -542,6 +560,13 @@
     <Compile Include="InBangKeBanVe.aspx.designer.cs">
       <DependentUpon>InBangKeBanVe.aspx</DependentUpon>
     </Compile>
+    <Compile Include="InBangKeKetCa.aspx.cs">
+      <DependentUpon>InBangKeKetCa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InBangKeKetCa.aspx.designer.cs">
+      <DependentUpon>InBangKeKetCa.aspx</DependentUpon>
+    </Compile>
     <Compile Include="InBangKeKiemKho.aspx.cs">
       <DependentUpon>InBangKeKiemKho.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -583,6 +608,13 @@
     </Compile>
     <Compile Include="InBaoCaoBanVe.aspx.designer.cs">
       <DependentUpon>InBaoCaoBanVe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InBaoCaoKetCa.aspx.cs">
+      <DependentUpon>InBaoCaoKetCa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InBaoCaoKetCa.aspx.designer.cs">
+      <DependentUpon>InBaoCaoKetCa.aspx</DependentUpon>
     </Compile>
     <Compile Include="InBaoCaoKiemKho.aspx.cs">
       <DependentUpon>InBaoCaoKiemKho.aspx</DependentUpon>
@@ -765,6 +797,12 @@
     <Compile Include="Report\rpBaoCaoBanVe.Designer.cs">
       <DependentUpon>rpBaoCaoBanVe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\rpBaoCaoKetCa.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rpBaoCaoKetCa.Designer.cs">
+      <DependentUpon>rpBaoCaoKetCa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\rpBaoCaoKiemKho.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -819,6 +857,12 @@
     </Compile>
     <Compile Include="Root.master.designer.cs">
       <DependentUpon>Root.master</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rpBangKeKetCa.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rpBangKeKetCa.Designer.cs">
+      <DependentUpon>rpBangKeKetCa.cs</DependentUpon>
     </Compile>
     <Compile Include="ThayDoiMatKhau.aspx.cs">
       <DependentUpon>ThayDoiMatKhau.aspx</DependentUpon>
@@ -889,6 +933,9 @@
     <EmbeddedResource Include="Report\rpBaoCaoBanVe.resx">
       <DependentUpon>rpBaoCaoBanVe.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\rpBaoCaoKetCa.resx">
+      <DependentUpon>rpBaoCaoKetCa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\rpBaoCaoKiemKho.resx">
       <DependentUpon>rpBaoCaoKiemKho.cs</DependentUpon>
     </EmbeddedResource>
@@ -912,6 +959,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rpInVe.resx">
       <DependentUpon>rpInVe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rpBangKeKetCa.resx">
+      <DependentUpon>rpBangKeKetCa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

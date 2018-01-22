@@ -184,7 +184,7 @@ namespace BanHang
         {
             txtTienThua.Text = "";
             txtKhachThanhToan.Text = "";
-            txtDiemTichLuy.Text = "0";
+            //txtDiemTichLuy.Text = "0";
             int indexTabActive = tabControlSoHoaDon.ActiveTabIndex;
             DanhSachBanVe.RemoveAt(indexTabActive);
             tabControlSoHoaDon.Tabs.RemoveAt(indexTabActive);
@@ -235,7 +235,7 @@ namespace BanHang
         {
             BatchUpdate();
             BindGridChiTietHoaDon();
-            LamMoi();
+            //LamMoi();
         }
         private void BatchUpdate()
         {
@@ -254,7 +254,7 @@ namespace BanHang
                 DanhSachBanVe[MaHoaDon].TongTien += exitHang.ThanhTien - ThanhTienOld;
                 DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
             }
-            LamMoi();
+            //LamMoi();
         }
         public void HienThiThongBao(string thongbao)
         {
@@ -290,7 +290,7 @@ namespace BanHang
                 DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
                 DanhSachBanVe[MaHoaDon].ListChiTietBanVe.Remove(itemToRemove);
                 BindGridChiTietHoaDon();
-                LamMoi();
+                //LamMoi();
             }
             catch (Exception ex)
             {
@@ -339,7 +339,11 @@ namespace BanHang
                 string IDKhachHang = "1";
                 if (cmbKhachHang.Value != null)
                     IDKhachHang = cmbKhachHang.Value.ToString();
-                object IDHoaDon = dt.InsertHoaDonBanVe(IDNhanVien, TenNhanVien, IDKhachHang, DanhSachBanVe[MaHoaDon], txtDiemTichLuy.Text.ToString());
+
+                string Diem = dtSetting.LayTienQuyDoiDiem();
+                DanhSachBanVe[MaHoaDon].SoDiemTang = (int)(DanhSachBanVe[MaHoaDon].KhachCanTra / float.Parse(Diem));   
+
+                object IDHoaDon = dt.InsertHoaDonBanVe(IDNhanVien, TenNhanVien, IDKhachHang, DanhSachBanVe[MaHoaDon],"");
 
                 string IDNhanVien1 = "1"; // Session["IDThuNgan"].ToString();
                 if (Session["IDThuNgan"] != null)
@@ -417,65 +421,139 @@ namespace BanHang
 
         protected void txtDiemTichLuy_TextChanged(object sender, EventArgs e)
         {
-            if (cmbKhachHang.Text != "")
-            {
-                string IDKhachHang = cmbKhachHang.Value.ToString();
-                dtBanVe data = new dtBanVe();
-                int SoDiemCanDoi;
-                bool isNumeric = Int32.TryParse(txtDiemTichLuy.Text, out SoDiemCanDoi);
-                if (!isNumeric)
-                {
-                    txtDiemTichLuy.Text = "0";
-                    txtGiamGia.Text = "0";
-                    txtDiemTichLuy.Focus();
-                    HienThiThongBao("Nhập không đúng số điểm !!"); return;
-                }
-                else
-                {
-                    float DiemTichLuy = data.DiemTichLuy(IDKhachHang);
-                    if (float.Parse(txtDiemTichLuy.Text) > DiemTichLuy)
-                    {
+            //if (cmbKhachHang.Text != "")
+            //{
+            //    string IDKhachHang = cmbKhachHang.Value.ToString();
+            //    dtBanVe data = new dtBanVe();
+            //    int SoDiemCanDoi;
+            //    bool isNumeric = Int32.TryParse(txtDiemTichLuy.Text, out SoDiemCanDoi);
+            //    if (!isNumeric)
+            //    {
+            //        txtDiemTichLuy.Text = "0";
+            //        txtGiamGia.Text = "0";
+            //        txtDiemTichLuy.Focus();
+            //        HienThiThongBao("Nhập không đúng số điểm !!"); return;
+            //    }
+            //    else
+            //    {
+            //        float DiemTichLuy = data.DiemTichLuy(IDKhachHang);
+            //        if (float.Parse(txtDiemTichLuy.Text) > DiemTichLuy)
+            //        {
                       
-                        txtDiemTichLuy.Text = "0";
-                        txtGiamGia.Text = "0";
-                        txtDiemTichLuy.Focus();
-                        txtKhachCanTra.Text = txtTongTien.Text.ToString();
-                        HienThiThongBao("Điểm tích lũy không đủ !!"); return;
-                    }
-                    else
-                    {
-                        float SoTienDoi = float.Parse(dtSetting.LayDiemQuyDoiTien());
-                        float TongTien = float.Parse(txtTongTien.Text);
+            //            txtDiemTichLuy.Text = "0";
+            //            txtGiamGia.Text = "0";
+            //            txtDiemTichLuy.Focus();
+            //            txtKhachCanTra.Text = txtTongTien.Text.ToString();
+            //            HienThiThongBao("Điểm tích lũy không đủ !!"); return;
+            //        }
+            //        else
+            //        {
+            //            float SoTienDoi = float.Parse(dtSetting.LayDiemQuyDoiTien());
+            //            float TongTien = float.Parse(txtTongTien.Text);
 
-                        int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
-                        DanhSachBanVe[MaHoaDon].KhachThanhToan = (TongTien - (SoTienDoi * SoDiemCanDoi));
-                        txtKhachCanTra.Text = (TongTien - (SoTienDoi * SoDiemCanDoi)) + "";
-                        txtGiamGia.Text = (SoTienDoi * SoDiemCanDoi) + "";
-                        txtKhachThanhToan.Text = "0";
-                        txtTienThua.Text = "0";
-                    }
-                }
-            }
-            else
-            {
-                txtGiamGia.Text = "0";
-                txtDiemTichLuy.Text = "0";
-                cmbKhachHang.Focus();
-                HienThiThongBao("Vui lòng chọn khách hàng !!"); return;
-            }
+            //            int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
+            //            DanhSachBanVe[MaHoaDon].KhachThanhToan = (TongTien - (SoTienDoi * SoDiemCanDoi));
+            //            txtKhachCanTra.Text = (TongTien - (SoTienDoi * SoDiemCanDoi)) + "";
+            //            txtGiamGia.Text = (SoTienDoi * SoDiemCanDoi) + "";
+            //            txtKhachThanhToan.Text = "0";
+            //            txtTienThua.Text = "0";
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    txtGiamGia.Text = "0";
+            //    //txtDiemTichLuy.Text = "0";
+            //    cmbKhachHang.Focus();
+            //    HienThiThongBao("Vui lòng chọn khách hàng !!"); return;
+            //}
         }
 
         protected void cmbKhachHang_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LamMoi();
+            int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
+
+            DanhSachBanVe[MaHoaDon].SoDiemTang = 0;
+            DanhSachBanVe[MaHoaDon].SoDiemGiam = 0;
+            DanhSachBanVe[MaHoaDon].HinhThucGiamGia = cmbGiamGia.Text;
+            DanhSachBanVe[MaHoaDon].Giam = 0;
+            DanhSachBanVe[MaHoaDon].GiamGia = 0;
+            DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
+            BindGridChiTietHoaDon();
         }
         public void LamMoi()
         {
-            txtDiemTichLuy.Text = "0";
+            //txtDiemTichLuy.Text = "0";
             txtGiamGia.Text = "0";
             txtKhachCanTra.Text = txtTongTien.Text;
             txtKhachThanhToan.Text = "0";
             txtTienThua.Text = "0";
+        }
+
+        protected void cmbGiamGia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbKhachHang.Text != "" && Int32.Parse(cmbKhachHang.Value + "") == 1)
+            {
+                HienThiThongBao("Chọn khách hàng"); return;
+                cmbGiamGia.Value = 1;
+            }
+            int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
+            DanhSachBanVe[MaHoaDon].SoDiemTang = 0;
+            DanhSachBanVe[MaHoaDon].SoDiemGiam = 0;
+            DanhSachBanVe[MaHoaDon].HinhThucGiamGia = cmbGiamGia.Text;
+            DanhSachBanVe[MaHoaDon].Giam = 0;
+            DanhSachBanVe[MaHoaDon].GiamGia = 0;
+            DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
+            BatchUpdate();
+            BindGridChiTietHoaDon();
+        }
+
+        protected void txtNhapGiamGia_TextChanged(object sender, EventArgs e)
+        {
+            int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
+            float g = 0;
+            if (Int32.Parse(cmbGiamGia.Value + "") == 3 && cmbKhachHang.Text != "")
+            {
+                // Điểm
+                string idKH = cmbKhachHang.Value + "";
+                dtKhachHang dt = new dtKhachHang();
+                string Diem = dt.layDiemTichLuy(idKH);
+                string TienQuyDoi = dtSetting.LayDiemQuyDoiTien();
+
+                DanhSachBanVe[MaHoaDon].Giam = Int32.Parse(txtNhapGiamGia.Value + "");
+                DanhSachBanVe[MaHoaDon].SoDiemGiam = Int32.Parse(txtNhapGiamGia.Value + "");
+
+                if (DanhSachBanVe[MaHoaDon].Giam <= float.Parse(Diem))
+                {
+                    txtGiamGia.Value = float.Parse(txtNhapGiamGia.Value + "") * float.Parse(TienQuyDoi);
+                    g = float.Parse(txtNhapGiamGia.Value + "") * float.Parse(TienQuyDoi);
+                }
+                else
+                {
+                    g = 0;
+                    DanhSachBanVe[MaHoaDon].Giam = 0;
+                    HienThiThongBao("Số điểm hiện có không đủ. !!"); return;
+                }
+
+            }
+            else if (Int32.Parse(cmbGiamGia.Value + "") == 2)
+            {
+                //Tiền
+                DanhSachBanVe[MaHoaDon].Giam = Int32.Parse(txtNhapGiamGia.Value + "");
+                g = float.Parse(txtNhapGiamGia.Value + "");
+            }
+            else if (Int32.Parse(cmbGiamGia.Value + "") == 1)
+            {
+                // %
+                DanhSachBanVe[MaHoaDon].Giam = Int32.Parse(txtNhapGiamGia.Value + "");
+                g = (DanhSachBanVe[MaHoaDon].TongTien * DanhSachBanVe[MaHoaDon].Giam) / 100;
+            }
+
+            DanhSachBanVe[MaHoaDon].HinhThucGiamGia = cmbGiamGia.Text;
+            DanhSachBanVe[MaHoaDon].GiamGia = g;
+            DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
+            BatchUpdate();
+            BindGridChiTietHoaDon();
         }
     }
     [Serializable]
@@ -484,6 +562,10 @@ namespace BanHang
         public int IDHoaDon { get; set; }
         public int SoLuongHang { get; set; }
         public float TongTien { get; set; }
+        public string HinhThucGiamGia { get; set; }
+        public float Giam { get; set; }
+        public int SoDiemGiam { get; set; }
+        public int SoDiemTang { get; set; }
         public float GiamGia { get; set; }
         public float KhachCanTra { get; set; }
         public float KhachThanhToan { get; set; }
@@ -494,6 +576,10 @@ namespace BanHang
             SoLuongHang = 0;
             TongTien = 0;
             GiamGia = 0;
+            HinhThucGiamGia = "";
+            Giam = 0;
+            SoDiemGiam = 0;
+            SoDiemTang = 0;
             KhachCanTra = 0;
             KhachThanhToan = 0;
             TienThua = 0;

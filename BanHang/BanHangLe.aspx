@@ -275,19 +275,26 @@
                                                     <CaptionStyle Font-Bold="True">
                                                     </CaptionStyle>
                                                 </dx:LayoutItem>
-                                                <dx:LayoutItem Caption="" VerticalAlign="Middle">
+                                                <dx:LayoutItem Caption="GIẢM GIÁ" FieldName="HinhThucGiam">
                                                     <LayoutItemNestedControlCollection>
                                                         <dx:LayoutItemNestedControlContainer runat="server">
-                                                            <dx:ASPxLabel ID="txtSoDiemHienCo" runat="server" Width="100%">
-                                                            </dx:ASPxLabel>
+                                                            <dx:ASPxComboBox ID="cmbGiamGia" runat="server" Width="100%" AutoPostBack="True" SelectedIndex="1" OnSelectedIndexChanged="cmbGiamGia_SelectedIndexChanged">
+                                                                <Items>
+                                                                    <dx:ListEditItem Text="%" Value="1" />
+                                                                    <dx:ListEditItem Selected="True" Text="$" Value="2" />
+                                                                    <dx:ListEditItem Selected="True" Text="Điểm tích lũy" Value="3" />
+                                                                </Items>
+                                                            </dx:ASPxComboBox>
                                                         </dx:LayoutItemNestedControlContainer>
                                                     </LayoutItemNestedControlCollection>
                                                 </dx:LayoutItem>
-                                                <dx:LayoutItem Caption="NHẬP SỐ ĐIỂM" VerticalAlign="Middle">
+                                                <dx:LayoutItem Caption="NHẬP GIẢM GIÁ" FieldName="Giam">
                                                     <LayoutItemNestedControlCollection>
                                                         <dx:LayoutItemNestedControlContainer runat="server">
-                                                            <dx:ASPxTextBox ID="txtSoDiem" runat="server" Enabled="False" Font-Bold="True" Font-Names="digital-7" Font-Size="20pt" HorizontalAlign="Right" NullText="0" OnTextChanged="txtSoDiem_TextChanged" Text="0" Width="100%">
+                                                            <dx:ASPxTextBox runat="server" NullText="0" Width="100%" HorizontalAlign="Right" Text="0" DisplayFormatString="N0" AutoPostBack="True" Font-Bold="True" Font-Names="digital-7" Font-Size="20pt" ID="txtNhapGiamGia" OnTextChanged="txtNhapGiamGia_TextChanged">
+
                                                             </dx:ASPxTextBox>
+
                                                         </dx:LayoutItemNestedControlContainer>
                                                     </LayoutItemNestedControlCollection>
                                                 </dx:LayoutItem>

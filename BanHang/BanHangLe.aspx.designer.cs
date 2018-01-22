@@ -265,22 +265,22 @@ namespace BanHang {
         protected global::DevExpress.Web.ASPxTextBox txtTongTien;
         
         /// <summary>
-        /// txtSoDiemHienCo control.
+        /// cmbGiamGia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxLabel txtSoDiemHienCo;
+        protected global::DevExpress.Web.ASPxComboBox cmbGiamGia;
         
         /// <summary>
-        /// txtSoDiem control.
+        /// txtNhapGiamGia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox txtSoDiem;
+        protected global::DevExpress.Web.ASPxTextBox txtNhapGiamGia;
         
         /// <summary>
         /// LayoutItemNestedControlContainer3 control.

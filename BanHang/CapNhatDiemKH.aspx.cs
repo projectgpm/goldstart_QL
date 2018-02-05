@@ -19,7 +19,7 @@ namespace BanHang
         {
             dtKhachHang dt = new dtKhachHang();
             float soTien = dt.laySoTienQuyDoi();
-            float soDiem = Int32.Parse(txtSoTien.Value.ToString()) / soTien;
+            int soDiem = (int)(Int32.Parse(txtSoTien.Value.ToString()) / soTien);
             dt.CapNhatDiemTichLuy(cmbKhachHang.Value.ToString(), soDiem, soTien + "",txtNoiDung.Text);
             txtSoTien.Value = 0;
             txtNoiDung.Text = "";

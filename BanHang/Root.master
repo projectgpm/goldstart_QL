@@ -69,6 +69,8 @@
                                                             <dx:RibbonDropDownButtonItem Name="khach_hang" NavigateUrl="KhachHang.aspx" 
                                                                 Text="Khách Hàng">
                                                             </dx:RibbonDropDownButtonItem>
+                                                            <dx:RibbonDropDownButtonItem Name="khach-hang-moi" NavigateUrl="KhachHang_News.aspx" Text="Khách hàng mới">
+                                                            </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="hang_hoa" Text="Hàng Hóa" NavigateUrl="HangHoa.aspx">
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="Giá Vé" NavigateUrl="KyHieuGiaVe.aspx" Text="Giá Vé">

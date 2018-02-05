@@ -14,7 +14,23 @@ namespace BanHang.Data
             using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
             {
                 con.Open();
-                string cmdText = "SELECT * FROM [GPM_KHACHHANG] where TenKhachHang != N'Khách lẻ' and DaXoa = 0";
+                string cmdText = "SELECT * FROM [GPM_KHACHHANG] WHERE TenKhachHang !=N'Khách lẻ' AND DaXoa = 0";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    DataTable tb = new DataTable();
+                    tb.Load(reader);
+                    return tb;
+                }
+            }
+        }
+
+        public DataTable LayDanhSachKhachHang_News()
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = "SELECT * FROM [GPM_KHACHHANG] WHERE TenKhachHang is null and MaKhachHang  is null AND New = 1 AND DaXoa = 0";
                 using (SqlCommand command = new SqlCommand(cmdText, con))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -294,7 +310,7 @@ namespace BanHang.Data
             using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
             {
                 con.Open();
-                string cmdText = "SELECT * FROM [GPM_KHACHHANG] WHERE MaKhachHang = " + MaKhachHang;
+                string cmdText = "SELECT * FROM [GPM_KHACHHANG] WHERE MaKhachHang = '" + MaKhachHang + "'";
                 using (SqlCommand command = new SqlCommand(cmdText, con))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {

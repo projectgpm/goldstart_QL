@@ -69,6 +69,8 @@
                                                             <dx:RibbonDropDownButtonItem Name="khach_hang" NavigateUrl="KhachHang.aspx" 
                                                                 Text="Khách Hàng">
                                                             </dx:RibbonDropDownButtonItem>
+                                                            <dx:RibbonDropDownButtonItem Name="khach-hang-moi" NavigateUrl="KhachHang_News.aspx" Text="Khách hàng mới">
+                                                            </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="hang_hoa" Text="Hàng Hóa" NavigateUrl="HangHoa.aspx">
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="Giá Vé" NavigateUrl="KyHieuGiaVe.aspx" Text="Giá Vé">
@@ -108,7 +110,7 @@
                                                         <Items>
                                                             <dx:RibbonDropDownButtonItem Name="bangkebanhang" Text="Bảng kê bán hàng" NavigateUrl="BangKeBanHang.aspx">
                                                             </dx:RibbonDropDownButtonItem>
-                                                            <dx:RibbonDropDownButtonItem Name="bangkebanve" Text="Bảng kê bán vé" NavigateUrl="BangKeBanVe.aspx" Visible="False">
+                                                            <dx:RibbonDropDownButtonItem Name="bangkebanve" Text="Bảng kê bán vé" NavigateUrl="BangKeBanVe.aspx">
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="bangkekiemkho" NavigateUrl="BangKeKiemKho.aspx" Text="Bảng kê kiểm kho">
                                                             </dx:RibbonDropDownButtonItem>
@@ -117,6 +119,8 @@
                                                             <dx:RibbonDropDownButtonItem Name="bangkephieuxuatkhac" NavigateUrl="BangKePhieuXuatKhac.aspx" Text="Bảng kê phiếu xuất khác">
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="bangketrahang" NavigateUrl="BangKeTraHang.aspx" Text="Bảng kê trả hàng">
+                                                            </dx:RibbonDropDownButtonItem>
+                                                            <dx:RibbonDropDownButtonItem Name="Bảng kê kết ca" NavigateUrl="BangKeKetCa.aspx" Text="Bảng kê kết ca">
                                                             </dx:RibbonDropDownButtonItem>
                                                         </Items>
                                                         <LargeImage Url="~/image/bao-cao-thong-ke.png">
@@ -138,6 +142,8 @@
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="baocaotrahang" NavigateUrl="BaoCaoTraHang.aspx" Text="Báo cáo trả hàng">
                                                             </dx:RibbonDropDownButtonItem>
+                                                            <dx:RibbonDropDownButtonItem Name="Báo cáo kết ca" NavigateUrl="BaoCaoKetCa.aspx" Text="Báo cáo kết ca">
+                                                            </dx:RibbonDropDownButtonItem>
                                                         </Items>
                                                         <LargeImage Url="~/image/baocao.png">
                                                         </LargeImage>
@@ -156,9 +162,9 @@
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="lich_su_truy_cap" Text="Lịch sử truy cập" NavigateUrl="LichSuTruyCap.aspx">
                                                             </dx:RibbonDropDownButtonItem>
-                                                            <dx:RibbonDropDownButtonItem Name="lich_su_thay_doi_gia" Text="Lịch sử thay đổi giá" NavigateUrl="LichSuThayDoiGia.aspx">
+                                                            <dx:RibbonDropDownButtonItem Name="lich_su_thay_doi_gia" Text="Lịch sử thay đổi giá" NavigateUrl="LichSuThayDoiGia.aspx" Visible="False">
                                                             </dx:RibbonDropDownButtonItem>
-                                                            <dx:RibbonDropDownButtonItem Name="Lịch sử kho" NavigateUrl="LichSuKho.aspx" Text="Lịch sử kho">
+                                                            <dx:RibbonDropDownButtonItem Name="lichsudiem" NavigateUrl="LichSuQuyDoiDiem.aspx" Text="Lịch sử quy đổi điểm">
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="Cài đặt điểm tích lũy" NavigateUrl="DiemTichLuy.aspx" Text="Cài đặt điểm tích lũy" Visible="False">
                                                             </dx:RibbonDropDownButtonItem>

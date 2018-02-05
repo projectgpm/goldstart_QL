@@ -301,6 +301,24 @@ namespace BanHang {
         protected global::DevExpress.Web.ASPxTextBox txtGiamGia;
         
         /// <summary>
+        /// LayoutItemNestedControlContainer11 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.LayoutItemNestedControlContainer LayoutItemNestedControlContainer11;
+        
+        /// <summary>
+        /// txtPhuThu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox txtPhuThu;
+        
+        /// <summary>
         /// LayoutItemNestedControlContainer4 control.
         /// </summary>
         /// <remarks>

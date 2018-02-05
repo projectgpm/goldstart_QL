@@ -269,3 +269,5 @@ C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\bin\BanHang.dll
 C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\bin\BanHang.pdb
 C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Debug\BanHang.Report.rpHoaDonBanVe.resources
 C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Debug\BanHang.pdb
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Debug\BanHang.Report.rpBaoCaoKetCa.resources
+C:\Users\vmquy\Desktop\Code\goldstart_QL\BanHang\obj\Debug\BanHang.rpBangKeKetCa.resources

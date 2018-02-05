@@ -233,9 +233,9 @@ namespace BanHang.Data
                     {
 
 
-                        string InsertHoaDon = "INSERT INTO [GPM_HoaDon] ([MaHoaDon],[IDKhachHang],[IDNhanVien],[NgayBan],[TongTien],[HinhThucGiamGia],[GiamGia],[KhachCanTra],[KhachThanhToan],[TienThua]) " +
+                        string InsertHoaDon = "INSERT INTO [GPM_HoaDon] ([MaHoaDon],[IDKhachHang],[IDNhanVien],[NgayBan],[TongTien],[HinhThucGiamGia],[GiamGia],[PhuThu],[KhachCanTra],[KhachThanhToan],[TienThua]) " +
                                               "OUTPUT INSERTED.ID " +
-                                              "VALUES (@MaHoaDon,@IDKhachHang, @IDNhanVien, getdate(), @TongTien, @HinhThucGiamGia, @GiamGia, @KhachCanTra, @KhachThanhToan, @TienThua)";
+                                              "VALUES (@MaHoaDon,@IDKhachHang, @IDNhanVien, getdate(), @TongTien, @HinhThucGiamGia, @GiamGia, @PhuThu, @KhachCanTra, @KhachThanhToan, @TienThua)";
 
                         using (SqlCommand cmd = new SqlCommand(InsertHoaDon, con, trans))
                         {
@@ -245,6 +245,7 @@ namespace BanHang.Data
                             cmd.Parameters.AddWithValue("@TongTien", hoaDon.TongTien);
                             cmd.Parameters.AddWithValue("@HinhThucGiamGia", hoaDon.HinhThucGiamGia);
                             cmd.Parameters.AddWithValue("@GiamGia", hoaDon.GiamGia);
+                            cmd.Parameters.AddWithValue("@PhuThu", hoaDon.PhuThu);
                             cmd.Parameters.AddWithValue("@KhachCanTra", hoaDon.KhachCanTra);
                             cmd.Parameters.AddWithValue("@KhachThanhToan", hoaDon.KhachThanhToan);
                             cmd.Parameters.AddWithValue("@TienThua", hoaDon.TienThua);

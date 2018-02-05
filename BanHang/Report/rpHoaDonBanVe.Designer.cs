@@ -61,19 +61,21 @@
             DevExpress.DataAccess.Sql.ColumnExpression columnExpression12 = new DevExpress.DataAccess.Sql.ColumnExpression();
             DevExpress.DataAccess.Sql.Column column13 = new DevExpress.DataAccess.Sql.Column();
             DevExpress.DataAccess.Sql.ColumnExpression columnExpression13 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column14 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression14 = new DevExpress.DataAccess.Sql.ColumnExpression();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter1 = new DevExpress.DataAccess.Sql.QueryParameter();
             DevExpress.DataAccess.Sql.Join join1 = new DevExpress.DataAccess.Sql.Join();
             DevExpress.DataAccess.Sql.RelationColumnInfo relationColumnInfo1 = new DevExpress.DataAccess.Sql.RelationColumnInfo();
             DevExpress.DataAccess.Sql.SelectQuery selectQuery3 = new DevExpress.DataAccess.Sql.SelectQuery();
-            DevExpress.DataAccess.Sql.Column column14 = new DevExpress.DataAccess.Sql.Column();
-            DevExpress.DataAccess.Sql.ColumnExpression columnExpression14 = new DevExpress.DataAccess.Sql.ColumnExpression();
-            DevExpress.DataAccess.Sql.Table table4 = new DevExpress.DataAccess.Sql.Table();
             DevExpress.DataAccess.Sql.Column column15 = new DevExpress.DataAccess.Sql.Column();
             DevExpress.DataAccess.Sql.ColumnExpression columnExpression15 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Table table4 = new DevExpress.DataAccess.Sql.Table();
             DevExpress.DataAccess.Sql.Column column16 = new DevExpress.DataAccess.Sql.Column();
             DevExpress.DataAccess.Sql.ColumnExpression columnExpression16 = new DevExpress.DataAccess.Sql.ColumnExpression();
             DevExpress.DataAccess.Sql.Column column17 = new DevExpress.DataAccess.Sql.Column();
             DevExpress.DataAccess.Sql.ColumnExpression columnExpression17 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column18 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression18 = new DevExpress.DataAccess.Sql.ColumnExpression();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter2 = new DevExpress.DataAccess.Sql.QueryParameter();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(rpHoaDonBanVe));
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
@@ -115,6 +117,8 @@
             this.xrLabel16 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel12 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel13 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel19 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -517,6 +521,9 @@
             columnExpression13.ColumnName = "MaHoaDon";
             columnExpression13.Table = table2;
             column13.Expression = columnExpression13;
+            columnExpression14.ColumnName = "PhuThu";
+            columnExpression14.Table = table2;
+            column14.Expression = columnExpression14;
             selectQuery2.Columns.Add(column5);
             selectQuery2.Columns.Add(column6);
             selectQuery2.Columns.Add(column7);
@@ -526,6 +533,7 @@
             selectQuery2.Columns.Add(column11);
             selectQuery2.Columns.Add(column12);
             selectQuery2.Columns.Add(column13);
+            selectQuery2.Columns.Add(column14);
             selectQuery2.FilterString = "[GPM_BanVe.ID] = ?ID";
             selectQuery2.Name = "GPM_BanVe";
             queryParameter1.Name = "ID";
@@ -540,23 +548,23 @@
             selectQuery2.Relations.Add(join1);
             selectQuery2.Tables.Add(table2);
             selectQuery2.Tables.Add(table3);
-            columnExpression14.ColumnName = "KyHieu";
+            columnExpression15.ColumnName = "KyHieu";
             table4.Name = "GPM_GiaVe_ChiTiet";
-            columnExpression14.Table = table4;
-            column14.Expression = columnExpression14;
-            columnExpression15.ColumnName = "GiaVe";
             columnExpression15.Table = table4;
             column15.Expression = columnExpression15;
-            columnExpression16.ColumnName = "SoLuong";
+            columnExpression16.ColumnName = "GiaVe";
             columnExpression16.Table = table4;
             column16.Expression = columnExpression16;
-            columnExpression17.ColumnName = "ThanhTien";
+            columnExpression17.ColumnName = "SoLuong";
             columnExpression17.Table = table4;
             column17.Expression = columnExpression17;
-            selectQuery3.Columns.Add(column14);
+            columnExpression18.ColumnName = "ThanhTien";
+            columnExpression18.Table = table4;
+            column18.Expression = columnExpression18;
             selectQuery3.Columns.Add(column15);
             selectQuery3.Columns.Add(column16);
             selectQuery3.Columns.Add(column17);
+            selectQuery3.Columns.Add(column18);
             selectQuery3.FilterString = "[GPM_GiaVe_ChiTiet.IDBanVe] = ?ID";
             selectQuery3.Name = "GPM_GiaVe_ChiTiet";
             queryParameter2.Name = "ID";
@@ -579,6 +587,8 @@
             // ReportFooter
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel18,
+            this.xrLabel19,
             this.xrLine1,
             this.xrLabel48,
             this.xrLabel14,
@@ -588,7 +598,7 @@
             this.xrLabel12,
             this.xrLabel13});
             this.ReportFooter.Dpi = 100F;
-            this.ReportFooter.HeightF = 121.8162F;
+            this.ReportFooter.HeightF = 144.7328F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // xrLine1
@@ -603,7 +613,7 @@
             // 
             this.xrLabel48.Dpi = 100F;
             this.xrLabel48.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
-            this.xrLabel48.LocationFloat = new DevExpress.Utils.PointFloat(1.000007F, 92.70834F);
+            this.xrLabel48.LocationFloat = new DevExpress.Utils.PointFloat(1.000007F, 110.7083F);
             this.xrLabel48.Name = "xrLabel48";
             this.xrLabel48.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel48.SizeF = new System.Drawing.SizeF(291F, 14.66666F);
@@ -616,7 +626,7 @@
             // 
             this.xrLabel14.Dpi = 100F;
             this.xrLabel14.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.xrLabel14.LocationFloat = new DevExpress.Utils.PointFloat(12.43752F, 51.47028F);
+            this.xrLabel14.LocationFloat = new DevExpress.Utils.PointFloat(12.43752F, 69.47028F);
             this.xrLabel14.Name = "xrLabel14";
             this.xrLabel14.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel14.SizeF = new System.Drawing.SizeF(97.57291F, 21.60491F);
@@ -631,7 +641,7 @@
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "GPM_BanVe.KhachCanTra", "{0:N0} VNĐ")});
             this.xrLabel15.Dpi = 100F;
             this.xrLabel15.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(110.0104F, 51.47028F);
+            this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(110.0104F, 69.47028F);
             this.xrLabel15.Name = "xrLabel15";
             this.xrLabel15.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel15.SizeF = new System.Drawing.SizeF(180.9896F, 21.60491F);
@@ -690,8 +700,35 @@
             this.xrLabel13.SizeF = new System.Drawing.SizeF(85.00001F, 17.04762F);
             this.xrLabel13.StylePriority.UseFont = false;
             this.xrLabel13.StylePriority.UseTextAlignment = false;
-            this.xrLabel13.Text = "Giảm giá";
+            this.xrLabel13.Text = "Giảm giá:";
             this.xrLabel13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            // 
+            // xrLabel18
+            // 
+            this.xrLabel18.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "GPM_BanVe.PhuThu", "{0:N0} VNĐ")});
+            this.xrLabel18.Dpi = 100F;
+            this.xrLabel18.Font = new System.Drawing.Font("Times New Roman", 8F);
+            this.xrLabel18.LocationFloat = new DevExpress.Utils.PointFloat(96.99998F, 51.47028F);
+            this.xrLabel18.Name = "xrLabel18";
+            this.xrLabel18.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel18.SizeF = new System.Drawing.SizeF(193.5625F, 17.04762F);
+            this.xrLabel18.StylePriority.UseFont = false;
+            this.xrLabel18.StylePriority.UseTextAlignment = false;
+            this.xrLabel18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
+            // 
+            // xrLabel19
+            // 
+            this.xrLabel19.Dpi = 100F;
+            this.xrLabel19.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.xrLabel19.LocationFloat = new DevExpress.Utils.PointFloat(11.99997F, 51.47028F);
+            this.xrLabel19.Name = "xrLabel19";
+            this.xrLabel19.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel19.SizeF = new System.Drawing.SizeF(85.00001F, 17.04762F);
+            this.xrLabel19.StylePriority.UseFont = false;
+            this.xrLabel19.StylePriority.UseTextAlignment = false;
+            this.xrLabel19.Text = "Phụ thu:";
+            this.xrLabel19.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
             // rpHoaDonBanVe
             // 
@@ -758,5 +795,7 @@
         private DevExpress.XtraReports.UI.XRBarCode xrBarCode1;
         private DevExpress.XtraReports.UI.XRLabel xrLabel48;
         private DevExpress.XtraReports.UI.XRLine xrLine1;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel18;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel19;
     }
 }

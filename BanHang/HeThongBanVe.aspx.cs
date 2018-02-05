@@ -252,7 +252,7 @@ namespace BanHang
                 exitHang.SoLuong = Convert.ToInt32(SoLuongMoi);
                 exitHang.ThanhTien = Convert.ToInt32(SoLuongMoi) * exitHang.DonGia;
                 DanhSachBanVe[MaHoaDon].TongTien += exitHang.ThanhTien - ThanhTienOld;
-                DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
+                DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia + DanhSachBanVe[MaHoaDon].PhuThu;
             }
             //LamMoi();
         }
@@ -287,7 +287,7 @@ namespace BanHang
                 var itemToRemove = DanhSachBanVe[MaHoaDon].ListChiTietBanVe.Single(r => r.STT == STT);
                 DanhSachBanVe[MaHoaDon].SoLuongHang--;
                 DanhSachBanVe[MaHoaDon].TongTien = DanhSachBanVe[MaHoaDon].TongTien - itemToRemove.ThanhTien;
-                DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
+                DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia + DanhSachBanVe[MaHoaDon].PhuThu;
                 DanhSachBanVe[MaHoaDon].ListChiTietBanVe.Remove(itemToRemove);
                 BindGridChiTietHoaDon();
                 //LamMoi();
@@ -478,7 +478,7 @@ namespace BanHang
             DanhSachBanVe[MaHoaDon].HinhThucGiamGia = cmbGiamGia.Text;
             DanhSachBanVe[MaHoaDon].Giam = 0;
             DanhSachBanVe[MaHoaDon].GiamGia = 0;
-            DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
+            DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia + DanhSachBanVe[MaHoaDon].PhuThu;
             BindGridChiTietHoaDon();
         }
         public void LamMoi()
@@ -503,7 +503,7 @@ namespace BanHang
             DanhSachBanVe[MaHoaDon].HinhThucGiamGia = cmbGiamGia.Text;
             DanhSachBanVe[MaHoaDon].Giam = 0;
             DanhSachBanVe[MaHoaDon].GiamGia = 0;
-            DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
+            DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia + DanhSachBanVe[MaHoaDon].PhuThu;
             BatchUpdate();
             BindGridChiTietHoaDon();
         }
@@ -551,7 +551,17 @@ namespace BanHang
 
             DanhSachBanVe[MaHoaDon].HinhThucGiamGia = cmbGiamGia.Text;
             DanhSachBanVe[MaHoaDon].GiamGia = g;
-            DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia;
+            DanhSachBanVe[MaHoaDon].PhuThu = float.Parse(txtPhuThu.Value + "");
+            DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia + DanhSachBanVe[MaHoaDon].PhuThu;
+            BatchUpdate();
+            BindGridChiTietHoaDon();
+        }
+
+        protected void txtPhuThu_TextChanged(object sender, EventArgs e)
+        {
+            int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
+            DanhSachBanVe[MaHoaDon].PhuThu = float.Parse(txtPhuThu.Value + "");
+            DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia + DanhSachBanVe[MaHoaDon].PhuThu;
             BatchUpdate();
             BindGridChiTietHoaDon();
         }
@@ -567,6 +577,7 @@ namespace BanHang
         public int SoDiemGiam { get; set; }
         public int SoDiemTang { get; set; }
         public float GiamGia { get; set; }
+        public float PhuThu { get; set; }
         public float KhachCanTra { get; set; }
         public float KhachThanhToan { get; set; }
         public float TienThua { get; set; }
@@ -576,6 +587,7 @@ namespace BanHang
             SoLuongHang = 0;
             TongTien = 0;
             GiamGia = 0;
+            PhuThu = 0;
             HinhThucGiamGia = "";
             Giam = 0;
             SoDiemGiam = 0;

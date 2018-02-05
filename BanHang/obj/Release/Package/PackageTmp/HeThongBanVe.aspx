@@ -64,7 +64,7 @@
                                     <dx:ASPxComboBox ID="cmbKyHieu" runat="server" ValueType="System.String"  
                                         DropDownWidth="600" DataSourceID="SqlDanhSachKyHieu" 
                                         TextFormatString="{1}" Width="100%"
-                                         ValueField="ID" >
+                                         ValueField="ID" Visible="False" >
                                         <Columns>
                                             <dx:ListBoxColumn FieldName="MaKyHieu" Width="80px" Caption="Mã Ký Hiệu" />
                                             <dx:ListBoxColumn FieldName="TenKyHieu" Width="200px" Caption="Tên Ký Hiệu"/>
@@ -79,7 +79,7 @@
                                 </td>
                                 <td width="15%">                            
                                     <dx:ASPxSpinEdit ID="txtSoLuong" ClientInstanceName="txtSoLuong" runat="server" Caption="Số lượng" TabIndex="0"
-                                        Font-Bold="True" Number="1" Width="100px" NumberType="Integer">                                    
+                                        Font-Bold="True" Number="1" Width="100px" NumberType="Integer" Visible="False">                                    
                                     </dx:ASPxSpinEdit>
                                 </td> 
                             </tr>
@@ -217,25 +217,27 @@
                             <td width="85%">
                                 <dx:ASPxComboBox ID="cmbKhachHang" runat="server" ValueType="System.String" 
                                         DropDownWidth="700" DropDownStyle="DropDown" 
-                                        ValueField="ID"
-                                        NullText="Tìm kiếm khách hàng ......." Width="100%" TextFormatString="{1}"
-                                        EnableCallbackMode="true" CallbackPageSize="10" 
-                                        OnItemsRequestedByFilterCondition="cmbKhachHang_ItemsRequestedByFilterCondition"
-                                        OnItemRequestedByValue="cmbKhachHang_ItemRequestedByValue" AutoPostBack="True" OnSelectedIndexChanged="cmbKhachHang_SelectedIndexChanged" 
+                                        ValueField="ID"  DataSourceID="sqlKhachHang"
+                                        NullText="Tìm kiếm khách hàng ......." Width="100%"
+                                        AutoPostBack="True" OnSelectedIndexChanged="cmbKhachHang_SelectedIndexChanged" 
                                         
                                         >                                    
                                         <Columns>
                                             <dx:ListBoxColumn FieldName="MaKhachHang" Width="100px" Caption="Mã Khách Hàng" />
                                             <dx:ListBoxColumn FieldName="TenKhachHang" Width="200px" Caption="Tên Khách Hàng"/>
-                                            <dx:ListBoxColumn FieldName="CMND" Width="120px" Caption="CMND"/>
                                             <dx:ListBoxColumn FieldName="DienThoai" Width="120px" Caption="Điện thoại" />
                                             <dx:ListBoxColumn FieldName="DiemTichLuy" Width="120px" Caption="Điểm Tích Lũy" />
                                         </Columns>
-                                        <DropDownButton Visible="False">
+                                        <DropDownButton Visible="true">
                                         </DropDownButton>
                                     </dx:ASPxComboBox>
                                 <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:BanHangConnectionString %>" >                                       
                                     </asp:SqlDataSource>
+                                <asp:SqlDataSource ID="sqlKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:BanHangConnectionString %>" SelectCommand="SELECT [ID], [MaKhachHang],[DienThoai], [TenKhachHang], [DiemTichLuy] FROM [GPM_KhachHang] WHERE ([DaXoa] = @DaXoa)">
+                                    <SelectParameters>
+                                        <asp:Parameter DefaultValue="0" Name="DaXoa" Type="Int32" />
+                                    </SelectParameters>
+                                </asp:SqlDataSource>
                             </td>
                             <td width="15%" align="right">
                                 <dx:ASPxButton ID="ASPxButton1" runat="server" RenderMode="Link" OnClick="ASPxButton1_Click" Text="Thêm Khách Hàng">
@@ -249,7 +251,7 @@
                     </div>
                     <div id="divTabThanhToan">                    
                     <dx:ASPxPageControl ID="pageControlThanhToan" runat="server" Width="100%" 
-                        ActiveTabIndex="1">
+                        ActiveTabIndex="0">
                         <TabPages>
                             <dx:TabPage Text="Hóa đơn">
                                 <ContentCollection>
@@ -261,7 +263,7 @@
                                                     <LayoutItemNestedControlCollection>
                                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
                                                             <dx:ASPxTextBox ID="txtSoLuongHang" runat="server" ReadOnly="True" 
-                                                            Font-Names="digital-7" Font-Bold="True" Font-Size="35pt" 
+                                                            Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
                                                                 HorizontalAlign="Right" DisplayFormatString="N0">
                                                             </dx:ASPxTextBox>
                                                         </dx:LayoutItemNestedControlContainer>
@@ -271,7 +273,7 @@
                                                     <LayoutItemNestedControlCollection>
                                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer2" runat="server">
                                                             <dx:ASPxTextBox ID="txtTongTien" runat="server" ReadOnly="True" 
-                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="35pt" 
+                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
                                                                 HorizontalAlign="Right" DisplayFormatString="N0" Width="100%">
                                                             </dx:ASPxTextBox>
                                                         </dx:LayoutItemNestedControlContainer>
@@ -279,16 +281,28 @@
                                                     <CaptionStyle Font-Bold="True">
                                                     </CaptionStyle>
                                                 </dx:LayoutItem>
-                                             
-                                                <dx:LayoutItem Caption="ĐIỂM TÍCH LŨY" FieldName="DiemTichLuy" 
-                                                    VerticalAlign="Middle">
+                                                <dx:LayoutItem Caption="GIẢM GIÁ" FieldName="HinhThucGiam">
                                                     <LayoutItemNestedControlCollection>
                                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer11" runat="server">
-                                                            <dx:ASPxTextBox ID="txtDiemTichLuy" runat="server"   NullText="0"
-                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="35pt" 
-                                                                HorizontalAlign="Right" Width="100%" DisplayFormatString="N0" 
-                                                                ForeColor="Red" AutoPostBack="True" OnTextChanged="txtDiemTichLuy_TextChanged">
+                                                            <dx:ASPxComboBox ID="cmbGiamGia" runat="server" Width="100%" AutoPostBack="True" SelectedIndex="1" OnSelectedIndexChanged="cmbGiamGia_SelectedIndexChanged">
+                                                                <Items>
+                                                                    <dx:ListEditItem Text="%" Value="1" />
+                                                                    <dx:ListEditItem Selected="True" Text="$" Value="2" />
+                                                                    <dx:ListEditItem Selected="True" Text="Điểm tích lũy" Value="3" />
+                                                                </Items>
+                                                            </dx:ASPxComboBox>
+                                                        </dx:LayoutItemNestedControlContainer>
+                                                    </LayoutItemNestedControlCollection>
+                                                    <CaptionStyle Font-Bold="True">
+                                                    </CaptionStyle>
+                                                </dx:LayoutItem>
+                                                <dx:LayoutItem Caption="NHẬP GIẢM GIÁ" FieldName="Giam">
+                                                    <LayoutItemNestedControlCollection>
+                                                        <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer13" runat="server">
+                                                            <dx:ASPxTextBox runat="server" NullText="0" Width="100%" HorizontalAlign="Right" Text="0" DisplayFormatString="N0" AutoPostBack="True" Font-Bold="True" Font-Names="digital-7" Font-Size="20pt" ID="txtNhapGiamGia" OnTextChanged="txtNhapGiamGia_TextChanged">
+
                                                             </dx:ASPxTextBox>
+
                                                         </dx:LayoutItemNestedControlContainer>
                                                     </LayoutItemNestedControlCollection>
                                                     <CaptionStyle Font-Bold="True">
@@ -298,8 +312,20 @@
                                                     <LayoutItemNestedControlCollection>
                                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer3" runat="server">
                                                             <dx:ASPxTextBox ID="txtGiamGia" runat="server" ReadOnly="True" 
-                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="35pt" 
+                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
                                                                 HorizontalAlign="Right" DisplayFormatString="N0" Width="100%">
+                                                            </dx:ASPxTextBox>
+                                                        </dx:LayoutItemNestedControlContainer>
+                                                    </LayoutItemNestedControlCollection>
+                                                    <CaptionStyle Font-Bold="True">
+                                                    </CaptionStyle>
+                                                </dx:LayoutItem>
+                                                <dx:LayoutItem Caption="PHỤ THU" FieldName="PhuThu" VerticalAlign="Middle">
+                                                    <LayoutItemNestedControlCollection>
+                                                        <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer14" runat="server">
+                                                            <dx:ASPxTextBox ID="txtPhuThu" runat="server" 
+                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
+                                                                HorizontalAlign="Right" DisplayFormatString="N0" Width="100%" OnTextChanged="txtPhuThu_TextChanged">
                                                             </dx:ASPxTextBox>
                                                         </dx:LayoutItemNestedControlContainer>
                                                     </LayoutItemNestedControlCollection>
@@ -311,7 +337,7 @@
                                                     <LayoutItemNestedControlCollection>
                                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer4" runat="server">
                                                             <dx:ASPxTextBox ID="txtKhachCanTra" runat="server" ReadOnly="True" 
-                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="35pt" 
+                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
                                                                 HorizontalAlign="Right" Width="100%" DisplayFormatString="N0" 
                                                                 ForeColor="Red">
                                                             </dx:ASPxTextBox>
@@ -325,7 +351,7 @@
                                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer5" runat="server">
                                                             <dx:ASPxTextBox ID="txtKhachThanhToan" runat="server" NullText="0"
                                                                 OnTextChanged="txtKhachThanhToan_TextChanged" AutoPostBack="True" 
-                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="35pt" 
+                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
                                                                 HorizontalAlign="Right" Width="100%" DisplayFormatString="N0">
                                                             </dx:ASPxTextBox>
                                                         </dx:LayoutItemNestedControlContainer>
@@ -337,7 +363,7 @@
                                                     <LayoutItemNestedControlCollection>
                                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer6" runat="server">
                                                             <dx:ASPxTextBox ID="txtTienThua" runat="server" NullText="0" ReadOnly="True" 
-                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="35pt" 
+                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
                                                                 HorizontalAlign="Right" Width="100%" DisplayFormatString="N0" 
                                                                 ForeColor="#0000CC">
                                                             </dx:ASPxTextBox>
@@ -354,6 +380,96 @@
                                             Font-Size="25pt" Height="50px" BackColor="#33CCFF" Native="True" 
                                             OnClick="btnThanhToan_Click">                                    
                                         </dx:ASPxButton>                                      
+                                    </dx:ContentControl>
+                                </ContentCollection>
+                            </dx:TabPage>
+                            <dx:TabPage Text="Kết ca">
+                                <ContentCollection>
+                                    <dx:ContentControl runat="server">
+                                        <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" Width="100%" 
+                                            ClientInstanceName="formLayoutThanhToan" Font-Bold="True">
+                                            <Items>
+                                                <dx:LayoutItem Caption="Giảm giá" VerticalAlign="Middle">
+                                                    <LayoutItemNestedControlCollection>
+                                                        <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer18" runat="server">
+                                                            <dx:ASPxTextBox ID="txtKetCaGiamGia" runat="server" NullText="0" ReadOnly="True" 
+                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
+                                                                HorizontalAlign="Right" Width="100%" DisplayFormatString="N0" 
+                                                                ForeColor="#0000CC" Enabled="False">
+                                                            </dx:ASPxTextBox>
+                                                        </dx:LayoutItemNestedControlContainer>
+                                                    </LayoutItemNestedControlCollection>
+                                                    <CaptionStyle Font-Bold="True">
+                                                    </CaptionStyle>
+                                                </dx:LayoutItem>
+                                                <dx:LayoutItem Caption="Tổng tiền" VerticalAlign="Middle">
+                                                    <LayoutItemNestedControlCollection>
+                                                        <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer12" runat="server">
+                                                            <dx:ASPxTextBox ID="txtKetCaTongTien" runat="server" NullText="0" ReadOnly="True" 
+                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
+                                                                HorizontalAlign="Right" Width="100%" DisplayFormatString="N0" 
+                                                                ForeColor="#0000CC" Enabled="False">
+                                                            </dx:ASPxTextBox>
+                                                        </dx:LayoutItemNestedControlContainer>
+                                                    </LayoutItemNestedControlCollection>
+                                                    <CaptionStyle Font-Bold="True">
+                                                    </CaptionStyle>
+                                                </dx:LayoutItem>
+                                            </Items>
+                                            <Paddings Padding="0px" />
+                                        </dx:ASPxFormLayout>  
+                                        <dx:ASPxButton ID="btnKetCa" runat="server" Text="Kết ca" 
+                                            EnableTheming="False" Font-Bold="True" Font-Names="Courier New" 
+                                            Font-Size="20pt" Height="50px" BackColor="#33CCFF" Native="True" 
+                                            OnClick="btnKetCa_Click">                                    
+                                        </dx:ASPxButton> 
+                                        <dx:ASPxGridView ID="gridKetCa" runat="server" AccessibilityCompliant="True" AutoGenerateColumns="False" KeyFieldName="ID">
+                                            <SettingsCommandButton>
+                                                <ShowAdaptiveDetailButton ButtonType="Image">
+                                                </ShowAdaptiveDetailButton>
+                                                <HideAdaptiveDetailButton ButtonType="Image">
+                                                </HideAdaptiveDetailButton>
+                                            </SettingsCommandButton>
+                                            <Columns>
+                                                <dx:GridViewDataTextColumn Caption="Tổng tiền" FieldName="TongTienTruoc" ShowInCustomizationForm="True" VisibleIndex="3" Visible="False">
+                                                    <PropertiesTextEdit DisplayFormatInEditMode="True" DisplayFormatString="N0">
+                                                    </PropertiesTextEdit>
+                                                    <HeaderStyle Wrap="True" />
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn Caption="Giảm giá" FieldName="GiamGia" ShowInCustomizationForm="True" VisibleIndex="4">
+                                                    <PropertiesTextEdit DisplayFormatInEditMode="True" DisplayFormatString="N0">
+                                                    </PropertiesTextEdit>
+                                                    <HeaderStyle Wrap="True" />
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn Caption="Tổng" FieldName="TongTienSau" ShowInCustomizationForm="True" VisibleIndex="5">
+                                                    <PropertiesTextEdit DisplayFormatInEditMode="True" DisplayFormatString="N0">
+                                                    </PropertiesTextEdit>
+                                                    <HeaderStyle Wrap="True" />
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataDateColumn Caption="Giờ bắt đầu" FieldName="GioBatDau" ShowInCustomizationForm="True" VisibleIndex="1">
+                                                    <PropertiesDateEdit DisplayFormatInEditMode="True" DisplayFormatString="dd/MM/yyyy hh:mm">
+                                                    </PropertiesDateEdit>
+                                                    <HeaderStyle Wrap="True" />
+                                                </dx:GridViewDataDateColumn>
+                                                <dx:GridViewDataDateColumn Caption="Giờ kết thúc" FieldName="GioKetThuc" ShowInCustomizationForm="True" VisibleIndex="2">
+                                                    <PropertiesDateEdit DisplayFormatInEditMode="True" DisplayFormatString="dd/MM/yyyy hh:mm">
+                                                    </PropertiesDateEdit>
+                                                    <HeaderStyle Wrap="True" />
+                                                </dx:GridViewDataDateColumn>
+                                                <dx:GridViewDataComboBoxColumn Caption="Nhân viên" FieldName="IDNhanVien" ShowInCustomizationForm="True" VisibleIndex="0">
+                                                    <PropertiesComboBox DataSourceID="sqlNhanVien" TextField="TenNguoiDung" ValueField="ID">
+                                                    </PropertiesComboBox>
+                                                    <HeaderStyle Wrap="True" />
+                                                </dx:GridViewDataComboBoxColumn>
+                                            </Columns>
+                                        </dx:ASPxGridView>
+                                        <asp:SqlDataSource ID="sqlNhanVien" runat="server" ConnectionString="<%$ ConnectionStrings:BanHangConnectionString %>" SelectCommand="SELECT [TenNguoiDung], [ID] FROM [GPM_NguoiDung] WHERE ([DaXoa] = @DaXoa)">
+                                            <SelectParameters>
+                                                <asp:Parameter DefaultValue="0" Name="DaXoa" Type="Int32" />
+                                            </SelectParameters>
+                                        </asp:SqlDataSource>
+                                        <asp:SqlDataSource ID="sqlKetCa" runat="server" ConnectionString="<%$ ConnectionStrings:BanHangConnectionString %>" SelectCommand="SELECT * FROM [GPM_KetCa]"></asp:SqlDataSource>
+                                    
                                     </dx:ContentControl>
                                 </ContentCollection>
                             </dx:TabPage>

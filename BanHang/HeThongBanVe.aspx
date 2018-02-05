@@ -320,6 +320,18 @@
                                                     <CaptionStyle Font-Bold="True">
                                                     </CaptionStyle>
                                                 </dx:LayoutItem>
+                                                <dx:LayoutItem Caption="PHỤ THU" FieldName="PhuThu" VerticalAlign="Middle">
+                                                    <LayoutItemNestedControlCollection>
+                                                        <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer14" runat="server">
+                                                            <dx:ASPxTextBox ID="txtPhuThu" runat="server" 
+                                                                Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
+                                                                HorizontalAlign="Right" DisplayFormatString="N0" Width="100%" OnTextChanged="txtPhuThu_TextChanged">
+                                                            </dx:ASPxTextBox>
+                                                        </dx:LayoutItemNestedControlContainer>
+                                                    </LayoutItemNestedControlCollection>
+                                                    <CaptionStyle Font-Bold="True">
+                                                    </CaptionStyle>
+                                                </dx:LayoutItem>
                                                 <dx:LayoutItem Caption="KHÁCH CẦN TRẢ" FieldName="KhachCanTra" 
                                                     VerticalAlign="Middle">
                                                     <LayoutItemNestedControlCollection>

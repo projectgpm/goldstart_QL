@@ -1,11 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Root.master" AutoEventWireup="true" CodeBehind="KhachHang.aspx.cs" Inherits="BanHang.KhachHang" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Root.master" AutoEventWireup="true" CodeBehind="KhachHang_News.aspx.cs" Inherits="BanHang.KhachHang_News" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Content" runat="server">
-    <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" ColCount="8" Width="10%">
+<dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" ColCount="8" Width="10%">
         <Items>
             <dx:LayoutItem Caption="" HorizontalAlign="Left">
                 <LayoutItemNestedControlCollection>
                     <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer2" runat="server">
-                        <dx:ASPxButton ID="btnXuatExcel" runat="server" OnClick="btnXuatExcel_Click" Text="Xuất Excel">
+                        <dx:ASPxButton ID="btnXuatExcel" runat="server" OnClick="btnXuatExcel_Click" Text="Xuất Excel" Visible="False">
                             <Image IconID="export_exporttoxls_16x16">
                             </Image>
                         </dx:ASPxButton>
@@ -15,7 +15,7 @@
             <dx:LayoutItem Caption="" HorizontalAlign="Left">
                 <LayoutItemNestedControlCollection>
                     <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer3" runat="server">
-                        <dx:ASPxButton ID="btnNhapExcel" runat="server" OnClick="btnNhapExcel_Click" Text="Nhập Excel">
+                        <dx:ASPxButton ID="btnNhapExcel" runat="server" OnClick="btnNhapExcel_Click" Text="Nhập Excel" Visible="False">
                             <Image IconID="export_exporttoxlsx_16x16gray">
                             </Image>
                         </dx:ASPxButton>
@@ -24,8 +24,8 @@
             </dx:LayoutItem>
             <dx:LayoutItem Caption="">
                 <LayoutItemNestedControlCollection>
-                    <dx:LayoutItemNestedControlContainer runat="server">
-                        <dx:ASPxButton ID="btnCapNhat" runat="server" OnClick="btnCapNhat_Click" Text="Cập nhật điểm">
+                    <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
+                        <dx:ASPxButton ID="btnCapNhat" runat="server" OnClick="btnCapNhat_Click" Text="Cập nhật điểm" Visible="False">
                             <Image IconID="actions_editname_16x16">
                             </Image>
                         </dx:ASPxButton>
@@ -80,7 +80,7 @@
                         </dx:GridViewColumnLayoutItem>
                         <dx:GridViewColumnLayoutItem ColumnName="Tên khách hàng" Name="TenKhachHang" Width="100%">
                         </dx:GridViewColumnLayoutItem>
-                        <dx:GridViewColumnLayoutItem ColumnName="Ngày sinh" Name="NgaySinh">
+                        <dx:GridViewColumnLayoutItem ColumnName="Ngày ĐK" Name="NgaySinh" ShowCaption="True">
                         </dx:GridViewColumnLayoutItem>
                         <dx:GridViewColumnLayoutItem ColumnName="Địa chỉ" Name="DiaChi" Width="100%">
                         </dx:GridViewColumnLayoutItem>
@@ -99,18 +99,18 @@
         <Columns>
             <dx:GridViewCommandColumn ShowClearFilterButton="True" ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="20" Name="iconaction">
             </dx:GridViewCommandColumn>
-            <dx:GridViewDataTextColumn Caption="Mã khách hàng" FieldName="MaKhachHang" VisibleIndex="1">
+            <dx:GridViewDataTextColumn Caption="Mã khách hàng" FieldName="MaKhachHang" VisibleIndex="1" Visible="False">
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="Tên khách hàng" FieldName="TenKhachHang" VisibleIndex="2">
+            <dx:GridViewDataTextColumn Caption="Tên khách hàng" FieldName="TenKhachHang" VisibleIndex="2" Visible="False">
                 <PropertiesTextEdit>
                     <ValidationSettings>
                         <RequiredField IsRequired="True" />
                     </ValidationSettings>
                 </PropertiesTextEdit>
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="Địa chỉ" FieldName="DiaChi" VisibleIndex="4">
+            <dx:GridViewDataTextColumn Caption="Địa chỉ" FieldName="DiaChi" VisibleIndex="4" Visible="False">
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="CMND" FieldName="CMND" VisibleIndex="5">
+            <dx:GridViewDataTextColumn Caption="CMND" FieldName="CMND" VisibleIndex="5" Visible="False">
             </dx:GridViewDataTextColumn>
             <dx:GridViewDataTextColumn Caption="SĐT" FieldName="DienThoai" VisibleIndex="6">
                 <PropertiesTextEdit>
@@ -123,11 +123,11 @@
             </dx:GridViewDataTextColumn>
             <dx:GridViewDataTextColumn Caption="Ghi chú" FieldName="GhiChu" VisibleIndex="8">
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataComboBoxColumn Caption="Nhóm khách hàng" FieldName="IDNhomKhachHang" VisibleIndex="0">
+            <dx:GridViewDataComboBoxColumn Caption="Nhóm khách hàng" FieldName="IDNhomKhachHang" VisibleIndex="0" Visible="False">
                 <PropertiesComboBox DataSourceID="sqlNhomKhachHang" TextField="TenNhomKhachHang" ValueField="ID">
                 </PropertiesComboBox>
             </dx:GridViewDataComboBoxColumn>
-            <dx:GridViewDataDateColumn Caption="Ngày sinh" FieldName="NgaySinh" VisibleIndex="3">
+            <dx:GridViewDataDateColumn Caption="Ngày ĐK" FieldName="NgaySinh" VisibleIndex="3">
                 <PropertiesDateEdit DisplayFormatInEditMode="True" DisplayFormatString="dd/MM/yyyy">
                 </PropertiesDateEdit>
             </dx:GridViewDataDateColumn>

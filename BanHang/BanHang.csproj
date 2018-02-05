@@ -184,6 +184,7 @@
     <Content Include="InHoaDonBanLe.aspx" />
     <Content Include="InHoaDonBanVe.aspx" />
     <Content Include="KhachHang.aspx" />
+    <Content Include="KhachHang_News.aspx" />
     <Content Include="KiemKho.aspx" />
     <Content Include="KyHieuGiaVe.aspx" />
     <Content Include="LichSuQuyDoiDiem.aspx" />
@@ -677,6 +678,13 @@
     </Compile>
     <Compile Include="KhachHang.aspx.designer.cs">
       <DependentUpon>KhachHang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang_News.aspx.cs">
+      <DependentUpon>KhachHang_News.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KhachHang_News.aspx.designer.cs">
+      <DependentUpon>KhachHang_News.aspx</DependentUpon>
     </Compile>
     <Compile Include="KiemKho.aspx.cs">
       <DependentUpon>KiemKho.aspx</DependentUpon>

@@ -1,9 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Root.master" AutoEventWireup="true" CodeBehind="BaoCaoNhapHang.aspx.cs" Inherits="BanHang.BaoCaoNhapHang" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Root.master" AutoEventWireup="true" CodeBehind="BaoCaoKetCa.aspx.cs" Inherits="BanHang.BaoCaoKetCa" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Content" runat="server">
-    
-    <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" Width="100%">
+     <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" Width="100%">
         <Items>
-            <dx:LayoutGroup Caption="Thông tin nhập hàng" ColCount="4" HorizontalAlign="Center">
+            <dx:LayoutGroup Caption="Thông tin" ColCount="4" HorizontalAlign="Center">
                 <Items>
                     <dx:LayoutItem Caption="Theo năm">
                         <LayoutItemNestedControlCollection>
@@ -51,15 +50,23 @@
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
-                    <dx:LayoutItem Caption="">
+                    <dx:LayoutItem Caption="Nhân viên" Visible="False">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer7" runat="server">
+                                <dx:ASPxComboBox ID="cmbNhanVien" runat="server">
+                                </dx:ASPxComboBox>
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
                     <dx:LayoutItem Caption="">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer8" runat="server">
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+                    <dx:LayoutItem Caption="">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer9" runat="server">
                                 <dx:ASPxButton ID="btnXemBaoCao" runat="server" Text="In" Width="100%" OnClick="btnXemBaoCao_Click">
                                     <Image IconID="print_printarea_16x16">
                                     </Image>
@@ -78,7 +85,7 @@
     </dx:ASPxFormLayout>
     <dx:ASPxPopupControl ID="popup" runat="server" AllowDragging="True" AllowResize="True" 
          PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter"  Width="1000px"
-         Height="550px" FooterText="Thông tin nhập hàng"
+         Height="550px" FooterText="Thông tin kết ca"
         HeaderText="Thông tin chi tiết" ClientInstanceName="popup" EnableHierarchyRecreation="True">
     </dx:ASPxPopupControl>
 </asp:Content>

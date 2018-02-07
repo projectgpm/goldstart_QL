@@ -88,6 +88,11 @@ namespace BanHang
                 DanhSachBanVe[MaHoaDon].ListChiTietBanVe = list;
 
             }
+            UpdateSTT(MaHoaDon);
+            int phuthu = dtSetting.PhuThu();
+            txtPhuThu.Value = (DanhSachBanVe[MaHoaDon].TongTien * phuthu) / 100;
+            DanhSachBanVe[MaHoaDon].PhuThu = (DanhSachBanVe[MaHoaDon].TongTien * phuthu) / 100;
+            DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia + DanhSachBanVe[MaHoaDon].PhuThu;
 
             gridChiTietHoaDon.DataSource = DanhSachBanVe[MaHoaDon].ListChiTietBanVe;
             gridChiTietHoaDon.DataBind();
@@ -110,7 +115,13 @@ namespace BanHang
             gridKetCa.DataSource = dt.DanhSachKetCa();
             gridKetCa.DataBind();
         }
-
+        protected void UpdateSTT(int MaHoaDon)
+        {
+            for (int i = 1; i <= DanhSachBanVe[MaHoaDon].ListChiTietBanVe.Count; i++)
+            {
+                DanhSachBanVe[MaHoaDon].ListChiTietBanVe[i - 1].STT = i;
+            }
+        }
         protected void btnKetCa_Click(object sender, EventArgs e)
         {
             // Kết ca
@@ -564,6 +575,15 @@ namespace BanHang
             DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia + DanhSachBanVe[MaHoaDon].PhuThu;
             BatchUpdate();
             BindGridChiTietHoaDon();
+        }
+
+        protected void txtTongTien_TextChanged(object sender, EventArgs e)
+        {
+            int phuthu = dtSetting.PhuThu();
+            int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
+            txtPhuThu.Value = (float.Parse(txtTongTien.Value + "") * phuthu) / 100;
+            DanhSachBanVe[MaHoaDon].PhuThu = float.Parse(txtPhuThu.Value + "");
+            DanhSachBanVe[MaHoaDon].KhachCanTra = DanhSachBanVe[MaHoaDon].TongTien - DanhSachBanVe[MaHoaDon].GiamGia + DanhSachBanVe[MaHoaDon].PhuThu;
         }
     }
     [Serializable]

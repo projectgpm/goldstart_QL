@@ -59,6 +59,12 @@ namespace BanHang
         public void BindGridChiTietHoaDon()
         {
             int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
+            UpdateSTT(MaHoaDon);
+            int phuthu = dtSetting.PhuThu();
+            txtPhuThu.Value = (DanhSachHoaDon[MaHoaDon].TongTien * phuthu) / 100;
+            DanhSachHoaDon[MaHoaDon].PhuThu = (DanhSachHoaDon[MaHoaDon].TongTien * phuthu) / 100;
+            DanhSachHoaDon[MaHoaDon].KhachCanTra = DanhSachHoaDon[MaHoaDon].TongTien - DanhSachHoaDon[MaHoaDon].GiamGia + DanhSachHoaDon[MaHoaDon].PhuThu;
+
             gridChiTietHoaDon.DataSource = DanhSachHoaDon[MaHoaDon].ListChiTietHoaDon;
             gridChiTietHoaDon.DataBind();
             formLayoutThanhToan.DataSource = DanhSachHoaDon[MaHoaDon];
@@ -128,7 +134,6 @@ namespace BanHang
                 exitHang.SoLuong = SoLuong;
                 exitHang.ThanhTien = SoLuong * exitHang.DonGia;
                 DanhSachHoaDon[MaHoaDon].TongTien += exitHang.ThanhTien - ThanhTienOld;
-                DanhSachHoaDon[MaHoaDon].KhachCanTra = DanhSachHoaDon[MaHoaDon].TongTien - DanhSachHoaDon[MaHoaDon].GiamGia + DanhSachHoaDon[MaHoaDon].PhuThu;
             }
             else
             {
@@ -143,8 +148,8 @@ namespace BanHang
 
                 DanhSachHoaDon[MaHoaDon].ListChiTietHoaDon.Add(cthd);
                 DanhSachHoaDon[MaHoaDon].TongTien += cthd.ThanhTien;
-                DanhSachHoaDon[MaHoaDon].KhachCanTra = DanhSachHoaDon[MaHoaDon].TongTien - DanhSachHoaDon[MaHoaDon].GiamGia + DanhSachHoaDon[MaHoaDon].PhuThu;
             }
+            
         }
 
         protected void btnInsertHang_Click(object sender, EventArgs e)
@@ -212,7 +217,6 @@ namespace BanHang
                 exitHang.ThanhTien = Convert.ToInt32(SoLuongMoi) * exitHang.DonGia;
                 DanhSachHoaDon[MaHoaDon].TongTien += exitHang.ThanhTien - ThanhTienOld;
                 DanhSachHoaDon[MaHoaDon].KhachCanTra = DanhSachHoaDon[MaHoaDon].TongTien - DanhSachHoaDon[MaHoaDon].GiamGia + DanhSachHoaDon[MaHoaDon].PhuThu;
-
             }
         }
 
@@ -234,7 +238,13 @@ namespace BanHang
             txtTienThua.Text = DanhSachHoaDon[MaHoaDon].TienThua.ToString();
 
         }
-
+        protected void UpdateSTT(int MaHoaDon)
+        {
+            for (int i = 1; i <= DanhSachHoaDon[MaHoaDon].ListChiTietHoaDon.Count; i++)
+            {
+                DanhSachHoaDon[MaHoaDon].ListChiTietHoaDon[i - 1].STT = i;
+            }
+        }
         protected void BtnXoaHang_Click(object sender, EventArgs e)
         {
             try
@@ -564,8 +574,6 @@ namespace BanHang
             DanhSachHoaDon[MaHoaDon].GiamGia = g;
             DanhSachHoaDon[MaHoaDon].PhuThu = float.Parse(txtPhuThu.Value + "");
             DanhSachHoaDon[MaHoaDon].KhachCanTra = DanhSachHoaDon[MaHoaDon].TongTien - DanhSachHoaDon[MaHoaDon].GiamGia + DanhSachHoaDon[MaHoaDon].PhuThu;
-            BatchUpdate();
-            BindGridChiTietHoaDon();
         }
 
         protected void txtPhuThu_TextChanged(object sender, EventArgs e)
@@ -576,6 +584,15 @@ namespace BanHang
             DanhSachHoaDon[MaHoaDon].KhachCanTra = DanhSachHoaDon[MaHoaDon].TongTien - DanhSachHoaDon[MaHoaDon].GiamGia + DanhSachHoaDon[MaHoaDon].PhuThu;
             BatchUpdate();
             BindGridChiTietHoaDon();
+        }
+
+        protected void txtTongTien_TextChanged(object sender, EventArgs e)
+        {
+            int phuthu = dtSetting.PhuThu();
+            int MaHoaDon = tabControlSoHoaDon.ActiveTabIndex;
+            txtPhuThu.Value = (float.Parse(txtTongTien.Value + "") * phuthu) / 100;
+            DanhSachHoaDon[MaHoaDon].PhuThu = float.Parse(txtPhuThu.Value + "");
+            DanhSachHoaDon[MaHoaDon].KhachCanTra = DanhSachHoaDon[MaHoaDon].TongTien - DanhSachHoaDon[MaHoaDon].GiamGia + DanhSachHoaDon[MaHoaDon].PhuThu;
         }
     }
     [Serializable]

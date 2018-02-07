@@ -155,6 +155,8 @@
                                                 <Items>
                                                     <dx:RibbonDropDownButtonItem Name="He_Thong" Size="Large" Text="Hệ thống">
                                                         <Items>
+                                                            <dx:RibbonDropDownButtonItem Name="QL" NavigateUrl="QLPhuThu.aspx" Text="Phụ thu">
+                                                            </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="nhom_nguoi_dung" Text="Nhóm người dùng" NavigateUrl="NhomNguoiDung.aspx">
                                                             </dx:RibbonDropDownButtonItem>
                                                             <dx:RibbonDropDownButtonItem Name="quan_tri_nguoi_dung" 

@@ -202,6 +202,7 @@
     <Content Include="obj\Debug\banhang.dll.licenses" />
     <Content Include="obj\Debug\BanHang.pdb" />
     <Content Include="PhieuXuatKhac.aspx" />
+    <Content Include="QLPhuThu.aspx" />
     <Content Include="QuanTriNguoiDung.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -750,6 +751,13 @@
       <DependentUpon>PhieuXuatKhac.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QLPhuThu.aspx.cs">
+      <DependentUpon>QLPhuThu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QLPhuThu.aspx.designer.cs">
+      <DependentUpon>QLPhuThu.aspx</DependentUpon>
+    </Compile>
     <Compile Include="QuanTriNguoiDung.aspx.cs">
       <DependentUpon>QuanTriNguoiDung.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

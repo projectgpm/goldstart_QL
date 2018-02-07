@@ -268,7 +268,7 @@
                                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer2" runat="server">
                                                             <dx:ASPxTextBox ID="txtTongTien" runat="server" ReadOnly="True" 
                                                                 Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
-                                                                HorizontalAlign="Right" DisplayFormatString="N0" Width="100%">
+                                                                HorizontalAlign="Right" DisplayFormatString="N0" Width="100%" OnTextChanged="txtTongTien_TextChanged">
                                                             </dx:ASPxTextBox>
                                                         </dx:LayoutItemNestedControlContainer>
                                                     </LayoutItemNestedControlCollection>
@@ -315,7 +315,7 @@
                                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer11" runat="server">
                                                             <dx:ASPxTextBox ID="txtPhuThu" runat="server" 
                                                                 Font-Names="digital-7" Font-Bold="True" Font-Size="20pt" 
-                                                                HorizontalAlign="Right" DisplayFormatString="N0" Width="100%" NullText="0" Text="0" OnTextChanged="txtPhuThu_TextChanged">
+                                                                HorizontalAlign="Right" DisplayFormatString="N0" Width="100%" NullText="0" Text="0" OnTextChanged="txtPhuThu_TextChanged" ReadOnly="True">
                                                             </dx:ASPxTextBox>
                                                         </dx:LayoutItemNestedControlContainer>
                                                     </LayoutItemNestedControlCollection>

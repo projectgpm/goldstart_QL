@@ -35,6 +35,29 @@ namespace BanHang.Data
                 }
             }
         }
+
+        public static void CapNhatPhuThu(string phuThu)
+        {
+            using (SqlConnection myConnection = new SqlConnection(StaticContext.ConnectionString))
+            {
+                try
+                {
+                    myConnection.Open();
+                    string cmdText = "UPDATE [Setting] SET [PhuThuQL] = @PhuThuQL";
+                    using (SqlCommand myCommand = new SqlCommand(cmdText, myConnection))
+                    {
+                        myCommand.Parameters.AddWithValue("@PhuThuQL", phuThu);
+                        myCommand.ExecuteNonQuery();
+                    }
+                    myConnection.Close();
+                }
+                catch
+                {
+                    throw new Exception("Lỗi: Quá trình thêm dữ liệu gặp lỗi");
+                }
+            }
+        }
+
         public static int SoLuong_TonKho(string IDHangHoa)
         {
             using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
@@ -268,6 +291,21 @@ namespace BanHang.Data
                 }
             }
         }
+        public static DataTable getPhuThu()
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = " SELECT * FROM Setting";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    DataTable tb = new DataTable();
+                    tb.Load(reader);
+                    return tb;
+                }
+            }
+        }
         public static float GiaMua(string IDHangHoa)
         {
             using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
@@ -288,6 +326,28 @@ namespace BanHang.Data
                 }
             }
         }
+
+        public static int PhuThu()
+        {
+            using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
+            {
+                con.Open();
+                string cmdText = "SELECT PhuThuQL FROM Setting";
+                using (SqlCommand command = new SqlCommand(cmdText, con))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    DataTable tb = new DataTable();
+                    tb.Load(reader);
+                    if (tb.Rows.Count != 0)
+                    {
+                        DataRow dr = tb.Rows[0];
+                        return int.Parse(dr["PhuThuQL"].ToString());
+                    }
+                    else return 0;
+                }
+            }
+        }
+
         public static string convertDauSangKhongDau(string s)
         {
             Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");

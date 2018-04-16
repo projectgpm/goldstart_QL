@@ -103,7 +103,7 @@ namespace BanHang.Data
             using (SqlConnection con = new SqlConnection(StaticContext.ConnectionString))
             {
                 con.Open();
-                string cmdText = "SELECT * FROM GPM_KetCa ORDER BY ID DESC";
+                string cmdText = "SELECT * FROM GPM_KetCa WHERE GioKetThuc >= '" + DateTime.Now.ToString("yyyy-MM-dd 00:00:00.000") + "' AND GioKetThuc <= '" + DateTime.Now.ToString("yyyy-MM-dd 23:23:59.000") + "' ORDER BY ID DESC";
                 using (SqlCommand command = new SqlCommand(cmdText, con))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
